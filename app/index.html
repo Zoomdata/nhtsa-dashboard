@@ -6,7 +6,7 @@
         <meta name="description" content="">
         <meta name="viewport" content="width=device-width">
         <link rel="shortcut icon" href="/favicon.ico">
-        <link href="//fonts.googleapis.com/css?family=Source+Sans Pro:300,400,700" rel="stylesheet" type="text/css">
+        <link href='http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700' rel='stylesheet' type='text/css'>
         <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
         <!-- build:css styles/vendor.css -->
         <!-- bower:css -->
@@ -28,11 +28,49 @@
 
 
         <div class="dashboard">
-            <div class="year-trend-wrapper">Complaints by Year <span class="trend" />
+            <div class="year-trend-wrapper">
+                <span class="trend-header">Complaints by <b>Year</b></span>
+                <span class="trend">
+                    <img height="100" src="images/trend.png"/>
+                </span>
+            </div>
+
+            <div class="make-wrapper">
+                <div class="make-header">Complaints</br>by <b>Make</b></div>
+                <div class="make-bar-chart">
+                    <img width="300" src="images/make.png"/>
+                </div>
+            </div>
+
+            <div class="model-wrapper">
+                <div class="model-header">Complaints</br>by <b>Model</b></div>
+                <div class="model-bar-chart">
+                    <img width="300" src="images/make.png"/>
+                </div>
             </div>
             
+            <img class="header" width="860" src="images/header.png"/>
+            <div class="stats">
+                <span>Reset Filters</span>
+                <span>801</span>
+                <span>of</span>
+                <span>257001</span>
+                <span>Complaints</span>
+            </div>
+
+            <img class="gauge" src="images/gauge.png"/>
+            <img class="gauge" src="images/gauge.png"/>
+            <img class="gauge" src="images/gauge.png"/>
+
+            <img class="scatterplot" src="images/scatterplot.png"/>
+            
             <div class="annotation">
-                <h3>Made by <img src="images/ZoomdataLogo.png"/> </br>With Data From <img src="images/NHTSALogo.png"/> </h3>
+                <div>
+                    Made by <img width="109" height="40" src="images/ZoomdataLogo.png"/>
+                </div>
+                <div>
+                    With Data From <img width="69" height="39" src="images/NHTSALogo.png"/>
+                </div>
             </div>
         </div>
 
