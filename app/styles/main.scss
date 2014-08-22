@@ -2,6 +2,12 @@
 @import '../bower_components/normalize.css/normalize.css';
 // endbower
 
+@font-face {
+    font-family: 'AF-LED7Seg-3';
+    src: url('fonts/2BB2E2_0_0.woff') format('woff'),
+         url('fonts/2BB2E2_0_0.ttf') format('truetype');
+}
+
 *, *:before, *:after {
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
