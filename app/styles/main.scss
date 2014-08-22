@@ -1,26 +1,22 @@
 // bower:scss
+@import '../bower_components/normalize.css/normalize.css';
 // endbower
 
+html, body {
+    margin:0;
+    padding:0;
+    height:100%;
+}
+
 body {
-    background: #fafafa;
-    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    background: #999999;
+    font-family: 'Source Sans Pro', sans-serif;
     color: #333;
 }
 
-.hero-unit {
-    margin: 50px auto 0 auto;
-    width: 300px;
-    font-size: 18px;
-    font-weight: 200;
-    line-height: 30px;
-    background-color: #eee;
-    border-radius: 6px;
-    padding: 60px;
-    h1 {
-        font-size: 60px;
-        line-height: 1;
-        letter-spacing: -1px;
-    }
+footer {
+    width: 990px;
+    margin: 10px auto;
 }
 
 .browsehappy {
@@ -28,4 +24,23 @@ body {
     background: #ccc;
     color: #000;
     padding: 0.2em 0;
+}
+
+.dashboard {
+    width: 990px;
+    height: 94%;
+    position: relative;
+    margin: auto;
+    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75), #ABABAB 0px 0px 3px inset;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}
+
+.annotation {
+    color: #333333;
+    position: absolute;
+    bottom: 20px;
+    left: 20px;
+    font-weight: 300;
+    text-transform: uppercase;
 }
