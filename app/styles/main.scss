@@ -49,7 +49,7 @@ footer {
     .year-trend-wrapper {
         height: 150px;
         margin: 0 auto;
-        width: 1200px;
+        width: 70%;
 
         img {
             vertical-align: top;
@@ -67,7 +67,8 @@ footer {
         float: left;
         margin-left: 50px;
         padding: 0 20px 20px 20px;
-        width: 340px;
+        width: 20%;
+        height: 60%;
 
         .make-header {
             color: #f6ebe6;
@@ -76,15 +77,28 @@ footer {
             font-weight: 300;
             text-transform: uppercase;
         }
+
+        img {
+            width: 100%;
+        }
+    }
+
+    .connector {
+        background: #4C4C4C;
+        float: left;
+        width: 50px;
+        height: 60%;
+        margin-top: 69px;
+        transform: skew(0,70deg);
     }
 
     .model-wrapper {
         background: #7A7A7A;
         float: left;
-        margin-left: 50px;
-        margin-top: 100px;
+        display: inline-block;
         padding: 0 20px 20px 20px;
-        width: 340px;
+        width: 20%;
+        height: 60%;
 
         .model-header {
             color: #f6ebe6;
@@ -93,30 +107,43 @@ footer {
             font-weight: 300;
             text-transform: uppercase;
         }
+
+        img {
+            width: 100%;
+        }
     }
 
     .header {
-        position: absolute;
-        right: 300px;
-        margin-top: 20px;
+        margin-top: 0px;
+        float: left;
+        height: 139px;
+        width: 70%;
+
+        .title {
+            color: #ffffff;
+            font-size: 70px;
+            font-weight: 700;
+            letter-spacing: 5px;
+            text-shadow: 4px 4px 0px rgba(153, 153, 153, 1);
+            text-transform: uppercase;
+        }
     }
 
     .stats {
-        float: right;
-        margin-right: 200px;
-        width: 700px;
     }
 
     .gauge {
-        float: right;
-        margin-right: 60px;
+        display: inline-block;
+        margin-left: 60px;
         margin-top: 50px;
+        width: 10%;
     }
 
     .scatterplot {
         float: right;
         margin-right: 60px;
         margin-top: 50px;
+        width: 50%;
     }
 
     .annotation {
