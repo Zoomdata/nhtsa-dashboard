@@ -29,6 +29,23 @@ body {
 img {
     vertical-align: middle;
 }
+button {
+  overflow: visible;
+  text-transform: none;
+  margin: 0;
+  -webkit-appearance: button;
+  border: none;
+}
+button[disabled] {
+  cursor: default;
+}
+button:focus {
+    outline:0;
+}
+button::-moz-focus-inner{
+  padding: 0;
+  border: 0;
+}
 
 footer {
     width: 990px;
@@ -77,8 +94,8 @@ footer {
 
         .make-header {
             color: #f6ebe6;
-            margin-bottom: 15px;
-            font-size: 22px;
+            margin: 15px 0;
+            font-size: 32px;
             font-weight: 300;
             text-transform: uppercase;
         }
@@ -107,8 +124,8 @@ footer {
 
         .model-header {
             color: #f6ebe6;
-            margin-bottom: 15px;
-            font-size: 22px;
+            margin: 15px 0;
+            font-size: 32px;
             font-weight: 300;
             text-transform: uppercase;
         }
@@ -135,6 +152,83 @@ footer {
     }
 
     .stats {
+        button.reset {
+            margin-left: 20px;
+            vertical-align: top;
+            background: none;
+            height: 40px;
+            padding: 0;
+        }
+        button.reset .circle {
+            background: rgba(93, 93, 93, 0.75);
+            color: #78C9D1;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            // transform: rotate(300deg);
+            box-shadow: 4px 4px 3px 0px rgba(73, 73, 73, 0.75);
+            vertical-align: top;
+            padding: 5px 0 0 2px;
+        }
+
+        button.reset:active .circle {
+            box-shadow: none;
+        }
+
+        button.reset .label {
+            font-size: 14px;
+            line-height: 14px;
+            margin-left: 11px;
+            text-align: left;
+            text-transform: uppercase;
+        }
+
+        div {
+            display: inline-block;
+        }
+
+        .LED {
+            background: #7A7A7A;
+            font-family: AF-LED7Seg-3;
+            font-size: 30px;
+            position: relative;
+            height: 40px;
+            margin-left: 20px;
+
+            div {
+                position: absolute;
+                text-align: right;
+                width: inherit;
+                height: inherit;
+            }
+
+            div.background {
+                color: #737373;
+            }
+
+            div.foreground {
+                color: #F6EBE6;
+            }
+        }
+
+        .LED.five {
+            width: 115px;
+        }
+
+        .LED.six {
+            width: 135px;
+        }
+
+        .filler {
+            color: #f6ebe6;
+            height: 36px;
+            font-size: 36px;
+            line-height: 40px;
+            margin-left: 20px;
+            font-weight: 300;
+            vertical-align: top;
+            text-transform: uppercase;
+        }
     }
 
     .gauge {
