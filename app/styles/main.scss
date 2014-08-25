@@ -257,11 +257,13 @@ footer {
         height: 151px;
         width: 55%;
         margin-left: 45%;
+        margin-bottom: 20px;
 
         .gauge {
             display: inline-block;
             margin: auto 2.5%;
             width: 25%;
+            height: 100%;
         }
     }
 

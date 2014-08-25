@@ -3,11 +3,33 @@ var apiKey = '53e569eae4b0a9e9da986978',
     host = 'daily.zoomdata.com/zoomdata',
     secure = true,
     sourceName = "Vehicle Complaints",
-    makeVis, modelVis;
-
+    makeVis, modelVis, countTextVis, complaintsGaugeVis,
+    injuriesGaugeVis, deathsGaugeVis,
+    makeFilter;
 
 var $makeBarChart = $("#make-bar-chart"),
-	$modelBarChart = $("#model-bar-chart");
+	$modelBarChart = $("#model-bar-chart"),
+	$totalCountText = $("#total-count-text"),
+	$complaintsGauge = $("#complaints-gauge"),
+	$injuriesGauge = $("#injuries-gauge"),
+	$deathsGauge = $("#deaths-gauge");
+
+$(document).ready(function() {
+	$('button.reset').on('mousedown', function() {
+    	var active = $modelBarChart.find('div.active');
+    	active.toggleClass('active', false);
+
+	    var filter = {
+	        path: 'model'
+	    };
+
+	    modelVis.controller.state.removeFilter(filter);
+	    countTextVis.controller.state.removeFilter(filter);
+	    complaintsGaugeVis.controller.state.removeFilter(filter);
+	    injuriesGaugeVis.controller.state.removeFilter(filter);
+	    deathsGaugeVis.controller.state.removeFilter(filter);
+	});
+});
 
 var zoomdataClient = new ZoomdataClient({
     apiKey: apiKey,
@@ -31,15 +53,21 @@ zoomdataClient.visualize({
 
             interactiveElement.$el.toggleClass('active');
 
-            var carModel = interactiveElement.data().group;
+            var carMake = interactiveElement.data().group;
+
+            makeFilter = carMake;
 
 		    var filter = {
 		        operation: 'IN',
 		        path: 'make',
-		        value: [carModel]
+		        value: [carMake]
 		    };
 
 		    modelVis.controller.state.setFilter(filter);
+		    countTextVis.controller.state.setFilter(filter);
+		    complaintsGaugeVis.controller.state.setFilter(filter);
+		    injuriesGaugeVis.controller.state.setFilter(filter);
+		    deathsGaugeVis.controller.state.setFilter(filter);
         });
 });
 
@@ -58,5 +86,50 @@ zoomdataClient.visualize({
         	active.toggleClass('active', false);
         	
             interactiveElement.$el.toggleClass('active');
+
+            var carModel = interactiveElement.data().group;
+
+		    var filter = {
+		        operation: 'IN',
+		        path: 'model',
+		        value: [carModel]
+		    };
+
+		    countTextVis.controller.state.setFilter(filter);
+		    complaintsGaugeVis.controller.state.setFilter(filter);
+		    injuriesGaugeVis.controller.state.setFilter(filter);
+		    deathsGaugeVis.controller.state.setFilter(filter);
         });
+});
+
+zoomdataClient.visualize({
+    visualization: "Total Count Text",
+    source: sourceName,
+    element: $totalCountText.get(0)
+}).done(function(visualization) {
+	countTextVis = visualization;
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Complaints Gauge",
+    source: sourceName,
+    element: $complaintsGauge.get(0)
+}).done(function(visualization) {
+	complaintsGaugeVis = visualization;
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Injuries Gauge",
+    source: sourceName,
+    element: $injuriesGauge.get(0)
+}).done(function(visualization) {
+	injuriesGaugeVis = visualization;
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Deaths Gauge",
+    source: sourceName,
+    element: $deathsGauge.get(0)
+}).done(function(visualization) {
+	deathsGaugeVis = visualization;
 });
