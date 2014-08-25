@@ -131,7 +131,6 @@ footer {
     .model-wrapper {
         background: #7A7A7A;
         float: left;
-        display: inline-block;
         padding: 0 20px 20px 20px;
         width: 20%;
         min-width: 246px;
@@ -143,10 +142,11 @@ footer {
             font-size: 32px;
             font-weight: 300;
             text-transform: uppercase;
+            height: 80px;
         }
 
-        img {
-            width: 100%;
+        #model-bar-chart {
+            height: calc(100% - 90px);
         }
     }
 
