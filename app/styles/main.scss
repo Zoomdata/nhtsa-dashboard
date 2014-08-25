@@ -24,6 +24,7 @@ body {
     color: #333;
     font-family: 'Source Sans Pro', sans-serif;
     letter-spacing: 3px;
+    overflow: hidden;
 }
 
 img {
@@ -52,6 +53,12 @@ footer {
     margin: 10px auto;
 }
 
+.group:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
 .browsehappy {
     margin: 0.2em 0;
     background: #ccc;
@@ -67,11 +74,17 @@ footer {
     box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75), #ABABAB 0px 0px 3px inset;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
+    overflow: auto;
+    white-space: nowrap;
 
     .year-trend-wrapper {
-        height: 150px;
+        height: 85px;
         margin: 0 auto;
-        width: 70%;
+        width: 95%;
+
+        div {
+            display: inline-block;
+        }
 
         img {
             vertical-align: top;
@@ -89,7 +102,8 @@ footer {
         float: left;
         padding: 0 20px 20px 20px;
         width: 20%;
-        height: 60%;
+        min-width: 246px;
+        height: calc(100% - 240px);
 
         .make-header {
             color: #f6ebe6;
@@ -107,10 +121,10 @@ footer {
     .connector {
         background: #4C4C4C;
         float: left;
-        width: 50px;
-        height: 60%;
+        width: 40px;
+        height: calc(100% - 240px);
         margin-top: 69px;
-        transform: skew(0,70deg);
+        transform: skew(0,74deg);
     }
 
     .model-wrapper {
@@ -119,7 +133,8 @@ footer {
         display: inline-block;
         padding: 0 20px 20px 20px;
         width: 20%;
-        height: 60%;
+        min-width: 246px;
+        height: calc(100% - 240px);
 
         .model-header {
             color: #f6ebe6;
@@ -136,9 +151,8 @@ footer {
 
     .header {
         margin-top: 0px;
-        float: left;
         height: 139px;
-        width: 70%;
+        margin-left: calc(20% + 50px);
 
         .title {
             color: #ffffff;
@@ -147,108 +161,124 @@ footer {
             letter-spacing: 5px;
             text-shadow: 4px 4px 0px rgba(153, 153, 153, 1);
             text-transform: uppercase;
-        }
-    }
 
-    .stats {
-        button.reset {
-            margin-left: 20px;
-            vertical-align: top;
-            background: none;
-            height: 40px;
-            padding: 0;
-        }
-        button.reset .circle {
-            background: rgba(93, 93, 93, 0.75);
-            color: #78C9D1;
-            width: 30px;
-            height: 30px;
-            border-radius: 50%;
-            // transform: rotate(300deg);
-            box-shadow: 4px 4px 3px 0px rgba(73, 73, 73, 0.75);
-            vertical-align: top;
-            padding: 5px 0 0 2px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
-        button.reset:active .circle {
-            box-shadow: none;
-        }
+        .stats {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
 
-        button.reset .label {
-            font-size: 14px;
-            line-height: 14px;
-            margin-left: 11px;
-            text-align: left;
-            text-transform: uppercase;
-        }
+            button.reset {
+                margin-left: 20px;
+                vertical-align: top;
+                background: none;
+                height: 40px;
+                padding: 0;
+            }
+            button.reset .circle {
+                background: rgba(93, 93, 93, 0.75);
+                color: #78C9D1;
+                width: 30px;
+                height: 30px;
+                border-radius: 50%;
+                // transform: rotate(300deg);
+                box-shadow: 4px 4px 3px 0px rgba(73, 73, 73, 0.75);
+                vertical-align: top;
+                padding: 5px 0 0 2px;
+            }
 
-        div {
-            display: inline-block;
-        }
+            button.reset:active .circle {
+                box-shadow: none;
+            }
 
-        .LED {
-            background: #7A7A7A;
-            font-family: AF-LED7Seg-3;
-            font-size: 30px;
-            position: relative;
-            height: 40px;
-            margin-left: 20px;
+            button.reset .label {
+                font-size: 14px;
+                line-height: 14px;
+                margin-left: 11px;
+                text-align: left;
+                text-transform: uppercase;
+            }
 
             div {
-                position: absolute;
-                text-align: right;
-                width: inherit;
-                height: inherit;
+                display: inline-block;
             }
 
-            div.background {
-                color: #737373;
+            .LED {
+                background: #7A7A7A;
+                font-family: AF-LED7Seg-3;
+                font-size: 30px;
+                position: relative;
+                height: 40px;
+                margin-left: 20px;
+
+                div {
+                    position: absolute;
+                    text-align: right;
+                    width: inherit;
+                    height: inherit;
+                }
+
+                div.background {
+                    color: #737373;
+                }
+
+                div.foreground {
+                    color: #F6EBE6;
+                }
             }
 
-            div.foreground {
-                color: #F6EBE6;
+            .LED.five {
+                width: 115px;
             }
-        }
 
-        .LED.five {
-            width: 115px;
-        }
+            .LED.six {
+                width: 135px;
+            }
 
-        .LED.six {
-            width: 135px;
-        }
-
-        .filler {
-            color: #f6ebe6;
-            height: 36px;
-            font-size: 36px;
-            line-height: 40px;
-            margin-left: 20px;
-            font-weight: 300;
-            vertical-align: top;
-            text-transform: uppercase;
+            .filler {
+                color: #f6ebe6;
+                height: 36px;
+                font-size: 36px;
+                line-height: 40px;
+                margin-left: 20px;
+                font-weight: 300;
+                vertical-align: top;
+                text-transform: uppercase;
+            }
         }
     }
 
-    .gauge {
-        display: inline-block;
-        margin-left: 60px;
-        margin-top: 50px;
-        width: 10%;
+    .gauges {
+        height: 151px;
+        width: 55%;
+        margin-left: 45%;
+
+        .gauge {
+            display: inline-block;
+            margin: auto 2.5%;
+            width: 25%;
+        }
     }
 
     .scatterplot {
-        float: right;
-        margin-right: 60px;
-        margin-top: 50px;
-        width: 40%;
+        width: 50%;
+        margin-top: 20px;
+        margin-left: 20px;
+        height: calc(100% - 420px);
+        overflow: scroll;
+        display: inline-block;
     }
 
     .annotation {
         color: #333333;
         position: absolute;
         bottom: 20px;
-        left: 60px;
+        left: 20px;
+        height: 100px;
         
         div {
             font-size: 20px;
