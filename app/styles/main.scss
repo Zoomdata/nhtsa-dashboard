@@ -22,7 +22,7 @@ html, body {
 body {
     background: #999999;
     color: #333;
-    font-family: 'Source Sans Pro', sans-serif;
+    font-family: 'Source Sans Pro', source-sans-pro, sans-serif;
     letter-spacing: 3px;
     overflow: hidden;
 }
@@ -111,10 +111,11 @@ footer {
             font-size: 32px;
             font-weight: 300;
             text-transform: uppercase;
+            height: 80px;
         }
 
-        img {
-            width: 100%;
+        #make-bar-chart {
+            height: calc(100% - 90px);
         }
     }
 
