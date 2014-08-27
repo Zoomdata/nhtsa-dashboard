@@ -4,7 +4,7 @@ var apiKey = '53e569eae4b0a9e9da986978',
     secure = true,
     sourceName = "Vehicle Complaints",
     makeVis, modelVis, countTextVis, complaintsGaugeVis,
-    injuriesGaugeVis, deathsGaugeVis,
+    injuriesGaugeVis, deathsGaugeVis, scatterplotVis,
     makeFilter;
 
 var $makeBarChart = $("#make-bar-chart"),
@@ -12,7 +12,8 @@ var $makeBarChart = $("#make-bar-chart"),
 	$totalCountText = $("#total-count-text"),
 	$complaintsGauge = $("#complaints-gauge"),
 	$injuriesGauge = $("#injuries-gauge"),
-	$deathsGauge = $("#deaths-gauge");
+	$deathsGauge = $("#deaths-gauge"),
+	$scatterplot = $("#scatterplot");
 
 $(document).ready(function() {
 	$('button.reset').on('mousedown', function() {
@@ -28,6 +29,7 @@ $(document).ready(function() {
 	    complaintsGaugeVis.controller.state.removeFilter(filter);
 	    injuriesGaugeVis.controller.state.removeFilter(filter);
 	    deathsGaugeVis.controller.state.removeFilter(filter);
+	    scatterplotVis.controller.state.removeFilter(filter);
 	});
 });
 
@@ -68,6 +70,7 @@ zoomdataClient.visualize({
 		    complaintsGaugeVis.controller.state.setFilter(filter);
 		    injuriesGaugeVis.controller.state.setFilter(filter);
 		    deathsGaugeVis.controller.state.setFilter(filter);
+	    	scatterplotVis.controller.state.setFilter(filter);
         });
 });
 
@@ -99,6 +102,7 @@ zoomdataClient.visualize({
 		    complaintsGaugeVis.controller.state.setFilter(filter);
 		    injuriesGaugeVis.controller.state.setFilter(filter);
 		    deathsGaugeVis.controller.state.setFilter(filter);
+		    scatterplotVis.controller.state.setFilter(filter);
         });
 });
 
@@ -132,4 +136,12 @@ zoomdataClient.visualize({
     element: $deathsGauge.get(0)
 }).done(function(visualization) {
 	deathsGaugeVis = visualization;
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Complaints Scatterplot",
+    source: sourceName,
+    element: $scatterplot.get(0)
+}).done(function(visualization) {
+	scatterplotVis = visualization;
 });
