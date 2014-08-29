@@ -3,12 +3,13 @@ var apiKey = '53e569eae4b0a9e9da986978',
     host = 'daily.zoomdata.com/zoomdata',
     secure = true,
     sourceName = "Vehicle Complaints",
-    makeVis, modelVis, countTextVis, complaintsGaugeVis,
+    makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
     injuriesGaugeVis, deathsGaugeVis, scatterplotVis,
     makeFilter;
 
 var $makeBarChart = $("#make-bar-chart"),
 	$modelBarChart = $("#model-bar-chart"),
+	$trendVis = $("#trend"),
 	$totalCountText = $("#total-count-text"),
 	$complaintsGauge = $("#complaints-gauge"),
 	$injuriesGauge = $("#injuries-gauge"),
@@ -105,6 +106,14 @@ zoomdataClient.visualize({
 		    scatterplotVis.controller.state.setFilter(filter);
         });
 });
+
+// zoomdataClient.visualize({
+//     visualization: "Brushing Year Chart",
+//     source: sourceName,
+//     element: $trendVis.get(0)
+// }).done(function(visualization) {
+// 	trendVis = visualization;
+// });
 
 zoomdataClient.visualize({
     visualization: "Total Count Text",
