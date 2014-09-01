@@ -8,7 +8,11 @@
     "backbone": "~1.1.2",
     "requirejs": "~2.1.14",
     "jstimezonedetect": "~1.0.5",
-    "velocity": "~1.0.0"
+    "velocity": "~1.0.0",
+    "backgrid": "~0.3.5"
   },
-  "devDependencies": {}
+  "devDependencies": {},
+  "resolutions": {
+    "jquery": "~2.1.1"
+  }
 }

@@ -55,6 +55,66 @@ $(document).ready(function() {
 	});
 
 	//hideOverlay();
+
+	var Record = Backbone.Model.extend({});
+
+	var Records = Backbone.Collection.extend({
+	  model: Record,
+	  url: "example.json"
+	});
+
+	var records = new Records();
+
+	var columns = [
+	{
+		name: "Make",
+	    label: "Make",
+	    cell: "string"
+	  }, {
+	    name: "Model",
+	    label: "Model",
+	    cell: "string"
+	  }, {
+	    name: "Year",
+	    label: "Year",
+	    cell: "string"
+	  }, {
+	    name: "Crashed",
+	    label: "Crashed",
+	    cell: "string"
+	  }, {
+	    name: "Fire",
+	    label: "Fire",
+	    cell: "string"
+	  }, {
+	    name: "Injured",
+	    label: "Injured",
+	    cell: "string"
+	  }, {
+	    name: "Description",
+	    label: "Failed Component",
+	    cell: "string"
+	}, {
+	    name: "State",
+	    label: "State",
+	    cell: "string"
+	  }, {
+	    name: "City",
+	    label: "City",
+	    cell: "string"
+	  }];
+
+	// Initialize a new Grid instance
+	var grid = new Backgrid.Grid({
+	  columns: columns,
+	  collection: records
+	});
+
+	// Render the grid and attach the root to your HTML document
+	$(".backgrid-container").append(grid.render().el);
+
+	// Fetch some countries from the url
+	records.fetch({reset: true});
 });
 
 function hideOverlay() {
