@@ -47,7 +47,7 @@ $(document).ready(function() {
 		} else {
 			$(".dashboard-foreground").velocity({ 
 				rotateX: 0
-			}, "easeOutExpo", liftDuration);
+			}, liftDuration);
 
 			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
 			lifted = false;
