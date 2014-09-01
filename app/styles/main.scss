@@ -66,6 +66,32 @@ footer {
     padding: 0.2em 0;
 }
 
+.overlay {
+    background: black;
+    height: 100%;
+    left: 0;
+    opacity: 0.75;
+    position: fixed;
+    top: 0;
+    width: 100%;
+    z-index: 20;
+}
+
+.overlay-description {
+    color: white;
+    font-size: 30px;
+    font-weight: 300;
+    margin-left: 20px;
+    margin-top: 20px;
+    position: absolute;
+    z-index: 101;
+
+    img {
+        vertical-align: bottom;
+        width: 109px;
+    }
+}
+
 .dashboard {
     width: 90%;
     height: 94%;
@@ -104,6 +130,8 @@ footer {
         width: 20%;
         min-width: 246px;
         height: calc(100% - 240px);
+        z-index: 100;
+        position: relative;
 
         .make-header {
             color: #f6ebe6;
