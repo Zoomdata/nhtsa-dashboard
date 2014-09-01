@@ -4,8 +4,7 @@ var apiKey = '53e569eae4b0a9e9da986978',
     secure = true,
     sourceName = "Vehicle Complaints",
     makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
-    injuriesGaugeVis, deathsGaugeVis, scatterplotVis,
-    makeFilter;
+    injuriesGaugeVis, deathsGaugeVis, scatterplotVis;
 
 var $makeBarChart = $("#make-bar-chart"),
 	$modelBarChart = $("#model-bar-chart"),
@@ -64,8 +63,6 @@ zoomdataClient.visualize({
             interactiveElement.$el.toggleClass('active');
 
             var carMake = interactiveElement.data().group;
-
-            makeFilter = carMake;
 
 		    var filter = {
 		        operation: 'IN',
