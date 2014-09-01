@@ -92,6 +92,13 @@ footer {
     }
 }
 
+.overlay-instructions {
+    margin-left: -15px;
+    margin-top: 240px;
+    position: absolute;
+    z-index: 101;
+}
+
 .dashboard {
     width: 90%;
     height: 94%;

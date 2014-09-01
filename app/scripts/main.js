@@ -14,7 +14,8 @@ var $makeBarChart = $("#make-bar-chart"),
 	$complaintsGauge = $("#complaints-gauge"),
 	$injuriesGauge = $("#injuries-gauge"),
 	$deathsGauge = $("#deaths-gauge"),
-	$scatterplot = $("#scatterplot");
+	$scatterplot = $("#scatterplot")
+	$overlay = $(".overlay");
 
 $(document).ready(function() {
 	$('button.reset').on('mousedown', function() {
@@ -51,6 +52,12 @@ zoomdataClient.visualize({
         .controller
         .elementsManager
         .on('interaction', function (interactiveElement) {
+        	if($overlay.is(":visible")) {
+        		$overlay.velocity({ opacity: 0 }, { display: "none" });
+        		$(".overlay-description").velocity({ opacity: 0 }, { display: "none" });
+        		$(".overlay-instructions").velocity({ opacity: 0 }, { display: "none" });
+        	}
+
         	var active = $makeBarChart.find('div.active');
         	active.toggleClass('active', false);
 
