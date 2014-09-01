@@ -104,11 +104,22 @@ footer {
     height: 94%;
     position: relative;
     margin: auto;
-    box-shadow: 2px 2px 6px 0px rgba(0,0,0,0.75), #ABABAB 0px 0px 3px inset;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    overflow: auto;
     white-space: nowrap;
+
+    .dashboard-foreground {
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+        background: #999999;
+        box-shadow: #ABABAB 0px 0px 3px inset, 2px 2px 6px 0px rgba(0,0,0,0.75);
+        overflow: hidden;
+    }
 
     .year-trend-wrapper {
         height: 85px;
@@ -327,6 +338,21 @@ footer {
                 margin-bottom: 10px;
             }
         }
+    }
+
+    .dashboard-background {
+        background: #424242;
+        box-shadow: inset 0 0 100px 20px #000000;
+        width: 100%;
+        height: 100%;
+        position: absolute;
+        border-bottom-left-radius: inherit;
+        border-bottom-right-radius: inherit;
+        top: 0;
+        left: 0;
+        text-align: center;
+        vertical-align: middle;
+        z-index: -1;
     }
 }
 

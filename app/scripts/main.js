@@ -3,6 +3,7 @@ var apiKey = '53e569eae4b0a9e9da986978',
     host = 'daily.zoomdata.com/zoomdata',
     secure = true,
     sourceName = "Vehicle Complaints",
+    lifted = false,
     makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
     injuriesGaugeVis, deathsGaugeVis, scatterplotVis;
 
@@ -32,7 +33,35 @@ $(document).ready(function() {
 	    deathsGaugeVis.controller.state.removeFilter(filter);
 	    scatterplotVis.controller.state.removeFilter(filter);
 	});
+
+	$('button.show-data').on('mousedown', function() {
+		var liftDuration = 2000;
+		if(!lifted) {
+			$(".dashboard-foreground").velocity({
+				rotateX: 90
+			}, "easeOutBack", liftDuration);
+
+			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
+			$.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
+			lifted = true;
+		} else {
+			$(".dashboard-foreground").velocity({ 
+				rotateX: 0
+			}, "easeOutExpo", liftDuration);
+
+			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
+			lifted = false;
+		}
+	});
+
+	//hideOverlay();
 });
+
+function hideOverlay() {
+	$overlay.velocity({ opacity: 0 }, { display: "none" });
+	$(".overlay-description").velocity({ opacity: 0 }, { display: "none" });
+	$(".overlay-instructions").velocity({ opacity: 0 }, { display: "none" });
+}
 
 var zoomdataClient = new ZoomdataClient({
     apiKey: apiKey,
@@ -52,9 +81,7 @@ zoomdataClient.visualize({
         .elementsManager
         .on('interaction', function (interactiveElement) {
         	if($overlay.is(":visible")) {
-        		$overlay.velocity({ opacity: 0 }, { display: "none" });
-        		$(".overlay-description").velocity({ opacity: 0 }, { display: "none" });
-        		$(".overlay-instructions").velocity({ opacity: 0 }, { display: "none" });
+        		hideOverlay();
         	}
 
         	var active = $makeBarChart.find('div.active');

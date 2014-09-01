@@ -31,71 +31,76 @@
 
 
         <div class="dashboard">
-            <div class="year-trend-wrapper">
-                <div class="trend-header">Complaints by <b>Year</b></div>
-                <div class="trend">
-                    <img height="80" src="images/trend.png"/>
-                </div>
-            </div>
-
-            <div class="make-wrapper">
-                <div class="make-header">Complaints</br>by <b>Make</b></div>
-                <div id="make-bar-chart" class="make-bar-chart">
-                </div>
-            </div>
-
-            <img class="overlay-instructions" src="images/pick_a_make.png" width="427" height="177" />
-
-            <div class="connector">
-            </div>
-            
-            <div class="header">
-                <div class="title" style="position:relative; z-index:20;">
-                    Vehicle Complaints
-                </div>
-
-                <div class="overlay-description">We used the <img src="images/green_logo.png"/> API to create an app that<br />visualizes a <b>quarter-million</b> records in real time.</div>
-
-                <div class="stats">
-                    <button class="reset">
-                        <div class="circle">↺</div><div class="label"> <b>Reset<br />Filters</b><div>
-                    </button>
-                    <div class="LED five">
-                        <div class="background">88888</div>
-                        <div id="total-count-text" class="foreground"></div>
+            <div class="dashboard-foreground">
+                <div class="year-trend-wrapper">
+                    <div class="trend-header">Complaints by <b>Year</b></div>
+                    <div class="trend">
+                        <img height="80" src="images/trend.png"/>
                     </div>
-                    <div class="filler">of</div>
-                    <div class="LED six">
-                        <div class="background">888888</div>
-                        <div class="foreground">257001</div>
+                </div>
+
+                <div class="make-wrapper">
+                    <div class="make-header">Complaints</br>by <b>Make</b></div>
+                    <div id="make-bar-chart" class="make-bar-chart"></div>
+                </div>
+
+                <img class="overlay-instructions" src="images/pick_a_make.png" width="427" height="177" />
+
+                <div class="connector">
+                </div>
+                
+                <div class="header">
+                    <div class="title" style="position:relative; z-index:20;">
+                        Vehicle Complaints
                     </div>
-                    <div class="filler">Complaints</div>
+
+                    <div class="overlay-description">We used the <img src="images/green_logo.png"/> API to create an app that<br />visualizes a <b>quarter-million</b> records in real time.</div>
+
+                    <div class="stats">
+                        <button class="reset">
+                            <div class="circle">↺</div><div class="label"> <b>Reset<br />Filters</b><div>
+                        </button>
+                        <div class="LED five">
+                            <div class="background">88888</div>
+                            <div id="total-count-text" class="foreground"></div>
+                        </div>
+                        <div class="filler">of</div>
+                        <div class="LED six">
+                            <div class="background">888888</div>
+                            <div class="foreground">257001</div>
+                        </div>
+                        <div class="filler">Complaints</div>
+                    </div>
+                </div>
+
+                <div class="model-wrapper">
+                    <div class="model-header">Complaints</br>by <b>Model</b></div>
+                    <div id="model-bar-chart" class="model-bar-chart"></div>
+                </div>
+
+                <div class="gauges">
+                    <div id="complaints-gauge" class="gauge"></div>
+                    <div id="injuries-gauge" class="gauge"></div>
+                    <div id="deaths-gauge" class="gauge"></div>
+                </div>
+
+                <div id="scatterplot" class="scatterplot"></div>
+                
+                <div class="annotation">
+                    <div>
+                        Made by <img width="109" height="40" src="images/ZoomdataLogo.png"/>
+                    </div>
+                    <div>
+                        With Data From <img width="69" height="39" src="images/NHTSALogo.png"/>
+                    </div>
                 </div>
             </div>
 
-            <div class="model-wrapper">
-                <div class="model-header">Complaints</br>by <b>Model</b></div>
-                <div id="model-bar-chart" class="model-bar-chart">
-                </div>
-            </div>
-
-            <div class="gauges">
-                <div id="complaints-gauge" class="gauge"></div>
-                <div id="injuries-gauge" class="gauge"></div>
-                <div id="deaths-gauge" class="gauge"></div>
-            </div>
-
-            <div id="scatterplot" class="scatterplot"></div>
-            
-            <div class="annotation">
-                <div>
-                    Made by <img width="109" height="40" src="images/ZoomdataLogo.png"/>
-                </div>
-                <div>
-                    With Data From <img width="69" height="39" src="images/NHTSALogo.png"/>
-                </div>
+            <div class="dashboard-background">
+                This is the content you will see underneath.
             </div>
         </div>
+        <button class="show-data">Open</button>
 
         <footer>
         © 2014 Zoomdata, Inc. <a href="http://www.zoomdata.com/">About</a> <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>
