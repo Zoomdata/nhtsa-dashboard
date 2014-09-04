@@ -94,7 +94,7 @@ footer {
 }
 
 .overlay-instructions {
-    margin-left: -15px;
+    margin-left: 200px;
     margin-top: 240px;
     position: absolute;
     z-index: 101;
@@ -123,22 +123,25 @@ footer {
         /*z-index: 100;*/
 
         .year-trend-wrapper {
-            height: 85px;
+            position: relative;
+            height: 90px;
             margin: 0 auto;
             width: 95%;
-
-            div {
-                display: inline-block;
-            }
-
-            img {
-                vertical-align: top;
-            }
+            margin-bottom: 10px;
+            border-bottom: 1px solid #737373;
 
             .trend-header {
+                float: left;
                 font-size: 20px;
                 margin-right: 15px;
                 text-transform: uppercase;
+                position: absolute;
+                bottom: 0;
+            }
+
+            #trend {
+                height: 85px;
+                margin-left: 250px;
             }
         }
 
@@ -319,7 +322,6 @@ footer {
             margin-top: 20px;
             margin-left: 20px;
             height: calc(100% - 450px);
-            overflow: scroll;
             display: inline-block;
         }
 

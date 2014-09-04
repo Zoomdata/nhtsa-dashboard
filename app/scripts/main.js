@@ -54,7 +54,7 @@ $(document).ready(function() {
 		}
 	});
 
-	//hideOverlay();
+	// hideOverlay();
 
 	var Record = Backbone.Model.extend({});
 
@@ -198,13 +198,13 @@ zoomdataClient.visualize({
         });
 });
 
-// zoomdataClient.visualize({
-//     visualization: "Brushing Year Chart",
-//     source: sourceName,
-//     element: $trendVis.get(0)
-// }).done(function(visualization) {
-// 	trendVis = visualization;
-// });
+zoomdataClient.visualize({
+    visualization: "Brushing Year Chart",
+    source: sourceName,
+    element: $trendVis.get(0)
+}).done(function(visualization) {
+	trendVis = visualization;
+});
 
 zoomdataClient.visualize({
     visualization: "Total Count Text",
