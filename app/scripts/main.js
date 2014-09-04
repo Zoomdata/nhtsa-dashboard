@@ -41,6 +41,9 @@ $(document).ready(function() {
 				rotateX: 90
 			}, "easeOutBack", liftDuration);
 
+			var currentCount = $("#total-count-text").text();
+			$("#dashboard-background-total").text(numberWithCommas(currentCount));
+
 			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
 			$.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
 			lifted = true;
@@ -245,3 +248,7 @@ zoomdataClient.visualize({
 }).done(function(visualization) {
 	scatterplotVis = visualization;
 });
+
+function numberWithCommas(x) {
+    return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
