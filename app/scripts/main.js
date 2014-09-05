@@ -4,6 +4,9 @@ var apiKey = '53e569eae4b0a9e9da986978',
     secure = true,
     sourceName = "Vehicle Complaints",
     lifted = false,
+    hasNextDetails = true,
+    loadingDetails = false,
+    detailsOffset = 0,
     makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
     injuriesGaugeVis, deathsGaugeVis, deathsGauge2Vis, scatterplotVis;
 
@@ -16,7 +19,72 @@ var $makeBarChart = $("#make-bar-chart"),
 	$deathsGauge = $("#deaths-gauge"),
 	$deathsGauge2 = $("#deaths-gauge2"),
 	$scatterplot = $("#scatterplot")
-	$overlay = $(".overlay");
+	$overlay = $(".overlay"),
+	$backgridContainer = $(".backgrid-container");
+
+
+
+var Record = Backbone.Model.extend({});
+
+var Records = Backbone.Collection.extend({
+  model: Record
+});
+
+var records = new Records();
+
+var columns = [
+{
+	name: "make",
+    label: "Make",
+    cell: "string"
+  }, {
+    name: "model",
+    label: "Model",
+    cell: "string"
+  }, {
+    name: "year",
+    label: "Year",
+    cell: "string"
+  }, {
+    name: "crashed",
+    label: "Crashed",
+    cell: "string"
+  }, {
+    name: "fire",
+    label: "Fire",
+    cell: "string"
+  }, {
+    name: "injured",
+    label: "Injured",
+    cell: "string"
+  }, {
+    name: "description",
+    label: "Failed Component",
+    cell: "string"
+}, {
+    name: "state",
+    label: "State",
+    cell: "string"
+  }, {
+    name: "city",
+    label: "City",
+    cell: "string"
+  }];
+
+// Initialize a new Grid instance
+var grid = new Backgrid.Grid({
+  columns: columns,
+  collection: records
+});
+
+// Render the grid and attach the root to your HTML document
+$backgridContainer.append(grid.render().el);
+
+$backgridContainer.scroll(function() {
+    if( this.scrollHeight - $backgridContainer.height() - this.scrollTop < 100 && hasNextDetails && !loadingDetails){
+        getDetails();
+    }
+});
 
 $(document).ready(function() {
 	$('button.reset').on('mousedown', function() {
@@ -38,6 +106,10 @@ $(document).ready(function() {
 	$('button.show-data').on('mousedown', function() {
 		var liftDuration = 2000;
 		if(!lifted) {
+	        detailsOffset = 0;
+	        hasNextDetails = true;
+			getDetails();
+
 			$(".dashboard-foreground").velocity({
 				rotateX: 90
 			}, "easeOutBack", liftDuration);
@@ -47,11 +119,17 @@ $(document).ready(function() {
 
 			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
 			$.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
+
 			lifted = true;
 		} else {
 			$(".dashboard-foreground").velocity({ 
 				rotateX: 0
-			}, liftDuration);
+			}, {
+				duration: liftDuration,
+				complete: function() {
+					records.reset();
+				}
+			});
 
 			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
 			lifted = false;
@@ -59,66 +137,6 @@ $(document).ready(function() {
 	});
 
 	// hideOverlay();
-
-	var Record = Backbone.Model.extend({});
-
-	var Records = Backbone.Collection.extend({
-	  model: Record,
-	  url: "example.json"
-	});
-
-	var records = new Records();
-
-	var columns = [
-	{
-		name: "Make",
-	    label: "Make",
-	    cell: "string"
-	  }, {
-	    name: "Model",
-	    label: "Model",
-	    cell: "string"
-	  }, {
-	    name: "Year",
-	    label: "Year",
-	    cell: "string"
-	  }, {
-	    name: "Crashed",
-	    label: "Crashed",
-	    cell: "string"
-	  }, {
-	    name: "Fire",
-	    label: "Fire",
-	    cell: "string"
-	  }, {
-	    name: "Injured",
-	    label: "Injured",
-	    cell: "string"
-	  }, {
-	    name: "Description",
-	    label: "Failed Component",
-	    cell: "string"
-	}, {
-	    name: "State",
-	    label: "State",
-	    cell: "string"
-	  }, {
-	    name: "City",
-	    label: "City",
-	    cell: "string"
-	  }];
-
-	// Initialize a new Grid instance
-	var grid = new Backgrid.Grid({
-	  columns: columns,
-	  collection: records
-	});
-
-	// Render the grid and attach the root to your HTML document
-	$(".backgrid-container").append(grid.render().el);
-
-	// Fetch some countries from the url
-	records.fetch({reset: true});
 });
 
 function hideOverlay() {
@@ -260,4 +278,54 @@ zoomdataClient.visualize({
 
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+}
+
+function makePreviewEndpointURL() {
+    var endpointURL = secure ? 'https://' : 'http://';
+    endpointURL += host + '/service/stream/preview';
+    endpointURL += '?key=' + apiKey;
+
+    return endpointURL;
+}
+
+function getDetails() {
+    loadingDetails = true;
+    var filters = countTextVis.controller.state.filters.toJSON();
+    filters.forEach(function(filter) {
+    	delete filter.editable;
+    	filter.value = filter.value[0];
+    	filter.operation = "EQUALS";
+    });
+
+    var streamSourceId = makeVis.controller.state.get('streamSourceId'),
+        url = makePreviewEndpointURL(),
+        count = 50,
+        payload = {
+            count: count,
+            offset: detailsOffset,
+            fromTime: 788947200000,
+            toTime: 1404975600000,
+            restrictions: filters,
+            streamSourceId: streamSourceId,
+            timestampField: 'failtimestamp_real'
+        };
+
+    $.ajax({
+        type: 'POST',
+        url: url,
+        data: JSON.stringify(payload),
+        contentType: 'application/json'
+    })
+    .done(function (message) {
+        hasNextDetails = message.hasNext;
+
+        records.add(message.documents);
+
+        detailsOffset += count;
+        loadingDetails = false;
+    })
+    .fail(function (response) {
+        console.log('ERROR: ', response);
+        loadingDetails = false;
+    });
 }
