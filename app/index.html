@@ -26,12 +26,15 @@
         <!--[if lt IE 10]>
             <p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
         <![endif]-->
-
-        <div class="overlay">
-        </div>
-
+        
+        <div class="overlay"></div>
 
         <div class="dashboard">
+            <div class="dashboard-background">
+                <h2 class="header"><b>Vehicle Complaints:</b> Showing <span id="dashboard-background-total"></span> of 257,001 Records</h2>
+                <div class="backgrid-container"></div>
+            </div>
+
             <div class="dashboard-foreground">
                 <div class="year-trend-wrapper">
                     <div class="trend-header">Complaints by <b>Year</b></div>
@@ -93,11 +96,6 @@
                         With Data From <img width="69" height="39" src="images/NHTSALogo.png"/>
                     </div>
                 </div>
-            </div>
-
-            <div class="dashboard-background">
-                <h2 class="header"><b>Vehicle Complaints:</b> Showing <span id="dashboard-background-total"></span> of 257,001 Records</h2>
-                <div class="backgrid-container"></div>
             </div>
         </div>
         <button class="show-data">Open</button>

@@ -17,6 +17,7 @@ html, body {
     margin:0;
     padding:0;
     height:100%;
+    width: 100%;
 }
 
 body {
@@ -68,14 +69,13 @@ footer {
 }
 
 .overlay {
-    background: black;
-    height: 100%;
-    left: 0;
-    opacity: 0.75;
     position: fixed;
     top: 0;
+    left: 0;
+    height: 100%;
     width: 100%;
     z-index: 20;
+    background-color: rgba(0,0,0,0.7);
 }
 
 .overlay-description {
@@ -120,7 +120,6 @@ footer {
         background: #999999;
         box-shadow: #ABABAB 0px 0px 3px inset, 2px 2px 6px 0px rgba(0,0,0,0.75);
         overflow: hidden;
-        /*z-index: 100;*/
 
         .year-trend-wrapper {
             position: relative;
@@ -354,7 +353,6 @@ footer {
         border-bottom-right-radius: inherit;
         text-align: center;
         vertical-align: middle;
-        z-index: -1;
         position: absolute;
         padding: 0 30px;
         overflow: hidden;
@@ -365,6 +363,8 @@ footer {
 
         .backgrid-container {
             height: calc(100% - 100px);
+            overflow-x: hidden;
+            overflow-y: scroll;
         }
 
         .backgrid td {
