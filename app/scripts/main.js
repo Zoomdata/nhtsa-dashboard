@@ -35,39 +35,48 @@ var records = new Records();
 var columns = [
 {
 	name: "make",
-    label: "Make",
+    label: "MAKE",
+    editable: false,
     cell: "string"
   }, {
     name: "model",
-    label: "Model",
+    label: "MODEL",
+    editable: false,
     cell: "string"
   }, {
     name: "year",
-    label: "Year",
+    label: "YEAR",
+    editable: false,
     cell: "string"
   }, {
     name: "crashed",
-    label: "Crashed",
+    label: "CRASHED",
+    editable: false,
     cell: "string"
   }, {
     name: "fire",
-    label: "Fire",
+    label: "FIRE",
+    editable: false,
     cell: "string"
   }, {
     name: "injured",
-    label: "Injured",
+    label: "INJURED",
+    editable: false,
     cell: "string"
   }, {
     name: "description",
-    label: "Failed Component",
+    label: "FAILED COMPONENT",
+    editable: false,
     cell: "string"
 }, {
     name: "state",
-    label: "State",
+    label: "STATE",
+    editable: false,
     cell: "string"
   }, {
     name: "city",
-    label: "City",
+    label: "CITY",
+    editable: false,
     cell: "string"
   }];
 
@@ -100,6 +109,7 @@ $(document).ready(function() {
 	    complaintsGaugeVis.controller.state.removeFilter(filter);
 	    injuriesGaugeVis.controller.state.removeFilter(filter);
 	    deathsGaugeVis.controller.state.removeFilter(filter);
+	    deathsGauge2Vis.controller.state.removeFilter(filter);
 	    scatterplotVis.controller.state.removeFilter(filter);
 	});
 
@@ -184,6 +194,7 @@ zoomdataClient.visualize({
 		    complaintsGaugeVis.controller.state.setFilter(filter);
 		    injuriesGaugeVis.controller.state.setFilter(filter);
 		    deathsGaugeVis.controller.state.setFilter(filter);
+		    deathsGauge2Vis.controller.state.setFilter(filter);
 	    	scatterplotVis.controller.state.setFilter(filter);
         });
 });
@@ -216,6 +227,7 @@ zoomdataClient.visualize({
 		    complaintsGaugeVis.controller.state.setFilter(filter);
 		    injuriesGaugeVis.controller.state.setFilter(filter);
 		    deathsGaugeVis.controller.state.setFilter(filter);
+		    deathsGauge2Vis.controller.state.setFilter(filter);
 		    scatterplotVis.controller.state.setFilter(filter);
         });
 });
@@ -238,6 +250,7 @@ zoomdataClient.visualize({
 	    complaintsGaugeVis.controller.state.setFilter(filter);
 	    injuriesGaugeVis.controller.state.setFilter(filter);
 	    deathsGaugeVis.controller.state.setFilter(filter);
+	    deathsGauge2Vis.controller.state.setFilter(filter);
 	    scatterplotVis.controller.state.setFilter(filter);
 	});
 });
