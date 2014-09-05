@@ -256,30 +256,30 @@ zoomdataClient.visualize({
     element: $complaintsGauge.get(0)
 }).done(function(visualization) {
 	complaintsGaugeVis = visualization;
-});
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Injuries Gauge",
-    source: sourceName,
-    element: $injuriesGauge.get(0)
-}).done(function(visualization) {
-	injuriesGaugeVis = visualization;
-});
+	zoomdataClient.visualize({
+	    visualization: "Vehicle Injuries Gauge",
+	    source: sourceName,
+	    element: $injuriesGauge.get(0)
+	}).done(function(visualization) {
+		injuriesGaugeVis = visualization;
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Deaths Gauge",
-    source: sourceName,
-    element: $deathsGauge.get(0)
-}).done(function(visualization) {
-	deathsGaugeVis = visualization;
-});
+		zoomdataClient.visualize({
+		    visualization: "Vehicle Deaths Gauge",
+		    source: sourceName,
+		    element: $deathsGauge.get(0)
+		}).done(function(visualization) {
+			deathsGaugeVis = visualization;
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Deaths Gauge",
-    source: sourceName,
-    element: $deathsGauge2.get(0)
-}).done(function(visualization) {
-	deathsGauge2Vis = visualization;
+			zoomdataClient.visualize({
+			    visualization: "Vehicle Deaths Gauge",
+			    source: sourceName,
+			    element: $deathsGauge2.get(0)
+			}).done(function(visualization) {
+				deathsGauge2Vis = visualization;
+			});
+		});
+	});
 });
 
 zoomdataClient.visualize({
