@@ -226,6 +226,20 @@ zoomdataClient.visualize({
     element: $trendVis.get(0)
 }).done(function(visualization) {
 	trendVis = visualization;
+
+	Zoomdata.eventDispatcher.on('filter:years', function(years) {
+	    var filter = {
+	        operation: 'IN',
+	        path: 'year',
+	        value: years
+	    };
+
+	    countTextVis.controller.state.setFilter(filter);
+	    complaintsGaugeVis.controller.state.setFilter(filter);
+	    injuriesGaugeVis.controller.state.setFilter(filter);
+	    deathsGaugeVis.controller.state.setFilter(filter);
+	    scatterplotVis.controller.state.setFilter(filter);
+	});
 });
 
 zoomdataClient.visualize({
