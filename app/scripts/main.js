@@ -197,6 +197,44 @@ zoomdataClient.visualize({
 		    deathsGauge2Vis.controller.state.setFilter(filter);
 	    	scatterplotVis.controller.state.setFilter(filter);
         });
+
+    setTimeout(function() {
+    	zoomdataClient.visualize({
+		    visualization: "Brushing Year Chart",
+		    source: sourceName,
+		    element: $trendVis.get(0)
+		}).done(function(visualization) {
+			trendVis = visualization;
+
+			Zoomdata.eventDispatcher.on('filter:years', function(years) {
+				if(years.length > 0) {
+				    var filter = {
+				        operation: 'IN',
+				        path: 'year',
+				        value: years
+				    };
+
+				    countTextVis.controller.state.setFilter(filter);
+				    complaintsGaugeVis.controller.state.setFilter(filter);
+				    injuriesGaugeVis.controller.state.setFilter(filter);
+				    deathsGaugeVis.controller.state.setFilter(filter);
+				    deathsGauge2Vis.controller.state.setFilter(filter);
+				    scatterplotVis.controller.state.setFilter(filter);
+				} else {
+				    var filter = {
+				        path: 'year'
+				    };
+
+				    countTextVis.controller.state.removeFilter(filter);
+				    complaintsGaugeVis.controller.state.removeFilter(filter);
+				    injuriesGaugeVis.controller.state.removeFilter(filter);
+				    deathsGaugeVis.controller.state.removeFilter(filter);
+				    deathsGauge2Vis.controller.state.removeFilter(filter);
+				    scatterplotVis.controller.state.removeFilter(filter);
+				}
+			});
+		});
+    }, 1000);
 });
 
 zoomdataClient.visualize({
@@ -233,42 +271,6 @@ zoomdataClient.visualize({
 });
 
 zoomdataClient.visualize({
-    visualization: "Brushing Year Chart",
-    source: sourceName,
-    element: $trendVis.get(0)
-}).done(function(visualization) {
-	trendVis = visualization;
-
-	Zoomdata.eventDispatcher.on('filter:years', function(years) {
-		if(years.length > 0) {
-		    var filter = {
-		        operation: 'IN',
-		        path: 'year',
-		        value: years
-		    };
-
-		    countTextVis.controller.state.setFilter(filter);
-		    complaintsGaugeVis.controller.state.setFilter(filter);
-		    injuriesGaugeVis.controller.state.setFilter(filter);
-		    deathsGaugeVis.controller.state.setFilter(filter);
-		    deathsGauge2Vis.controller.state.setFilter(filter);
-		    scatterplotVis.controller.state.setFilter(filter);
-		} else {
-		    var filter = {
-		        path: 'year'
-		    };
-
-		    countTextVis.controller.state.removeFilter(filter);
-		    complaintsGaugeVis.controller.state.removeFilter(filter);
-		    injuriesGaugeVis.controller.state.removeFilter(filter);
-		    deathsGaugeVis.controller.state.removeFilter(filter);
-		    deathsGauge2Vis.controller.state.removeFilter(filter);
-		    scatterplotVis.controller.state.removeFilter(filter);
-		}
-	});
-});
-
-zoomdataClient.visualize({
     visualization: "Total Count Text",
     source: sourceName,
     element: $totalCountText.get(0)
@@ -282,30 +284,30 @@ zoomdataClient.visualize({
     element: $complaintsGauge.get(0)
 }).done(function(visualization) {
 	complaintsGaugeVis = visualization;
+});
 
-	zoomdataClient.visualize({
-	    visualization: "Vehicle Injuries Gauge",
-	    source: sourceName,
-	    element: $injuriesGauge.get(0)
-	}).done(function(visualization) {
-		injuriesGaugeVis = visualization;
+zoomdataClient.visualize({
+    visualization: "Vehicle Injuries Gauge",
+    source: sourceName,
+    element: $injuriesGauge.get(0)
+}).done(function(visualization) {
+	injuriesGaugeVis = visualization;
+});
 
-		zoomdataClient.visualize({
-		    visualization: "Vehicle Deaths Gauge",
-		    source: sourceName,
-		    element: $deathsGauge.get(0)
-		}).done(function(visualization) {
-			deathsGaugeVis = visualization;
+zoomdataClient.visualize({
+    visualization: "Vehicle Deaths Gauge",
+    source: sourceName,
+    element: $deathsGauge.get(0)
+}).done(function(visualization) {
+	deathsGaugeVis = visualization;
+});
 
-			zoomdataClient.visualize({
-			    visualization: "Vehicle Deaths Gauge",
-			    source: sourceName,
-			    element: $deathsGauge2.get(0)
-			}).done(function(visualization) {
-				deathsGauge2Vis = visualization;
-			});
-		});
-	});
+zoomdataClient.visualize({
+    visualization: "Vehicle Deaths Gauge",
+    source: sourceName,
+    element: $deathsGauge2.get(0)
+}).done(function(visualization) {
+	deathsGauge2Vis = visualization;
 });
 
 zoomdataClient.visualize({
