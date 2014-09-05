@@ -303,16 +303,16 @@ footer {
         }
 
         .gauges {
-            height: 151px;
+            height: 130px;
             width: 55%;
             margin-left: 45%;
             margin-bottom: 20px;
 
             .gauge {
                 display: inline-block;
-                margin: auto 2.5%;
-                width: 25%;
-                height: 100%;
+                margin: 0 100px 0 0;
+                width: 60px;
+                height: 90%;
             }
         }
 

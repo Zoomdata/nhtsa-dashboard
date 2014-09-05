@@ -5,7 +5,7 @@ var apiKey = '53e569eae4b0a9e9da986978',
     sourceName = "Vehicle Complaints",
     lifted = false,
     makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
-    injuriesGaugeVis, deathsGaugeVis, scatterplotVis;
+    injuriesGaugeVis, deathsGaugeVis, deathsGauge2Vis, scatterplotVis;
 
 var $makeBarChart = $("#make-bar-chart"),
 	$modelBarChart = $("#model-bar-chart"),
@@ -14,6 +14,7 @@ var $makeBarChart = $("#make-bar-chart"),
 	$complaintsGauge = $("#complaints-gauge"),
 	$injuriesGauge = $("#injuries-gauge"),
 	$deathsGauge = $("#deaths-gauge"),
+	$deathsGauge2 = $("#deaths-gauge2"),
 	$scatterplot = $("#scatterplot")
 	$overlay = $(".overlay");
 
@@ -239,6 +240,14 @@ zoomdataClient.visualize({
     element: $deathsGauge.get(0)
 }).done(function(visualization) {
 	deathsGaugeVis = visualization;
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Deaths Gauge",
+    source: sourceName,
+    element: $deathsGauge2.get(0)
+}).done(function(visualization) {
+	deathsGauge2Vis = visualization;
 });
 
 zoomdataClient.visualize({
