@@ -240,18 +240,31 @@ zoomdataClient.visualize({
 	trendVis = visualization;
 
 	Zoomdata.eventDispatcher.on('filter:years', function(years) {
-	    var filter = {
-	        operation: 'IN',
-	        path: 'year',
-	        value: years
-	    };
+		if(years.length > 0) {
+		    var filter = {
+		        operation: 'IN',
+		        path: 'year',
+		        value: years
+		    };
 
-	    countTextVis.controller.state.setFilter(filter);
-	    complaintsGaugeVis.controller.state.setFilter(filter);
-	    injuriesGaugeVis.controller.state.setFilter(filter);
-	    deathsGaugeVis.controller.state.setFilter(filter);
-	    deathsGauge2Vis.controller.state.setFilter(filter);
-	    scatterplotVis.controller.state.setFilter(filter);
+		    countTextVis.controller.state.setFilter(filter);
+		    complaintsGaugeVis.controller.state.setFilter(filter);
+		    injuriesGaugeVis.controller.state.setFilter(filter);
+		    deathsGaugeVis.controller.state.setFilter(filter);
+		    deathsGauge2Vis.controller.state.setFilter(filter);
+		    scatterplotVis.controller.state.setFilter(filter);
+		} else {
+		    var filter = {
+		        path: 'year'
+		    };
+
+		    countTextVis.controller.state.removeFilter(filter);
+		    complaintsGaugeVis.controller.state.removeFilter(filter);
+		    injuriesGaugeVis.controller.state.removeFilter(filter);
+		    deathsGaugeVis.controller.state.removeFilter(filter);
+		    deathsGauge2Vis.controller.state.removeFilter(filter);
+		    scatterplotVis.controller.state.removeFilter(filter);
+		}
 	});
 });
 
