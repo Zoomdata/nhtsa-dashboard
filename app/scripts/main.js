@@ -8,7 +8,8 @@ var apiKey = '53e569eae4b0a9e9da986978',
     loadingDetails = false,
     detailsOffset = 0,
     makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
-    injuriesGaugeVis, deathsGaugeVis, deathsGauge2Vis, scatterplotVis;
+    injuriesGaugeVis, deathsGaugeVis, deathsGauge2Vis, scatterplotVis,
+    mapVis;
 
 var $makeBarChart = $("#make-bar-chart"),
 	$modelBarChart = $("#model-bar-chart"),
@@ -18,7 +19,8 @@ var $makeBarChart = $("#make-bar-chart"),
 	$injuriesGauge = $("#injuries-gauge"),
 	$deathsGauge = $("#deaths-gauge"),
 	$deathsGauge2 = $("#deaths-gauge2"),
-	$scatterplot = $("#scatterplot")
+	$scatterplot = $("#scatterplot"),
+    $map = $("#map"),
 	$overlay = $(".overlay"),
 	$backgridContainer = $(".backgrid-container");
 
@@ -111,6 +113,7 @@ $(document).ready(function() {
 	    deathsGaugeVis.controller.state.removeFilter(filter);
 	    deathsGauge2Vis.controller.state.removeFilter(filter);
 	    scatterplotVis.controller.state.removeFilter(filter);
+        if(mapVis) mapVis.controller.state.removeFilter(filter);
 	});
 
 	$('button.show-data').on('mousedown', function() {
@@ -145,6 +148,28 @@ $(document).ready(function() {
 			lifted = false;
 		}
 	});
+
+    $('.tabs .tab-links a').on('click', function(e)  {
+        var currentAttrValue = $(this).attr('href');
+ 
+        // Show/Hide Tabs
+        $('.tabs ' + currentAttrValue).css('display', 'inline').siblings().hide();
+ 
+        // Change/remove current tab to active
+        $(this).parent('li').addClass('active').siblings().removeClass('active');
+ 
+        e.preventDefault();
+
+        if(!mapVis) {
+            zoomdataClient.visualize({
+                visualization: "Vehicle Complaints US Map",
+                source: sourceName,
+                element: $map.get(0)
+            }).done(function(visualization) {
+                mapVis = visualization;
+            });
+        }
+    });
 
 	// hideOverlay();
 });
@@ -196,6 +221,7 @@ zoomdataClient.visualize({
 		    deathsGaugeVis.controller.state.setFilter(filter);
 		    deathsGauge2Vis.controller.state.setFilter(filter);
 	    	scatterplotVis.controller.state.setFilter(filter);
+            if(mapVis) mapVis.controller.state.removeFilter(filter);
         });
 
     setTimeout(function() {
@@ -220,6 +246,7 @@ zoomdataClient.visualize({
 				    deathsGaugeVis.controller.state.setFilter(filter);
 				    deathsGauge2Vis.controller.state.setFilter(filter);
 				    scatterplotVis.controller.state.setFilter(filter);
+                    if(mapVis) mapVis.controller.state.removeFilter(filter);
 				} else {
 				    var filter = {
 				        path: 'year'
@@ -231,6 +258,7 @@ zoomdataClient.visualize({
 				    deathsGaugeVis.controller.state.removeFilter(filter);
 				    deathsGauge2Vis.controller.state.removeFilter(filter);
 				    scatterplotVis.controller.state.removeFilter(filter);
+                    if(mapVis) mapVis.controller.state.removeFilter(filter);
 				}
 			});
 		});
