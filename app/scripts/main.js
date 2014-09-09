@@ -169,7 +169,7 @@ $(document).ready(function() {
  
         e.preventDefault();
 
-        if(!mapVis) {
+        if(!mapVis && currentAttrValue === "#map-tab") {
             zoomdataClient.visualize({
                 visualization: "Vehicle Complaints US Map",
                 source: sourceName,
