@@ -174,6 +174,14 @@ $(document).ready(function() {
 	// hideOverlay();
 });
 
+$( window ).resize(function() {
+    makeVis.controller._controller.resize($makeBarChart.width(), $makeBarChart.height());
+    modelVis.controller._controller.resize($modelBarChart.width(), $modelBarChart.height());
+    trendVis.controller._controller.resize($trendVis.width(), $trendVis.height());
+    scatterplotVis.controller._controller.resize($scatterplot.width(), $scatterplot.height());
+    if(mapVis) mapVis.controller._controller.resize($mapVis.width(), $mapVis.height());
+});
+
 function hideOverlay() {
 	$overlay.velocity({ opacity: 0 }, { display: "none" });
 	$(".overlay-description").velocity({ opacity: 0 }, { display: "none" });

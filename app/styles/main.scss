@@ -417,6 +417,10 @@ footer {
         float:left;
         list-style:none;
         text-align: center;
+        
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
     }
  
         .tab-links a {
