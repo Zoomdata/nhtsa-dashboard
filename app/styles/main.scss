@@ -367,23 +367,146 @@ footer {
 
         .backgrid-container {
             height: calc(100% - 100px);
-            overflow-x: hidden;
-            overflow-y: scroll;
+            overflow: hidden;
         }
 
-        .backgrid thead th {
-            background-color: transparent;
+        .backgrid {
+            $makeWidth: 100px;
+            $modelWidth: 100px;
+            $yearWidth: 80px;
+            $crashedWidth: 100px;
+            $fireWidth: 80px;
+            $injuredWidth: 100px;
+            $speedWidth: 80px;
+            $descriptionWidth: 150px;
+            $stateWidth: 150px;
+            $cityWidth: 150px;
+
+            thead tr {
+                display: block;
+                position: relative;
+            }
+
+            thead {
+                th {
+                    background-color: transparent;
+                    border-bottom: 6px solid #5F5F5F;
+                }
+
+                th.make {
+                    width: $makeWidth;
+                    max-width: $makeWidth;
+                }
+
+                th.model {
+                    width: $modelWidth;
+                    max-width: $modelWidth;
+                }
+
+                th.year {
+                    width: $yearWidth;
+                    max-width: $yearWidth;
+                }
+
+                th.crashed {
+                    width: $crashedWidth;
+                    max-width: $crashedWidth;
+                }
+
+                th.fire {
+                    width: $fireWidth;
+                    max-width: $fireWidth;
+                }
+
+                th.injured {
+                    width: $injuredWidth;
+                    max-width: $injuredWidth;
+                }
+
+                th.speed {
+                    width: $speedWidth;
+                    max-width: $speedWidth;
+                }
+
+                th.description {
+                    width: $descriptionWidth;
+                    max-width: $descriptionWidth;
+                }
+
+                th.state {
+                    width: $stateWidth;
+                    max-width: $stateWidth;
+                }
+
+                th.city {
+                    width: $cityWidth;
+                    max-width: $cityWidth;
+                }
+            }
+
+            tbody {
+                display: block;
+                width: 100%;
+                overflow: auto;
+
+                td {
+                    border-left: 1px solid #5F5F5F;
+                    border-bottom: 1px solid #5F5F5F;
+                    border-right: 1px solid #5F5F5F;
+                }
+
+                td:nth-child(1){
+                    width: $makeWidth;
+                    max-width: $makeWidth;
+                }
+
+                td:nth-child(2){
+                    width: $modelWidth;
+                    max-width: $modelWidth;
+                }
+
+                td:nth-child(3){
+                    width: $yearWidth;
+                    max-width: $yearWidth;
+                }
+
+                td:nth-child(4){
+                    width: $crashedWidth;
+                    max-width: $crashedWidth;
+                }
+
+                td:nth-child(5){
+                    width: $fireWidth;
+                    max-width: $fireWidth;
+                }
+
+                td:nth-child(6){
+                    width: $injuredWidth;
+                    max-width: $injuredWidth;
+                }
+
+                td:nth-child(7){
+                    width: $speedWidth;
+                    max-width: $speedWidth;
+                }
+
+                td:nth-child(8){
+                    width: $descriptionWidth;
+                    max-width: $descriptionWidth;
+                }
+
+                td:nth-child(9){
+                    width: $stateWidth;
+                    max-width: $stateWidth;
+                }
+
+                td:nth-child(10){
+                    width: $cityWidth;
+                    max-width: $cityWidth;
+                }
+            }
         }
 
-        .backgrid th {
-            border-bottom: 6px solid #5F5F5F;
-        }
-
-        .backgrid td {
-            border-left: 1px solid #5F5F5F;
-            border-bottom: 1px solid #5F5F5F;
-            border-right: 1px solid #5F5F5F;
-        }
     }
 }
 
@@ -417,7 +540,7 @@ footer {
         float:left;
         list-style:none;
         text-align: center;
-        
+
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;

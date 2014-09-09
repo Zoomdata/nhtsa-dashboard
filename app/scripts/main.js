@@ -25,7 +25,6 @@ var $makeBarChart = $("#make-bar-chart"),
 	$backgridContainer = $(".backgrid-container");
 
 
-
 var Record = Backbone.Model.extend({});
 
 var Records = Backbone.Collection.extend({
@@ -52,7 +51,7 @@ var columns = [
     cell: "string"
   }, {
     name: "crashed",
-    label: "CRASHED",
+    label: "CRASH",
     editable: false,
     cell: "string"
   }, {
@@ -66,10 +65,18 @@ var columns = [
     editable: false,
     cell: "string"
   }, {
+    name: "speed",
+    label: "MPH",
+    editable: false,
+    cell: "string"
+  }, {
     name: "description",
     label: "FAILED COMPONENT",
     editable: false,
-    cell: "string"
+    cell: Backgrid.Cell.extend({
+      className: "string-cell description",
+      formatter: Backgrid.StringFormatter
+    })
 }, {
     name: "state",
     label: "STATE",
@@ -90,9 +97,11 @@ var grid = new Backgrid.Grid({
 
 // Render the grid and attach the root to your HTML document
 $backgridContainer.append(grid.render().el);
+var $backgridTBody = $backgridContainer.find('tbody');
+resizeBackgrid();
 
-$backgridContainer.scroll(function() {
-    if( this.scrollHeight - $backgridContainer.height() - this.scrollTop < 100 && hasNextDetails && !loadingDetails){
+$backgridTBody.scroll(function() {
+    if( this.scrollHeight - $backgridTBody.height() - this.scrollTop < 200 && hasNextDetails && !loadingDetails){
         getDetails();
     }
 });
@@ -167,6 +176,9 @@ $(document).ready(function() {
                 element: $map.get(0)
             }).done(function(visualization) {
                 mapVis = visualization;
+
+                var filters = countTextVis.controller.state.filters.toJSON();
+                mapVis.controller.state.addFilters(filters);
             });
         }
     });
@@ -175,11 +187,13 @@ $(document).ready(function() {
 });
 
 $( window ).resize(function() {
+    resizeBackgrid();
+
     makeVis.controller._controller.resize($makeBarChart.width(), $makeBarChart.height());
     modelVis.controller._controller.resize($modelBarChart.width(), $modelBarChart.height());
     trendVis.controller._controller.resize($trendVis.width(), $trendVis.height());
     scatterplotVis.controller._controller.resize($scatterplot.width(), $scatterplot.height());
-    if(mapVis) mapVis.controller._controller.resize($mapVis.width(), $mapVis.height());
+    if(mapVis) mapVis.controller._controller.resize($map.width(), $map.height());
 });
 
 function hideOverlay() {
@@ -229,7 +243,7 @@ zoomdataClient.visualize({
 		    firesGaugeVis.controller.state.setFilter(filter);
 		    speedGaugeVis.controller.state.setFilter(filter);
 	    	scatterplotVis.controller.state.setFilter(filter);
-            if(mapVis) mapVis.controller.state.removeFilter(filter);
+            if(mapVis) mapVis.controller.state.setFilter(filter);
         });
 
     setTimeout(function() {
@@ -254,7 +268,7 @@ zoomdataClient.visualize({
 				    firesGaugeVis.controller.state.setFilter(filter);
 				    speedGaugeVis.controller.state.setFilter(filter);
 				    scatterplotVis.controller.state.setFilter(filter);
-                    if(mapVis) mapVis.controller.state.removeFilter(filter);
+                    if(mapVis) mapVis.controller.state.setFilter(filter);
 				} else {
 				    var filter = {
 				        path: 'year'
@@ -303,6 +317,7 @@ zoomdataClient.visualize({
 		    firesGaugeVis.controller.state.setFilter(filter);
 		    speedGaugeVis.controller.state.setFilter(filter);
 		    scatterplotVis.controller.state.setFilter(filter);
+            if(mapVis) mapVis.controller.state.setFilter(filter);
         });
 });
 
@@ -358,6 +373,15 @@ function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
 
+function resizeBackgrid() {
+    var tbodyHeight = $backgridContainer.height() - $backgridContainer.find('thead').height();
+    $backgridTBody.css('height', tbodyHeight);
+
+    var descriptionWidth = $backgridContainer.width() - 940;
+    $('.backgrid thead th.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
+    $('.backgrid tbody td.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
+}
+
 function makePreviewEndpointURL() {
     var endpointURL = secure ? 'https://' : 'http://';
     endpointURL += host + '/service/stream/preview';
@@ -381,8 +405,8 @@ function getDetails() {
         payload = {
             count: count,
             offset: detailsOffset,
-            fromTime: 788947200000,
-            toTime: 1404975600000,
+            // fromTime: 788947200000,
+            // toTime: 1404975600000,
             restrictions: filters,
             streamSourceId: streamSourceId,
             timestampField: 'failtimestamp_real'
@@ -401,6 +425,8 @@ function getDetails() {
 
         detailsOffset += count;
         loadingDetails = false;
+
+        resizeBackgrid();
     })
     .fail(function (response) {
         console.log('ERROR: ', response);
