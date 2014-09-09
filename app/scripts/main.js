@@ -7,18 +7,18 @@ var apiKey = '53e569eae4b0a9e9da986978',
     hasNextDetails = true,
     loadingDetails = false,
     detailsOffset = 0,
-    makeVis, modelVis, trendVis, countTextVis, complaintsGaugeVis,
-    injuriesGaugeVis, deathsGaugeVis, deathsGauge2Vis, scatterplotVis,
+    makeVis, modelVis, trendVis, countTextVis, crashesGaugeVis,
+    injuriesGaugeVis, firesGaugeVis, speedGaugeVis, scatterplotVis,
     mapVis;
 
 var $makeBarChart = $("#make-bar-chart"),
 	$modelBarChart = $("#model-bar-chart"),
 	$trendVis = $("#trend"),
 	$totalCountText = $("#total-count-text"),
-	$complaintsGauge = $("#complaints-gauge"),
+	$crashesGauge = $("#crashes-gauge"),
 	$injuriesGauge = $("#injuries-gauge"),
-	$deathsGauge = $("#deaths-gauge"),
-	$deathsGauge2 = $("#deaths-gauge2"),
+	$firesGauge = $("#fires-gauge"),
+	$speedGauge = $("#speed-gauge"),
 	$scatterplot = $("#scatterplot"),
     $map = $("#map"),
 	$overlay = $(".overlay"),
@@ -108,10 +108,10 @@ $(document).ready(function() {
 
 	    modelVis.controller.state.removeFilter(filter);
 	    countTextVis.controller.state.removeFilter(filter);
-	    complaintsGaugeVis.controller.state.removeFilter(filter);
+	    crashesGaugeVis.controller.state.removeFilter(filter);
 	    injuriesGaugeVis.controller.state.removeFilter(filter);
-	    deathsGaugeVis.controller.state.removeFilter(filter);
-	    deathsGauge2Vis.controller.state.removeFilter(filter);
+	    firesGaugeVis.controller.state.removeFilter(filter);
+	    speedGaugeVis.controller.state.removeFilter(filter);
 	    scatterplotVis.controller.state.removeFilter(filter);
         if(mapVis) mapVis.controller.state.removeFilter(filter);
 	});
@@ -216,10 +216,10 @@ zoomdataClient.visualize({
 
 		    modelVis.controller.state.setFilter(filter);
 		    countTextVis.controller.state.setFilter(filter);
-		    complaintsGaugeVis.controller.state.setFilter(filter);
+		    crashesGaugeVis.controller.state.setFilter(filter);
 		    injuriesGaugeVis.controller.state.setFilter(filter);
-		    deathsGaugeVis.controller.state.setFilter(filter);
-		    deathsGauge2Vis.controller.state.setFilter(filter);
+		    firesGaugeVis.controller.state.setFilter(filter);
+		    speedGaugeVis.controller.state.setFilter(filter);
 	    	scatterplotVis.controller.state.setFilter(filter);
             if(mapVis) mapVis.controller.state.removeFilter(filter);
         });
@@ -241,10 +241,10 @@ zoomdataClient.visualize({
 				    };
 
 				    countTextVis.controller.state.setFilter(filter);
-				    complaintsGaugeVis.controller.state.setFilter(filter);
+				    crashesGaugeVis.controller.state.setFilter(filter);
 				    injuriesGaugeVis.controller.state.setFilter(filter);
-				    deathsGaugeVis.controller.state.setFilter(filter);
-				    deathsGauge2Vis.controller.state.setFilter(filter);
+				    firesGaugeVis.controller.state.setFilter(filter);
+				    speedGaugeVis.controller.state.setFilter(filter);
 				    scatterplotVis.controller.state.setFilter(filter);
                     if(mapVis) mapVis.controller.state.removeFilter(filter);
 				} else {
@@ -253,10 +253,10 @@ zoomdataClient.visualize({
 				    };
 
 				    countTextVis.controller.state.removeFilter(filter);
-				    complaintsGaugeVis.controller.state.removeFilter(filter);
+				    crashesGaugeVis.controller.state.removeFilter(filter);
 				    injuriesGaugeVis.controller.state.removeFilter(filter);
-				    deathsGaugeVis.controller.state.removeFilter(filter);
-				    deathsGauge2Vis.controller.state.removeFilter(filter);
+				    firesGaugeVis.controller.state.removeFilter(filter);
+				    speedGaugeVis.controller.state.removeFilter(filter);
 				    scatterplotVis.controller.state.removeFilter(filter);
                     if(mapVis) mapVis.controller.state.removeFilter(filter);
 				}
@@ -290,10 +290,10 @@ zoomdataClient.visualize({
 		    };
 
 		    countTextVis.controller.state.setFilter(filter);
-		    complaintsGaugeVis.controller.state.setFilter(filter);
+		    crashesGaugeVis.controller.state.setFilter(filter);
 		    injuriesGaugeVis.controller.state.setFilter(filter);
-		    deathsGaugeVis.controller.state.setFilter(filter);
-		    deathsGauge2Vis.controller.state.setFilter(filter);
+		    firesGaugeVis.controller.state.setFilter(filter);
+		    speedGaugeVis.controller.state.setFilter(filter);
 		    scatterplotVis.controller.state.setFilter(filter);
         });
 });
@@ -307,11 +307,11 @@ zoomdataClient.visualize({
 });
 
 zoomdataClient.visualize({
-    visualization: "Vehicle Complaints Gauge",
+    visualization: "Vehicle Crashes Gauge",
     source: sourceName,
-    element: $complaintsGauge.get(0)
+    element: $crashesGauge.get(0)
 }).done(function(visualization) {
-	complaintsGaugeVis = visualization;
+	crashesGaugeVis = visualization;
 });
 
 zoomdataClient.visualize({
@@ -323,19 +323,19 @@ zoomdataClient.visualize({
 });
 
 zoomdataClient.visualize({
-    visualization: "Vehicle Deaths Gauge",
+    visualization: "Vehicle Fires Gauge",
     source: sourceName,
-    element: $deathsGauge.get(0)
+    element: $firesGauge.get(0)
 }).done(function(visualization) {
-	deathsGaugeVis = visualization;
+	firesGaugeVis = visualization;
 });
 
 zoomdataClient.visualize({
-    visualization: "Vehicle Deaths Gauge",
+    visualization: "Vehicle Speed Gauge",
     source: sourceName,
-    element: $deathsGauge2.get(0)
+    element: $speedGauge.get(0)
 }).done(function(visualization) {
-	deathsGauge2Vis = visualization;
+	speedGaugeVis = visualization;
 });
 
 zoomdataClient.visualize({
