@@ -111,6 +111,8 @@ $(document).ready(function() {
     	var active = $modelBarChart.find('div.active');
     	active.toggleClass('active', false);
 
+        Zoomdata.eventDispatcher.trigger("filter:years:clear");
+
 	    var filter = {
 	        path: 'model'
 	    };
