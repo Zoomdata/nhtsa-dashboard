@@ -33,6 +33,41 @@ var Records = Backbone.Collection.extend({
 
 var records = new Records();
 
+var BooleanStringFormatter = _.extend({}, Backgrid.CellFormatter.prototype, {
+  fromRaw: function (rawValue, model) {
+    if(!rawValue || rawValue === "" || rawValue === "0") {
+        return '•';
+    } else {
+        return 'Y';
+    }
+  }
+});
+
+var BooleanStringCell = Backgrid.StringCell.extend({
+  render: function () {
+    BooleanStringCell.__super__.render.apply(this, arguments);
+    if (this.$el.text() === "•") {
+      this.el.classList.add("bullet");
+    }
+    return this;
+  },
+  formatter: BooleanStringFormatter
+});
+
+var NAStringFormatter = _.extend({}, Backgrid.CellFormatter.prototype, {
+  fromRaw: function (rawValue, model) {
+    if(!rawValue || rawValue === "" || rawValue === "0") {
+        return 'n/a';
+    } else {
+        return rawValue;
+    }
+  }
+});
+
+var NAStringCell = Backgrid.StringCell.extend({
+  formatter: NAStringFormatter
+});
+
 var columns = [
 {
 	name: "make",
@@ -57,25 +92,25 @@ var columns = [
     label: "CRASH",
     editable: false,
     sortable: false,
-    cell: "string"
+    cell: BooleanStringCell
   }, {
     name: "fire",
     label: "FIRE",
     editable: false,
     sortable: false,
-    cell: "string"
+    cell: BooleanStringCell
   }, {
     name: "injured",
     label: "INJURED",
     editable: false,
     sortable: false,
-    cell: "string"
+    cell: BooleanStringCell
   }, {
     name: "speed",
     label: "MPH",
     editable: false,
     sortable: false,
-    cell: "string"
+    cell: NAStringCell
   }, {
     name: "description",
     label: "FAILED COMPONENT",
@@ -409,7 +444,7 @@ function resizeBackgrid() {
     var tbodyHeight = $backgridContainer.height() - $backgridContainer.find('thead').height();
     $backgridTBody.css('height', tbodyHeight);
 
-    var descriptionWidth = $backgridContainer.width() - 940;
+    var descriptionWidth = $backgridContainer.width() - 760;
     $('.backgrid thead th.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
     $('.backgrid tbody td.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
 }

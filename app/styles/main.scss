@@ -374,10 +374,10 @@ footer {
             $makeWidth: 100px;
             $modelWidth: 100px;
             $yearWidth: 80px;
-            $crashedWidth: 100px;
-            $fireWidth: 80px;
-            $injuredWidth: 100px;
-            $speedWidth: 80px;
+            $crashedWidth: 40px;
+            $fireWidth: 40px;
+            $injuredWidth: 40px;
+            $speedWidth: 52px;
             $descriptionWidth: 150px;
             $stateWidth: 150px;
             $cityWidth: 150px;
@@ -391,6 +391,7 @@ footer {
                 th {
                     background-color: transparent;
                     border-bottom: 6px solid #5F5F5F;
+                    height: 100px;
                 }
 
                 th.make {
@@ -409,23 +410,19 @@ footer {
                 }
 
                 th.crashed {
-                    width: $crashedWidth;
-                    max-width: $crashedWidth;
+                    transform: rotate(-90deg) translate(-7px, -40px);
                 }
 
                 th.fire {
-                    width: $fireWidth;
-                    max-width: $fireWidth;
+                    transform: rotate(-90deg) translate(-15px, -65px);
                 }
 
                 th.injured {
-                    width: $injuredWidth;
-                    max-width: $injuredWidth;
+                    transform: rotate(-90deg) translate(5px, -100px);
                 }
 
                 th.speed {
-                    width: $speedWidth;
-                    max-width: $speedWidth;
+                    transform: rotate(-90deg) translate(-16px, -128px);
                 }
 
                 th.description {
@@ -455,6 +452,10 @@ footer {
                     border-right: 1px solid #5F5F5F;
                 }
 
+                td.bullet {
+                    color: #6d6e71;
+                }
+
                 td:nth-child(1){
                     width: $makeWidth;
                     max-width: $makeWidth;
@@ -468,26 +469,31 @@ footer {
                 td:nth-child(3){
                     width: $yearWidth;
                     max-width: $yearWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(4){
                     width: $crashedWidth;
                     max-width: $crashedWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(5){
                     width: $fireWidth;
                     max-width: $fireWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(6){
                     width: $injuredWidth;
                     max-width: $injuredWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(7){
                     width: $speedWidth;
                     max-width: $speedWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(8){
