@@ -38,41 +38,49 @@ var columns = [
 	name: "make",
     label: "MAKE",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "model",
     label: "MODEL",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "year",
     label: "YEAR",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "crashed",
     label: "CRASH",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "fire",
     label: "FIRE",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "injured",
     label: "INJURED",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "speed",
     label: "MPH",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "description",
     label: "FAILED COMPONENT",
     editable: false,
+    sortable: false,
     cell: Backgrid.Cell.extend({
       className: "string-cell description",
       formatter: Backgrid.StringFormatter
@@ -81,11 +89,13 @@ var columns = [
     name: "state",
     label: "STATE",
     editable: false,
+    sortable: false,
     cell: "string"
   }, {
     name: "city",
     label: "CITY",
     editable: false,
+    sortable: false,
     cell: "string"
   }];
 
