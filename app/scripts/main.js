@@ -236,14 +236,34 @@ zoomdataClient.visualize({
 		        value: [carMake]
 		    };
 
+            var modelFilter = {
+                path: 'model'
+            };
+
 		    modelVis.controller.state.setFilter(filter);
+
+            countTextVis.controller.state.removeFilter(modelFilter, {silent:true});
 		    countTextVis.controller.state.setFilter(filter);
+
+            crashesGaugeVis.controller.state.removeFilter(modelFilter, {silent:true});
 		    crashesGaugeVis.controller.state.setFilter(filter);
+
+            injuriesGaugeVis.controller.state.removeFilter(modelFilter, {silent:true});
 		    injuriesGaugeVis.controller.state.setFilter(filter);
+
+            firesGaugeVis.controller.state.removeFilter(modelFilter, {silent:true});
 		    firesGaugeVis.controller.state.setFilter(filter);
+
+            speedGaugeVis.controller.state.removeFilter(modelFilter, {silent:true});
 		    speedGaugeVis.controller.state.setFilter(filter);
+
+            scatterplotVis.controller.state.removeFilter(modelFilter, {silent:true});
 	    	scatterplotVis.controller.state.setFilter(filter);
-            if(mapVis) mapVis.controller.state.setFilter(filter);
+
+            if(mapVis) {
+                mapVis.controller.state.removeFilter(modelFilter, {silent:true});
+                mapVis.controller.state.setFilter(filter);
+            }
         });
 
     setTimeout(function() {
