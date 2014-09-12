@@ -7,6 +7,7 @@ var apiKey = '53e569eae4b0a9e9da986978',
     hasNextDetails = true,
     loadingDetails = false,
     detailsOffset = 0,
+    stateAbbreviationLookup = {'Alabama': 'AL','Alaska': 'AK','Arizona': 'AZ','Arkansas': 'AR','California': 'CA','Colorado': 'CO','Connecticut': 'CT','Delaware': 'DE','Florida': 'FL','Georgia': 'GA','Hawaii': 'HI','Idaho': 'ID','Illinois': 'IL','Indiana': 'IN','Iowa': 'IA','Kansas': 'KS','Kentucky': 'KY','Louisiana': 'LA','Maine': 'ME','Maryland': 'MD','Massachusetts': 'MA','Michigan': 'MI','Minnesota': 'MN','Mississippi': 'MS','Missouri': 'MO','Montana': 'MT','Nebraska': 'NE','Nevada': 'NV','New Hampshire': 'NH','New Jersey': 'NJ','New Mexico': 'NM','New York': 'NY','North Carolina': 'NC','North Dakota': 'ND','Ohio': 'OH','Oklahoma': 'OK','Oregon': 'OR','Pennsylvania': 'PA','Rhode Island': 'RI','South Carolina': 'SC','South Dakota': 'SD','Tennessee': 'TN','Texas': 'TX','Utah': 'UT','Vermont': 'VT','Virginia': 'VA','Washington': 'WA','West Virginia': 'WV','Wisconsin': 'WI', 'Wyoming': 'WY'},
     makeVis, modelVis, trendVis, countTextVis, crashesGaugeVis,
     injuriesGaugeVis, firesGaugeVis, speedGaugeVis, scatterplotVis,
     mapVis;
@@ -68,6 +69,16 @@ var NAStringCell = Backgrid.StringCell.extend({
   formatter: NAStringFormatter
 });
 
+var StateAbbreviationStringFormatter = _.extend({}, Backgrid.CellFormatter.prototype, {
+  fromRaw: function (rawValue, model) {
+    return stateAbbreviationLookup[rawValue]
+  }
+});
+
+var StateAbbreviationCell = Backgrid.StringCell.extend({
+  formatter: StateAbbreviationStringFormatter
+});
+
 var columns = [
 {
 	name: "make",
@@ -84,6 +95,18 @@ var columns = [
   }, {
     name: "year",
     label: "YEAR",
+    editable: false,
+    sortable: false,
+    cell: "string"
+  }, {
+    name: "state",
+    label: "STATE",
+    editable: false,
+    sortable: false,
+    cell: StateAbbreviationCell
+  }, {
+    name: "city",
+    label: "CITY",
     editable: false,
     sortable: false,
     cell: "string"
@@ -120,18 +143,6 @@ var columns = [
       className: "string-cell description",
       formatter: Backgrid.StringFormatter
     })
-}, {
-    name: "state",
-    label: "STATE",
-    editable: false,
-    sortable: false,
-    cell: "string"
-  }, {
-    name: "city",
-    label: "CITY",
-    editable: false,
-    sortable: false,
-    cell: "string"
   }];
 
 // Initialize a new Grid instance
@@ -480,7 +491,7 @@ function resizeBackgrid() {
     var tbodyHeight = $backgridContainer.height() - $backgridContainer.find('thead').height();
     $backgridTBody.css('height', tbodyHeight);
 
-    var descriptionWidth = $backgridContainer.width() - 760;
+    var descriptionWidth = $backgridContainer.width() - 580;
     $('.backgrid thead th.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
     $('.backgrid tbody td.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
 }

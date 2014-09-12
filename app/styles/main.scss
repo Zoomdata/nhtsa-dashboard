@@ -21,9 +21,9 @@ html, body {
 }
 
 body {
-    background:url(../images/car_background@2x.jpg) no-repeat 100% 100%,
-                url(../images/speckles_background@2x.jpg) repeat;
-    background-size: 780px 557px, auto;
+    background-color: #999999;
+    background: url(../images/car_background@2x.jpg) no-repeat 100% 100%, url(../images/speckles_background@2x.jpg) repeat;
+    background-size: 530px 325px, auto;
 
     color: #333;
     font-family: 'Source Sans Pro', source-sans-pro, sans-serif;
@@ -60,6 +60,8 @@ footer {
     float: left;
     margin-top: 10px;
     margin-left: 5%;
+    font-size: 10px;
+    font-weight: 300;
 
     a:visited, a {
         color: #333;
@@ -112,18 +114,19 @@ footer {
 }
 
 .dashboard {
-    width: 90%;
     height: 94%;
+    width: 90%;
+    min-height: 490px;
+    min-width: 990px;
     position: relative;
     margin: auto;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
     white-space: nowrap;
-    min-height: 490px;
-    min-width: 990px;
 
     .dashboard-foreground {
         background: url(../images/speckles_background@2x.jpg) repeat;
+        background-color: #999999;
         background-size: auto;
 
         width: 100%;
@@ -139,49 +142,49 @@ footer {
 
         .year-trend-wrapper {
             position: relative;
-            height: 90px;
-            margin: 0 auto;
-            width: 95%;
-            margin-bottom: 10px;
+            height: 54px;
+            margin: 0 10px;
+            width: calc(100% - 20px);
+            margin-bottom: 18px;
             border-bottom: 1px solid #737373;
 
             .trend-header {
                 float: left;
                 font-size: 20px;
-                margin-right: 15px;
+                margin-left: 60px;
                 text-transform: uppercase;
                 position: absolute;
                 bottom: 0;
             }
 
             #trend {
-                height: 85px;
-                margin-left: 250px;
+                height: 50px;
+                margin-left: 256px;
             }
         }
 
         .make-wrapper {
             background: #7A7A7A;
             float: left;
-            padding: 0 20px 20px 20px;
+            padding: 0 8px;
             width: 20%;
-            min-width: 258px;
-            height: calc(100% - 240px);
+            min-width: 186px;
+            height: calc(100% - 180px);
             position: relative;
 
             .make-header {
                 color: #f6ebe6;
-                margin: 15px 0;
-                font-size: 32px;
+                margin: 10px 0;
+                font-size: 21px;
                 font-weight: 300;
                 text-transform: uppercase;
-                height: 80px;
+                height: 50px;
                 position: relative;
                 z-index: 100;
             }
 
             #make-bar-chart {
-                height: calc(100% - 90px);
+                height: calc(100% - 60px);
                 position: relative;
                 z-index: 100;
             }
@@ -190,47 +193,48 @@ footer {
         .connector {
             background: #4C4C4C;
             float: left;
-            width: 40px;
-            height: calc(100% - 240px);
-            margin-top: 69px;
-            transform: skew(0,74deg);
+            width: 25px;
+            height: calc(100% - 180px);
+            margin-top: 46px;
+            transform: skew(0,75deg);
         }
 
         .model-wrapper {
             background: #7A7A7A;
             float: left;
-            padding: 0 20px 20px 20px;
+            padding: 0 8px;
             width: 20%;
-            min-width: 258px;
-            height: calc(100% - 240px);
+            min-width: 186px;
+            height: calc(100% - 180px);
             position: relative;
 
             .model-header {
                 color: #f6ebe6;
-                margin: 15px 0;
-                font-size: 32px;
+                margin: 10px 0;
+                font-size: 21px;
                 font-weight: 300;
                 text-transform: uppercase;
-                height: 80px;
+                height: 50px;
             }
 
             #model-bar-chart {
-                height: calc(100% - 90px);
+                height: calc(100% - 60px);
             }
         }
 
         .header {
             margin-top: 0px;
-            height: 139px;
+            height: 93px;
             margin-left: calc(20% + 50px);
 
             .title {
                 color: #ffffff;
-                font-size: 70px;
+                font-size: 40px;
                 font-weight: 700;
-                letter-spacing: 5px;
                 text-shadow: 4px 4px 0px rgba(153, 153, 153, 1);
                 text-transform: uppercase;
+                letter-spacing: 0.3em;
+                margin-left: 10px;
 
                 white-space: nowrap;
                 overflow: hidden;
@@ -241,24 +245,26 @@ footer {
                 white-space: nowrap;
                 overflow: hidden;
                 text-overflow: ellipsis;
+                position: relative;
 
                 button.reset {
                     margin-left: 20px;
                     vertical-align: top;
                     background: none;
-                    height: 40px;
+                    height: 30px;
                     padding: 0;
                 }
                 button.reset .circle {
                     background: rgba(93, 93, 93, 0.75);
                     color: #78C9D1;
-                    width: 30px;
-                    height: 30px;
+                    width: 20px;
+                    height: 20px;
                     border-radius: 50%;
                     // transform: rotate(300deg);
                     box-shadow: 4px 4px 3px 0px rgba(73, 73, 73, 0.75);
                     vertical-align: top;
-                    padding: 5px 0 0 2px;
+                    padding: 2px 1px 0 2px;
+                    font-size: 13px;
                 }
 
                 button.reset:active .circle {
@@ -266,9 +272,10 @@ footer {
                 }
 
                 button.reset .label {
-                    font-size: 14px;
-                    line-height: 14px;
-                    margin-left: 11px;
+                    color: #4c4c4c;
+                    font-size: 10px;
+                    line-height: 12px;
+                    margin-left: 6px;
                     text-align: left;
                     text-transform: uppercase;
                 }
@@ -282,8 +289,9 @@ footer {
                     font-family: AF-LED7Seg-3;
                     font-size: 30px;
                     position: relative;
-                    height: 40px;
+                    height: 30px;
                     margin-left: 20px;
+                    line-height: 22px;
 
                     div {
                         position: absolute;
@@ -311,29 +319,27 @@ footer {
 
                 .filler {
                     color: #f6ebe6;
-                    height: 36px;
-                    font-size: 36px;
-                    line-height: 40px;
+                    height: 30px;
+                    font-size: 21px;
+                    line-height: 30px;
                     margin-left: 20px;
                     font-weight: 300;
                     vertical-align: top;
                     text-transform: uppercase;
-                    position: relative;
                 }
             }
         }
 
         .gauges {
-            height: 130px;
+            float: right;
+            height: 120px;
             width: 55%;
-            margin-left: 45%;
-            margin-bottom: 20px;
 
             .gauge {
                 display: inline-block;
-                margin: 0 100px 0 0;
-                width: 60px;
-                height: 90%;
+                margin: 0 10px 0 0;
+                width: 120px;
+                height: 90px;
             }
         }
 
@@ -351,19 +357,20 @@ footer {
             position: absolute;
             bottom: -10%;
             right: -6%;
-            width: 792px;
-            height: 611px;
+            width: 530px;
+            height: 325px;
         }
 
         .annotation {
             color: #333333;
             position: absolute;
-            bottom: 20px;
+            bottom: 0;
             left: 10px;
             height: 100px;
+            letter-spacing: 0.15em;
             
             div {
-                font-size: 20px;
+                font-size: 12px;
                 font-weight: 300;
                 text-transform: uppercase;
 
@@ -385,12 +392,12 @@ footer {
         text-align: center;
         vertical-align: middle;
         position: absolute;
-        padding: 0 30px;
+        padding: 0 24px;
         overflow: hidden;
 
         h2.header {
             font-weight: 300;
-            height: 31px;
+            font-size: 23px;
             text-transform: uppercase;
         }
 
@@ -401,15 +408,17 @@ footer {
 
         .backgrid {
             $makeWidth: 100px;
-            $modelWidth: 100px;
-            $yearWidth: 80px;
-            $crashedWidth: 40px;
-            $fireWidth: 40px;
-            $injuredWidth: 40px;
-            $speedWidth: 52px;
-            $descriptionWidth: 150px;
-            $stateWidth: 150px;
+            $modelWidth: 90px;
+            $yearWidth: 90px;
+            $stateWidth: 90px;
             $cityWidth: 150px;
+            $crashedWidth: 30px;
+            $fireWidth: 30px;
+            $injuredWidth: 30px;
+            $speedWidth: 40px;
+            $descriptionWidth: 362px; //942px - 580px
+
+            letter-spacing: 0.15em;
 
             thead tr {
                 display: block;
@@ -420,7 +429,8 @@ footer {
                 th {
                     background-color: transparent;
                     border-bottom: 6px solid #5F5F5F;
-                    height: 100px;
+                    height: 75px;
+                    font-size: 11px;
                 }
 
                 th.make {
@@ -438,27 +448,6 @@ footer {
                     max-width: $yearWidth;
                 }
 
-                th.crashed {
-                    transform: rotate(-90deg) translate(-7px, -40px);
-                }
-
-                th.fire {
-                    transform: rotate(-90deg) translate(-15px, -65px);
-                }
-
-                th.injured {
-                    transform: rotate(-90deg) translate(5px, -100px);
-                }
-
-                th.speed {
-                    transform: rotate(-90deg) translate(-16px, -128px);
-                }
-
-                th.description {
-                    width: $descriptionWidth;
-                    max-width: $descriptionWidth;
-                }
-
                 th.state {
                     width: $stateWidth;
                     max-width: $stateWidth;
@@ -467,6 +456,27 @@ footer {
                 th.city {
                     width: $cityWidth;
                     max-width: $cityWidth;
+                }
+
+                th.crashed {
+                    transform: rotate(-90deg) translate(-2px, -25px);
+                }
+
+                th.fire {
+                    transform: rotate(-90deg) translate(-8px, -47px);
+                }
+
+                th.injured {
+                    transform: rotate(-90deg) translate(6px, -77px);
+                }
+
+                th.speed {
+                    transform: rotate(-90deg) translate(-10px, -100px);
+                }
+
+                th.description {
+                    width: $descriptionWidth;
+                    max-width: $descriptionWidth;
                 }
             }
 
@@ -479,7 +489,7 @@ footer {
                     border-left: 1px solid #5F5F5F;
                     border-bottom: 1px solid #5F5F5F;
                     border-right: 1px solid #5F5F5F;
-                    font-size: 14px;
+                    font-size: 11px;
                 }
 
                 td.bullet {
@@ -503,42 +513,42 @@ footer {
                 }
 
                 td:nth-child(4){
+                    width: $stateWidth;
+                    max-width: $stateWidth;
+                }
+
+                td:nth-child(5){
+                    width: $cityWidth;
+                    max-width: $cityWidth;
+                }
+
+                td:nth-child(6){
                     width: $crashedWidth;
                     max-width: $crashedWidth;
                     text-align: center;
                 }
 
-                td:nth-child(5){
+                td:nth-child(7){
                     width: $fireWidth;
                     max-width: $fireWidth;
                     text-align: center;
                 }
 
-                td:nth-child(6){
+                td:nth-child(8){
                     width: $injuredWidth;
                     max-width: $injuredWidth;
                     text-align: center;
                 }
 
-                td:nth-child(7){
+                td:nth-child(9){
                     width: $speedWidth;
                     max-width: $speedWidth;
                     text-align: center;
                 }
 
-                td:nth-child(8){
+                td:nth-child(10){
                     width: $descriptionWidth;
                     max-width: $descriptionWidth;
-                }
-
-                td:nth-child(9){
-                    width: $stateWidth;
-                    max-width: $stateWidth;
-                }
-
-                td:nth-child(10){
-                    width: $cityWidth;
-                    max-width: $cityWidth;
                 }
             }
         }
@@ -546,7 +556,7 @@ footer {
         .close-hood {
             position: absolute;
             bottom: 0px;
-            left: calc(28% - 10px);
+            left: calc(50% - 155px);
             cursor: pointer;
         }
 
@@ -559,11 +569,12 @@ footer {
 
 /*----- Tabs -----*/
 .tabs {
-    width: 55%;
-    margin-left: 10px;
-    height: calc(100% - 450px);
+    width: 53%;
+    margin-right: 2%;
+    height: calc(100% - 320px);
     display: inline-block;
     position: relative;
+    float: right;
 }
  
     /*----- Tab Links -----*/
@@ -577,6 +588,7 @@ footer {
     .tab-links {
         margin: 0;
         padding: 0;
+        height: 25px;
     }
  
     .tab-links li {
@@ -592,11 +604,11 @@ footer {
  
         .tab-links a {
             width: 100%;
-            padding:9px 15px;
+            padding:3px 15px;
             display:inline-block;
             border-radius:12px 12px 0px 0px;
             background: rgba(92, 92, 92, 0.8);
-            font-size:20px;
+            font-size:14px;
             font-weight:600;
             color:white;
             transition:all linear 0.15s;
@@ -614,21 +626,21 @@ footer {
  
     li.active a, li.active a:hover {
         background: rgba(128, 128, 128, 0.8);
-            border-bottom: 1px solid transparent;
+        border-bottom: 1px solid transparent;
     }
  
     /*----- Content of Tabs -----*/
     .tab-content {
         width: 100%;
         height: 100%;
-        padding:15px;
+        padding:8px 10px 0 10px;
         border-radius:0 0 3px 3px;
-        box-shadow:-1px 1px 1px rgba(0,0,0,0.15);
-        background: rgba(128, 128, 128, 0.8);
+        background: linear-gradient(to bottom, rgba(128, 128, 128, 0.8), rgba(0, 0, 0, 0) 50%);
 
         border-width: 1px;
         border-style: solid;
-        border-image:linear-gradient(to bottom, white, rgba(0, 0, 0, 0) 50%) 1 100%;
+        border-image: linear-gradient(to bottom, white, rgba(0, 0, 0, 0) 50%) 1 100%;
+        border-bottom: 0;
     }
  
         .tab {
@@ -640,9 +652,9 @@ footer {
         }
 
 .button-container {
-  width: 242px;
-  height: 200px;
-  left: 34%;
+  width: 120px;
+  height: 110px;
+  left: calc(50% - 120px);
   position: fixed;
   bottom: -5px;
   cursor: pointer;
@@ -693,9 +705,9 @@ footer {
 }
 
 .arrow-bottom {
-  width: 102px;
-  height: 20px;
-  transform: perspective(100px) rotateX(125deg) translate(0, 28px);
+  width: 57px;
+  height: 10px;
+  transform: perspective(100px) rotateX(125deg) translate(0, 15px);
   margin: auto;
   background: #878787;
   transition: all 0.4s;
@@ -703,16 +715,16 @@ footer {
 }
 
 .button-container:hover .arrow-bottom {
-  width: 106px;
-  transform: perspective(110px) rotateX(128deg) translate(0, 28px);
+  width: 57px;
+  transform: perspective(110px) rotateX(128deg) translate(0, 15deg);
 }
 
 
 
 @keyframes bottom-drop {
   0% {  
-    width: 106px;
-    transform: perspective(110px) rotateX(128deg) translate(0, 28px);
+      width: 57px;
+      transform: perspective(110px) rotateX(128deg) translate(0, 15deg);
   }
   
   100% {
@@ -730,7 +742,7 @@ footer {
 .top {
   display: block;
   position: absolute;
-  bottom: 30px;
+  bottom: 26px;
 }
 
 .bottom {
