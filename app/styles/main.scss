@@ -543,6 +543,13 @@ footer {
             }
         }
 
+        .close-hood {
+            position: absolute;
+            bottom: 0px;
+            left: calc(32% - 25px);
+            cursor: pointer;
+        }
+
     }
 }
 

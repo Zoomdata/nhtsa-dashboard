@@ -192,6 +192,22 @@ $(document).ready(function() {
         $.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
     });
 
+    $('.close-hood').click(function(){
+        var liftDuration = 2000;
+        $(".dashboard-foreground").velocity({ 
+            rotateX: 0
+        }, {
+            duration: liftDuration,
+            complete: function() {
+                records.reset();
+
+                $('.button-container').removeClass('active');
+            }
+        });
+
+        $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
+    });
+
 	$('button.show-data').on('mousedown', function() {
 		var liftDuration = 2000;
 		if(!lifted) {
