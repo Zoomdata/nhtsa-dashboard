@@ -546,7 +546,7 @@ footer {
         .close-hood {
             position: absolute;
             bottom: 0px;
-            left: calc(32% - 25px);
+            left: calc(28% - 10px);
             cursor: pointer;
         }
 
@@ -642,10 +642,9 @@ footer {
 .button-container {
   width: 242px;
   height: 200px;
-  left: 36%;
+  left: 34%;
   position: fixed;
-  bottom: 5px;
-  z-index: 2;
+  bottom: -5px;
   cursor: pointer;
   
   perspective: 600px;
