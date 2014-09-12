@@ -172,6 +172,26 @@ $(document).ready(function() {
         if(mapVis) mapVis.controller.state.removeFilter(filter);
 	});
 
+    $('.button-container').click(function() {
+        $(this).addClass('active');
+
+        detailsOffset = 0;
+        hasNextDetails = true;
+        getDetails();
+
+        var liftDuration = 2000;
+
+        $(".dashboard-foreground").velocity({
+            rotateX: 90
+        }, "easeOutBack", liftDuration);
+
+        var currentCount = $("#total-count-text").text();
+        $("#dashboard-background-total").text(numberWithCommas(currentCount));
+
+        $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
+        $.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
+    });
+
 	$('button.show-data').on('mousedown', function() {
 		var liftDuration = 2000;
 		if(!lifted) {

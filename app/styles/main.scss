@@ -54,8 +54,16 @@ button::-moz-focus-inner{
 }
 
 footer {
+    position: relative;
+    letter-spacing: normal;
     width: 990px;
-    margin: 10px auto;
+    float: left;
+    margin-top: 10px;
+    margin-left: 5%;
+
+    a:visited, a {
+        color: #333;
+    }
 }
 
 .group:after {
@@ -159,7 +167,6 @@ footer {
             width: 20%;
             min-width: 258px;
             height: calc(100% - 240px);
-            z-index: 100;
             position: relative;
 
             .make-header {
@@ -169,10 +176,14 @@ footer {
                 font-weight: 300;
                 text-transform: uppercase;
                 height: 80px;
+                position: relative;
+                z-index: 100;
             }
 
             #make-bar-chart {
                 height: calc(100% - 90px);
+                position: relative;
+                z-index: 100;
             }
         }
 
@@ -620,3 +631,114 @@ footer {
         .tab.active {
             display:inline;
         }
+
+.button-container {
+  width: 242px;
+  height: 200px;
+  left: 36%;
+  position: fixed;
+  bottom: 5px;
+  z-index: 2;
+  cursor: pointer;
+  
+  perspective: 600px;
+}
+
+.button-container .show-data {
+  display: block;
+  margin: auto;
+  transform: rotateX(0deg);
+  transform-origin: bottom;
+  transition: all 0.3s;
+  
+  -webkit-filter: drop-shadow(6px 20px 7px rgba(0,0,0,0.8));
+  // filter: url(#drop-shadow);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=6, OffY=20, Color='#444')";
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=6, OffY=20, Color='#444')";
+}
+
+.button-container:hover .show-data {
+  
+  transform: rotateX(20deg);
+  
+  -webkit-filter: drop-shadow(6px 6px 7px rgba(0,0,0,0.8));
+  // filter: url(#drop-shadow);
+  -ms-filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=6, OffY=6, Color='#444')";
+  filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=6, OffY=6, Color='#444')";
+}
+
+@keyframes tab-rotate {
+  50%  { 
+    transform: rotateX(-30deg);
+  }
+  
+  100% {
+    transform: rotateX(-30deg) translate(0, 200px);
+  }
+}
+
+.button-container.active .show-data {
+  animation: tab-rotate 2s normal;
+  animation-fill-mode: forwards;
+  
+  -webkit-filter: none;
+  -ms-filter: none;
+  filter: none;
+}
+
+.arrow-bottom {
+  width: 102px;
+  height: 20px;
+  transform: perspective(100px) rotateX(125deg) translate(0, 28px);
+  margin: auto;
+  background: #878787;
+  transition: all 0.4s;
+  transform-origin: bottom;
+}
+
+.button-container:hover .arrow-bottom {
+  width: 106px;
+  transform: perspective(110px) rotateX(128deg) translate(0, 28px);
+}
+
+
+
+@keyframes bottom-drop {
+  0% {  
+    width: 106px;
+    transform: perspective(110px) rotateX(128deg) translate(0, 28px);
+  }
+  
+  100% {
+    transform: perspective(110px) rotateX(128deg) translate(0, -400px);
+    opacity: 0;
+  }
+}
+
+.button-container.active .arrow-bottom {
+  animation: bottom-drop 1s normal;
+  animation-delay: 1s;
+  animation-fill-mode: forwards;
+}
+
+.top {
+  display: block;
+  position: absolute;
+  bottom: 30px;
+}
+
+.bottom {
+  display: block;
+  position: absolute;
+  bottom: 23px;
+}
+
+.cover {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: calc(100% - 23px);
+  background: #999999;
+  z-index: 10;
+}
+

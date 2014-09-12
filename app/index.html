@@ -115,12 +115,31 @@
                 </div>
             </div>
         </div>
-        <button class="show-data">Open</button>
 
         <footer>
-        © 2014 Zoomdata, Inc. <a href="http://www.zoomdata.com/">About</a> <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>
+        © 2014 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc. <a href="http://www.zoomdata.com/contact">Contact</a> <a href="http://www.zoomdata.com/terms">Legal</a>
         </footer>
 
+        <div class="button-container">
+          <img class="top" src="images/slot-top.png" />
+          <img class="show-data" src="images/show-data.png" />
+          <div class="arrow-bottom"></div>
+          <img class="bottom" src="images/slot-bottom.png" />
+          <div class="cover"></div>
+        </div>
+
+        <svg height="0" xmlns="http://www.w3.org/2000/svg">
+            <filter id="drop-shadow">
+                <feGaussianBlur in="SourceAlpha" stdDeviation="2.2" />
+                <feOffset dx="6" dy="20" result="offsetblur" />
+                <feFlood flood-color="rgba(0,0,0,0.8)" />
+                <feComposite in2="offsetblur" operator="in" />
+                <feMerge>
+                    <feMergeNode/>
+                    <feMergeNode in="SourceGraphic" />
+                </feMerge>
+            </filter>
+        </svg>
 
         <!-- build:js scripts/vendor.js -->
         <!-- bower:js -->
