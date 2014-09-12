@@ -156,7 +156,7 @@ $(document).ready(function() {
     	var active = $modelBarChart.find('div.active');
     	active.toggleClass('active', false);
 
-        Zoomdata.eventDispatcher.trigger("filter:years:clear");
+        Zoomdata.eventDispatcher.trigger("filter:years:reset");
 
 	    var filter = {
 	        path: 'model'
