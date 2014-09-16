@@ -113,6 +113,56 @@ footer {
     z-index: 101;
 }
 
+.about-block {
+    margin-top: 36px;
+    color: white;
+    width: 580px;
+    margin-left: calc(20% + 60px);
+    position: absolute;
+    z-index: 100;
+
+    a:visited, a {
+        color: white;
+    }
+
+    .about-header {
+        font-weight: 700;
+        text-transform: uppercase;
+        font-size: 40px;
+        letter-spacing: 0.3em;
+    }
+
+    .about-description {
+        font-size: 19px;
+        font-weight: 300;
+        margin: 30px 0 30px 0;
+    }
+
+    .zd-website-button {
+        font-size: 18px;
+        font-weight: 700;
+        padding: 10px 20px;
+        border-radius: 12px;
+        border: 2px solid white;
+        width: 241px;
+        float: left;
+        cursor: pointer;
+        text-decoration: none;
+    }
+
+    .close-about-button {
+        font-size: 13px;
+        font-weight: 700;
+        text-transform: uppercase;
+        float: left;
+        padding-top: 17px;
+        margin-left: 25px;
+        border-bottom: 2px solid white;
+        letter-spacing: 0.2em;
+        cursor: pointer;
+    }
+}
+
 .dashboard {
     height: 94%;
     width: 90%;
@@ -122,7 +172,6 @@ footer {
     margin: auto;
     border-bottom-left-radius: 12px;
     border-bottom-right-radius: 12px;
-    white-space: nowrap;
 
     .dashboard-foreground {
         background: url(../images/speckles_background@2x.jpg) repeat;
@@ -160,6 +209,14 @@ footer {
             #trend {
                 height: 50px;
                 margin-left: 256px;
+            }
+
+            .about-button {
+                float: right;
+                position: absolute;
+                right: 0;
+                top: 15px;
+                cursor: pointer;
             }
         }
 

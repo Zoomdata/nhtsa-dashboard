@@ -196,6 +196,14 @@ $(document).ready(function() {
         closeHood();
     });
 
+    $('.js-about-button').click(function(){
+        showAboutOverlay();
+    });
+
+    $('.js-close-about-button').click(function(){
+        hideAboutOverlay();
+    });
+
     $('.tabs .tab-links a').on('click', function(e)  {
         var currentAttrValue = $(this).attr('href');
  
@@ -234,7 +242,27 @@ $( window ).resize(function() {
     if(mapVis) mapVis.controller._controller.resize($map.width(), $map.height());
 });
 
+function showAboutOverlay() {
+    var $aboutBlock = $('.about-block');
+
+    $overlay.css("display", "inline");
+    $overlay.velocity({ opacity: 1 });
+
+    $aboutBlock.css("display", "block");
+    $aboutBlock.velocity({ opacity: 1 });
+}
+
+function hideAboutOverlay() {
+    var $aboutBlock = $('.about-block');
+
+    $overlay.velocity({ opacity: 0 }, { display: "none" });
+    $aboutBlock.velocity({ opacity: 0 }, { display: "none" });
+}
+
 function hideOverlay() {
+    $('.make-header').css('z-index', 1);
+    $('.make-bar-chart').css('z-index', 1);
+
 	$overlay.velocity({ opacity: 0 }, { display: "none" });
 	$(".overlay-description").velocity({ opacity: 0 }, { display: "none" });
 	$(".overlay-instructions").velocity({ opacity: 0 }, { display: "none" });
