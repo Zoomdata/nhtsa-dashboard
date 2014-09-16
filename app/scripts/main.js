@@ -184,73 +184,17 @@ $(document).ready(function() {
 	});
 
     $('.button-container').click(function() {
-        $(this).addClass('active');
-
-        detailsOffset = 0;
-        hasNextDetails = true;
-        getDetails();
-
-        var liftDuration = 2000;
-
-        $(".dashboard-foreground").velocity({
-            rotateX: 90
-        }, "easeOutBack", liftDuration);
-
-        var currentCount = $("#total-count-text").text();
-        $("#dashboard-background-total").text(numberWithCommas(currentCount));
-
-        $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
-        $.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
+        var $buttonContainer = $(this);
+        if($buttonContainer.hasClass('active')) {
+            closeHood();
+        } else {
+            openHood();
+        }
     });
 
     $('.close-hood').click(function(){
-        var liftDuration = 2000;
-        $(".dashboard-foreground").velocity({ 
-            rotateX: 0
-        }, {
-            duration: liftDuration,
-            complete: function() {
-                records.reset();
-
-                $('.button-container').removeClass('active');
-            }
-        });
-
-        $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
+        closeHood();
     });
-
-	$('button.show-data').on('mousedown', function() {
-		var liftDuration = 2000;
-		if(!lifted) {
-	        detailsOffset = 0;
-	        hasNextDetails = true;
-			getDetails();
-
-			$(".dashboard-foreground").velocity({
-				rotateX: 90
-			}, "easeOutBack", liftDuration);
-
-			var currentCount = $("#total-count-text").text();
-			$("#dashboard-background-total").text(numberWithCommas(currentCount));
-
-			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
-			$.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
-
-			lifted = true;
-		} else {
-			$(".dashboard-foreground").velocity({ 
-				rotateX: 0
-			}, {
-				duration: liftDuration,
-				complete: function() {
-					records.reset();
-				}
-			});
-
-			$.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
-			lifted = false;
-		}
-	});
 
     $('.tabs .tab-links a').on('click', function(e)  {
         var currentAttrValue = $(this).attr('href');
@@ -294,6 +238,54 @@ function hideOverlay() {
 	$overlay.velocity({ opacity: 0 }, { display: "none" });
 	$(".overlay-description").velocity({ opacity: 0 }, { display: "none" });
 	$(".overlay-instructions").velocity({ opacity: 0 }, { display: "none" });
+}
+
+function openHood() {
+    var $buttonContainer = $('.button-container'),
+        liftDuration = 2000;
+
+    $buttonContainer.addClass('active');
+
+    detailsOffset = 0;
+    hasNextDetails = true;
+    getDetails();
+
+    $(".dashboard-foreground").velocity({
+        rotateX: 90
+    }, {
+        easing: "easeOutBack",
+        duration: liftDuration,
+        complete: function() {
+            $buttonContainer.find('.show-data').hide();
+            $buttonContainer.find('.arrow-bottom').hide();
+        }
+    });
+
+    var currentCount = $("#total-count-text").text();
+    $("#dashboard-background-total").text(numberWithCommas(currentCount));
+
+    $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
+    $.Velocity.hook($(".dashboard-foreground"), "perspectiveOrigin", "0px 0px");
+}
+
+function closeHood() {
+    var $buttonContainer = $('.button-container'),
+        liftDuration = 2000;
+
+    $(".dashboard-foreground").velocity({ 
+        rotateX: 0
+    }, {
+        duration: liftDuration,
+        complete: function() {
+            records.reset();
+
+            $buttonContainer.removeClass('active');
+            $buttonContainer.find('.show-data').show();
+            $buttonContainer.find('.arrow-bottom').show();
+        }
+    });
+
+    $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
 }
 
 var zoomdataClient = new ZoomdataClient({

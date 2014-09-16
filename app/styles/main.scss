@@ -652,14 +652,21 @@ footer {
         }
 
 .button-container {
-  width: 120px;
-  height: 110px;
-  left: calc(50% - 120px);
-  position: fixed;
-  bottom: -5px;
-  cursor: pointer;
-  
-  perspective: 600px;
+    width: 120px;
+    height: 110px;
+    left: calc(50% - 120px);
+    position: fixed;
+    bottom: -5px;
+    cursor: pointer;
+
+    perspective: 600px;
+
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
 .button-container .show-data {
@@ -689,7 +696,7 @@ footer {
   50%  { 
     transform: rotateX(-30deg);
   }
-  
+
   100% {
     transform: rotateX(-30deg) translate(0, 200px);
   }
@@ -726,10 +733,9 @@ footer {
       width: 57px;
       transform: perspective(110px) rotateX(128deg) translate(0, 15deg);
   }
-  
+
   100% {
     transform: perspective(110px) rotateX(128deg) translate(0, -400px);
-    opacity: 0;
   }
 }
 
