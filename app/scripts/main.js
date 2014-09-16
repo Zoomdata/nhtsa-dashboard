@@ -222,6 +222,8 @@ $(document).ready(function() {
     });
 
 	// hideOverlay();
+
+    postionCarImageInBackground();
 });
 
 $( window ).resize(function() {
@@ -232,7 +234,16 @@ $( window ).resize(function() {
     trendVis.controller._controller.resize($trendVis.width(), $trendVis.height());
     scatterplotVis.controller._controller.resize($scatterplot.width(), $scatterplot.height());
     if(mapVis) mapVis.controller._controller.resize($map.width(), $map.height());
+
+    postionCarImageInBackground();
+
 });
+
+function postionCarImageInBackground() {
+    var newBackgroundX = ($(".dashboard").offset().left + $(".dashboard").width() - 465) + "px";
+    var newBackgroundY = ($(window).height() - 323) + "px";
+    $("body").css({"background-position": newBackgroundX + " " + newBackgroundY});
+}
 
 function hideOverlay() {
 	$overlay.velocity({ opacity: 0 }, { display: "none" });
