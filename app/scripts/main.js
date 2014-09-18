@@ -80,6 +80,19 @@ var StateAbbreviationCell = Backgrid.StringCell.extend({
   formatter: StateAbbreviationStringFormatter
 });
 
+var Rotated45HeaderCell = Backgrid.HeaderCell.extend({
+  render: function () {
+    Rotated45HeaderCell.__super__.render.apply(this, arguments);
+
+    var text = this.$el.text(),
+        html = $('<div><span>' + text + '</span></div>');
+
+    this.$el.html(html);
+
+    return this;
+  }
+});
+
 var columns = [
 {
 	name: "make",
@@ -106,35 +119,33 @@ var columns = [
     sortable: false,
     cell: StateAbbreviationCell
   }, {
-    name: "city",
-    label: "CITY",
-    editable: false,
-    sortable: false,
-    cell: "string"
-  }, {
     name: "crashed",
     label: "CRASH",
     editable: false,
     sortable: false,
-    cell: BooleanStringCell
+    cell: BooleanStringCell,
+    headerCell: Rotated45HeaderCell
   }, {
     name: "fire",
     label: "FIRE",
     editable: false,
     sortable: false,
-    cell: BooleanStringCell
+    cell: BooleanStringCell,
+    headerCell: Rotated45HeaderCell
   }, {
     name: "injured",
-    label: "INJURED",
+    label: "INJURY",
     editable: false,
     sortable: false,
-    cell: BooleanStringCell
+    cell: BooleanStringCell,
+    headerCell: Rotated45HeaderCell
   }, {
     name: "speed",
     label: "MPH",
     editable: false,
     sortable: false,
-    cell: NAStringCell
+    cell: NAStringCell,
+    headerCell: Rotated45HeaderCell
   }, {
     name: "description",
     label: "FAILED COMPONENT",
@@ -545,9 +556,9 @@ function resizeBackgrid() {
 
     $backgridTBody.css('height', tbodyHeight);
 
-    var descriptionWidth = $backgridContainer.width() - 580;
-    $('.backgrid thead th.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
-    $('.backgrid tbody td.description').css('width', descriptionWidth).css('max-width', descriptionWidth);
+    var descriptionWidth = $backgridContainer.width() - 441;
+    $('.backgrid thead th.description').css('width', descriptionWidth + 1).css('min-width', descriptionWidth + 1).css('max-width', descriptionWidth + 1);
+    $('.backgrid tbody td.description').css('width', descriptionWidth).css('min-width', descriptionWidth).css('max-width', descriptionWidth);
 }
 
 function makePreviewEndpointURL() {

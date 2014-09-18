@@ -448,10 +448,10 @@ footer {
         border-bottom-left-radius: inherit;
         border-bottom-right-radius: inherit;
         text-align: center;
-        vertical-align: middle;
         position: absolute;
         padding: 0 24px;
         overflow: hidden;
+        border-collapse: collapse;
 
         h2.header {
             font-weight: 300;
@@ -467,14 +467,13 @@ footer {
         .backgrid {
             $makeWidth: 100px;
             $modelWidth: 90px;
-            $yearWidth: 90px;
-            $stateWidth: 90px;
-            $cityWidth: 150px;
+            $yearWidth: 60px;
+            $stateWidth: 60px;
             $crashedWidth: 30px;
             $fireWidth: 30px;
             $injuredWidth: 30px;
             $speedWidth: 40px;
-            $descriptionWidth: 362px; //942px - 580px
+            $descriptionWidth: 502px; //942px - 440px
 
             letter-spacing: 0.15em;
 
@@ -487,54 +486,89 @@ footer {
                 th {
                     background-color: transparent;
                     border-bottom: 6px solid #5F5F5F;
-                    height: 75px;
                     font-size: 11px;
+                    height: 75px;
+                    vertical-align: bottom;
+                    overflow: visible;
                 }
 
                 th.make {
-                    width: $makeWidth;
-                    max-width: $makeWidth;
+                    min-width: $makeWidth;
                 }
 
                 th.model {
-                    width: $modelWidth;
-                    max-width: $modelWidth;
+                    min-width: $modelWidth;
                 }
 
                 th.year {
-                    width: $yearWidth;
-                    max-width: $yearWidth;
+                    min-width: $yearWidth;
                 }
 
                 th.state {
-                    width: $stateWidth;
-                    max-width: $stateWidth;
+                    min-width: $stateWidth;
                 }
 
-                th.city {
-                    width: $cityWidth;
-                    max-width: $cityWidth;
-                }
-
+                // Rotate Column Headers
+                // http://css-tricks.com/rotated-table-column-headers/
                 th.crashed {
-                    transform: rotate(-90deg) translate(-2px, -25px);
+                    min-width: $crashedWidth;
+                    max-width: $crashedWidth;
+                    white-space: nowrap;
+
+                    div {
+                        transform: translate(0, 2px) rotate(315deg);
+
+                        span {
+                            padding: 5px 10px;
+                        }
+                    }
                 }
 
                 th.fire {
-                    transform: rotate(-90deg) translate(-8px, -47px);
+                    min-width: $fireWidth;
+                    max-width: $fireWidth;
+                    white-space: nowrap;
+
+                    div {
+                        transform: translate(0, 1px) rotate(315deg);
+
+                        span {
+                            padding: 5px 10px;
+                        }
+                    }
                 }
 
                 th.injured {
-                    transform: rotate(-90deg) translate(6px, -77px);
+                    min-width: $injuredWidth;
+                    max-width: $injuredWidth;
+                    white-space: nowrap;
+
+                    div {
+                        transform: translate(0, 1px) rotate(315deg);
+
+                        span {
+                            padding: 5px 10px;
+                        }
+                    }
                 }
 
                 th.speed {
-                    transform: rotate(-90deg) translate(-10px, -100px);
+                    min-width: $speedWidth;
+                    max-width: $speedWidth;
+                    white-space: nowrap;
+
+                    div {
+                        transform: translate(0, -3px) rotate(315deg);
+
+                        span {
+                            padding: 5px 10px;
+                        }
+                    }
                 }
 
                 th.description {
                     width: $descriptionWidth;
-                    max-width: $descriptionWidth;
+                    min-width: $descriptionWidth;
                 }
             }
 
@@ -555,58 +589,46 @@ footer {
                 }
 
                 td:nth-child(1){
-                    width: $makeWidth;
-                    max-width: $makeWidth;
+                    min-width: $makeWidth;
                 }
 
                 td:nth-child(2){
-                    width: $modelWidth;
-                    max-width: $modelWidth;
+                    min-width: $modelWidth;
                 }
 
                 td:nth-child(3){
-                    width: $yearWidth;
-                    max-width: $yearWidth;
+                    min-width: $yearWidth;
                     text-align: center;
                 }
 
                 td:nth-child(4){
-                    width: $stateWidth;
-                    max-width: $stateWidth;
+                    min-width: $stateWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(5){
-                    width: $cityWidth;
-                    max-width: $cityWidth;
+                    min-width: $crashedWidth;
+                    text-align: center;
                 }
 
                 td:nth-child(6){
-                    width: $crashedWidth;
-                    max-width: $crashedWidth;
+                    min-width: $fireWidth;
                     text-align: center;
                 }
 
                 td:nth-child(7){
-                    width: $fireWidth;
-                    max-width: $fireWidth;
+                    min-width: $injuredWidth;
                     text-align: center;
                 }
 
                 td:nth-child(8){
-                    width: $injuredWidth;
-                    max-width: $injuredWidth;
+                    min-width: $speedWidth;
                     text-align: center;
                 }
 
                 td:nth-child(9){
-                    width: $speedWidth;
-                    max-width: $speedWidth;
-                    text-align: center;
-                }
-
-                td:nth-child(10){
                     width: $descriptionWidth;
-                    max-width: $descriptionWidth;
+                    min-width: $descriptionWidth;
                 }
             }
         }
