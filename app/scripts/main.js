@@ -242,7 +242,7 @@ $(document).ready(function() {
     });
 
 	// hideOverlay();
-
+    positionSplat();
     positionCarImageInBackground();
     positionHoodReleaseButton();
     toggleYScrollability();
@@ -256,10 +256,25 @@ $( window ).resize(function() {
     scatterplotVis.controller._controller.resize($scatterplot.width(), $scatterplot.height());
     if(mapVis) mapVis.controller._controller.resize($map.width(), $map.height());
 
+    positionSplat();
     positionCarImageInBackground();
     positionHoodReleaseButton();
     toggleYScrollability();
 });
+
+function positionSplat(){
+    // make sure it is behind the make-wrapper
+    var makeWrapperObj = $(".make-wrapper");
+
+    // it will be proportioned correctlywhen splat is 248.756% the width of the makeWrapperObj
+    var newImageWidth = makeWrapperObj.width()* 2.48756;
+    $(".overlay-splat").css("width", newImageWidth);
+
+    // now position it properly
+    var barAreaLeft = $(".bar-area").offset().left;
+    $(".bar-area").css("left",  barAreaLeft + (newImageWidth *.077));
+    console.log( barAreaLeft + (newImageWidth *.077) + "px");
+}
 
 function positionHoodReleaseButton(){
     var newTop = $(".dashboard").height() - 67;

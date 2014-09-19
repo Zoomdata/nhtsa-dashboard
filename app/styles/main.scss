@@ -88,7 +88,14 @@ footer {
     height: 100%;
     width: 100%;
     z-index: 20;
-    background-color: rgba(0,0,0,0.8);
+    /*background-color: rgba(0,0,0,0.8);*/
+    background-color: #999999;
+    background: url(../images/car_background@2x.jpg) no-repeat 100% 100%, url(../images/speckles_background@2x.jpg) repeat;
+    background-size: 530px 325px, auto;
+}
+
+.overlay-splat {
+    -webkit-backface-visibility: hidden; position:absolute;
 }
 
 .overlay-description {
