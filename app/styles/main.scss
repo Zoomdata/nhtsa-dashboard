@@ -18,6 +18,7 @@ html, body {
     padding:0;
     height:100%;
     width: 100%;
+    user-select: none;
 }
 
 body {
@@ -770,7 +771,7 @@ footer {
   filter: "progid:DXImageTransform.Microsoft.Dropshadow(OffX=6, OffY=20, Color='#444')";
 }
 
-.button-container:hover .show-data {
+.no-touch .button-container:hover .show-data {
   
   transform: rotateX(20deg);
   
@@ -809,7 +810,7 @@ footer {
   transform-origin: bottom;
 }
 
-.button-container:hover .arrow-bottom {
+.no-touch .button-container:hover .arrow-bottom {
   width: 57px;
   transform: perspective(110px) rotateX(128deg) translate(0, 15deg);
 }
