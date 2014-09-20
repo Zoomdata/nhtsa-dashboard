@@ -99,18 +99,25 @@ footer {
     -webkit-backface-visibility: hidden; position:absolute;
 }
 
+.overlay-title {
+    font-weight:bold; font-size:100px; color:#fff;
+    position:absolute; line-height:85px;
+    letter-spacing:-0.0175em;
+}
+
 .overlay-description {
     color: white;
-    font-size: 30px;
+    font-size: 18px;
     font-weight: 300;
-    margin-left: 20px;
-    margin-top: 20px;
+    margin-left: 5px;
+    margin-top: 0px;
     position: absolute;
-    z-index: 101;
-
+    text-transform:uppercase;
+    letter-spacing:1px;
+    line-height:22px;
     img {
         vertical-align: bottom;
-        width: 109px;
+        width: 109px; position:relative;  top:4px;
     }
 }
 

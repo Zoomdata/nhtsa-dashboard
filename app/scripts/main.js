@@ -264,16 +264,25 @@ $( window ).resize(function() {
 
 function positionSplat(){
     // make sure it is behind the make-wrapper
-    var makeWrapperObj = $(".make-wrapper");
+    var w = $(".make-wrapper");
+    var s = $(".overlay-splat");
+    var t= $(".overlay-title");
 
-    // it will be proportioned correctlywhen splat is 248.756% the width of the makeWrapperObj
-    var newImageWidth = makeWrapperObj.width()* 2.48756;
-    $(".overlay-splat").css("width", newImageWidth);
+    // set size + position of splat
+    s.css("width", w.width() * 3);
+    s.css("height", w.height() + 200);
+    s.css("left", ( (w.width() / 2) + w.offset().left) - (s.width() / 2));
 
-    // now position it properly
-    var barAreaLeft = $(".bar-area").offset().left;
-    $(".bar-area").css("left",  barAreaLeft + (newImageWidth *.077));
-    console.log( barAreaLeft + (newImageWidth *.077) + "px");
+    // set position of title
+    t.css("top", w.offset().top);
+    t.css("left", w.offset().left + w.width() + 75 + "px");
+
+
+
+
+
+
+   
 }
 
 function positionHoodReleaseButton(){
@@ -291,6 +300,13 @@ function toggleYScrollability(){
 }
 
 function showAboutOverlay() {
+
+    // remove splat stuff, replace with dark overlay
+    $(".overlay-splat").hide();
+    $(".overlay-title").hide();
+
+    $overlay.css({"background-image": "none", "background-color": "rgba(0,0,0,0.8)"});
+
     var $aboutBlock = $('.about-block');
 
     $overlay.css("display", "inline");
