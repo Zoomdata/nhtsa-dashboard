@@ -262,6 +262,23 @@ $( window ).resize(function() {
     toggleYScrollability();
 });
 
+function showSpinner(){
+    $(".spinner-overlay").css("display", "block");
+    
+    window.setTimeout( function(){
+            $(".spinner-overlay").css("opacity", 0.8);
+        },0);
+}
+
+function hideSpinner(){
+    $(".spinner-overlay").css("opacity", 0);
+    window.setTimeout( function(){
+            $(".spinner-overlay").css("display", "none");
+        },500);
+}
+
+
+
 function positionSplat(){
     // make sure it is behind the make-wrapper
     var w = $(".make-wrapper");
