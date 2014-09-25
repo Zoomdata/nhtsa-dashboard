@@ -1,8 +1,10 @@
 
 var apiKey = '53e569eae4b0a9e9da986978',
     host = 'daily.zoomdata.com/zoomdata',
+// var apiKey = '5423cab5e4b0bc6347610a8b',
+//     host = '54.164.2.143/zoomdata',
     secure = true,
-    sourceName = "Vehicle Complaints",
+    sourceName = 'Vehicle Complaints',
     lifted = false,
     hasNextDetails = true,
     loadingDetails = false,
@@ -472,127 +474,125 @@ zoomdataClient.visualize({
             }
         });
 
-    setTimeout(function() {
-    	zoomdataClient.visualize({
-		    visualization: "Brushing Year Chart",
-		    source: sourceName,
-		    element: $trendVis.get(0)
-		}).done(function(visualization) {
-			trendVis = visualization;
+	zoomdataClient.visualize({
+	    visualization: "Brushing Year Chart",
+	    source: sourceName,
+	    element: $trendVis.get(0)
+	}).done(function(visualization) {
+		trendVis = visualization;
 
-			Zoomdata.eventDispatcher.on('filter:years', function(years) {
-				if(years.length > 0) {
-				    var filter = {
-				        operation: 'IN',
-				        path: 'year',
-				        value: years
-				    };
+		Zoomdata.eventDispatcher.on('filter:years', function(years) {
+			if(years.length > 0) {
+			    var filter = {
+			        operation: 'IN',
+			        path: 'year',
+			        value: years
+			    };
 
-				    countTextVis.controller.state.setFilter(filter);
-				    crashesGaugeVis.controller.state.setFilter(filter);
-				    injuriesGaugeVis.controller.state.setFilter(filter);
-				    firesGaugeVis.controller.state.setFilter(filter);
-				    speedGaugeVis.controller.state.setFilter(filter);
-				    scatterplotVis.controller.state.setFilter(filter);
-                    if(mapVis) mapVis.controller.state.setFilter(filter);
-				} else {
-				    var filter = {
-				        path: 'year'
-				    };
+			    countTextVis.controller.state.setFilter(filter);
+			    crashesGaugeVis.controller.state.setFilter(filter);
+			    injuriesGaugeVis.controller.state.setFilter(filter);
+			    firesGaugeVis.controller.state.setFilter(filter);
+			    speedGaugeVis.controller.state.setFilter(filter);
+			    scatterplotVis.controller.state.setFilter(filter);
+                if(mapVis) mapVis.controller.state.setFilter(filter);
+			} else {
+			    var filter = {
+			        path: 'year'
+			    };
 
-				    countTextVis.controller.state.removeFilter(filter);
-				    crashesGaugeVis.controller.state.removeFilter(filter);
-				    injuriesGaugeVis.controller.state.removeFilter(filter);
-				    firesGaugeVis.controller.state.removeFilter(filter);
-				    speedGaugeVis.controller.state.removeFilter(filter);
-				    scatterplotVis.controller.state.removeFilter(filter);
-                    if(mapVis) mapVis.controller.state.removeFilter(filter);
-				}
-			});
+			    countTextVis.controller.state.removeFilter(filter);
+			    crashesGaugeVis.controller.state.removeFilter(filter);
+			    injuriesGaugeVis.controller.state.removeFilter(filter);
+			    firesGaugeVis.controller.state.removeFilter(filter);
+			    speedGaugeVis.controller.state.removeFilter(filter);
+			    scatterplotVis.controller.state.removeFilter(filter);
+                if(mapVis) mapVis.controller.state.removeFilter(filter);
+			}
 		});
-    }, 1000);
-});
+	});
 
-zoomdataClient.visualize({
-    visualization: "Horizontal Bars by Model",
-    source: sourceName,
-    element: $modelBarChart.get(0)
-}).done(function(visualization) {
-	modelVis = visualization;
+    zoomdataClient.visualize({
+        visualization: "Horizontal Bars by Model",
+        source: sourceName,
+        element: $modelBarChart.get(0)
+    }).done(function(visualization) {
+        modelVis = visualization;
 
-    visualization
-        .controller
-        .elementsManager
-        .on('interaction', function (interactiveElement) {
-        	var active = $modelBarChart.find('div.active');
-        	active.toggleClass('active', false);
-        	
-            interactiveElement.$el.toggleClass('active');
+        visualization
+            .controller
+            .elementsManager
+            .on('interaction', function (interactiveElement) {
+                var active = $modelBarChart.find('div.active');
+                active.toggleClass('active', false);
+                
+                interactiveElement.$el.toggleClass('active');
 
-            var carModel = interactiveElement.data().group;
+                var carModel = interactiveElement.data().group;
 
-		    var filter = {
-		        operation: 'IN',
-		        path: 'model',
-		        value: [carModel]
-		    };
+                var filter = {
+                    operation: 'IN',
+                    path: 'model',
+                    value: [carModel]
+                };
 
-		    countTextVis.controller.state.setFilter(filter);
-		    crashesGaugeVis.controller.state.setFilter(filter);
-		    injuriesGaugeVis.controller.state.setFilter(filter);
-		    firesGaugeVis.controller.state.setFilter(filter);
-		    speedGaugeVis.controller.state.setFilter(filter);
-		    scatterplotVis.controller.state.setFilter(filter);
-            if(mapVis) mapVis.controller.state.setFilter(filter);
-        });
-});
+                countTextVis.controller.state.setFilter(filter);
+                crashesGaugeVis.controller.state.setFilter(filter);
+                injuriesGaugeVis.controller.state.setFilter(filter);
+                firesGaugeVis.controller.state.setFilter(filter);
+                speedGaugeVis.controller.state.setFilter(filter);
+                scatterplotVis.controller.state.setFilter(filter);
+                if(mapVis) mapVis.controller.state.setFilter(filter);
+            });
+    });
 
-zoomdataClient.visualize({
-    visualization: "Total Count Text",
-    source: sourceName,
-    element: $totalCountText.get(0)
-}).done(function(visualization) {
-	countTextVis = visualization;
-});
+    zoomdataClient.visualize({
+        visualization: "Total Count Text",
+        source: sourceName,
+        element: $totalCountText.get(0)
+    }).done(function(visualization) {
+        countTextVis = visualization;
+    });
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Crashes Gauge",
-    source: sourceName,
-    element: $crashesGauge.get(0)
-}).done(function(visualization) {
-	crashesGaugeVis = visualization;
-});
+    zoomdataClient.visualize({
+        visualization: "Vehicle Crashes Gauge",
+        source: sourceName,
+        element: $crashesGauge.get(0)
+    }).done(function(visualization) {
+        crashesGaugeVis = visualization;
+    });
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Injuries Gauge",
-    source: sourceName,
-    element: $injuriesGauge.get(0)
-}).done(function(visualization) {
-	injuriesGaugeVis = visualization;
-});
+    zoomdataClient.visualize({
+        visualization: "Vehicle Injuries Gauge",
+        source: sourceName,
+        element: $injuriesGauge.get(0)
+    }).done(function(visualization) {
+        injuriesGaugeVis = visualization;
+    });
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Fires Gauge",
-    source: sourceName,
-    element: $firesGauge.get(0)
-}).done(function(visualization) {
-	firesGaugeVis = visualization;
-});
+    zoomdataClient.visualize({
+        visualization: "Vehicle Fires Gauge",
+        source: sourceName,
+        element: $firesGauge.get(0)
+    }).done(function(visualization) {
+        firesGaugeVis = visualization;
+    });
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Speed Gauge",
-    source: sourceName,
-    element: $speedGauge.get(0)
-}).done(function(visualization) {
-	speedGaugeVis = visualization;
-});
+    zoomdataClient.visualize({
+        visualization: "Vehicle Speed Gauge",
+        source: sourceName,
+        element: $speedGauge.get(0)
+    }).done(function(visualization) {
+        speedGaugeVis = visualization;
+    });
 
-zoomdataClient.visualize({
-    visualization: "Vehicle Complaints Scatterplot",
-    source: sourceName,
-    element: $scatterplot.get(0)
-}).done(function(visualization) {
-	scatterplotVis = visualization;
+    zoomdataClient.visualize({
+        visualization: "Vehicle Complaints Scatterplot",
+        source: sourceName,
+        element: $scatterplot.get(0)
+    }).done(function(visualization) {
+        scatterplotVis = visualization;
+    });
 });
 
 function numberWithCommas(x) {
