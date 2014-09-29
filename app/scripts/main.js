@@ -1,8 +1,8 @@
 
-var apiKey = '53e569eae4b0a9e9da986978',
-    host = 'daily.zoomdata.com/zoomdata',
-// var apiKey = '5423cab5e4b0bc6347610a8b',
-//     host = '54.164.2.143/zoomdata',
+// var apiKey = '53e569eae4b0a9e9da986978',
+//     host = 'daily.zoomdata.com/zoomdata',
+var apiKey = '5423cab5e4b0bc6347610a8b',
+    host = '54.164.2.143/zoomdata',
     secure = true,
     sourceName = 'Vehicle Complaints',
     lifted = false,
@@ -11,6 +11,7 @@ var apiKey = '53e569eae4b0a9e9da986978',
     detailsOffset = 0,
     verticalScrollThreshold = 590,
     stateAbbreviationLookup = {'Alabama': 'AL','Alaska': 'AK','Arizona': 'AZ','Arkansas': 'AR','California': 'CA','Colorado': 'CO','Connecticut': 'CT','Delaware': 'DE','Florida': 'FL','Georgia': 'GA','Hawaii': 'HI','Idaho': 'ID','Illinois': 'IL','Indiana': 'IN','Iowa': 'IA','Kansas': 'KS','Kentucky': 'KY','Louisiana': 'LA','Maine': 'ME','Maryland': 'MD','Massachusetts': 'MA','Michigan': 'MI','Minnesota': 'MN','Mississippi': 'MS','Missouri': 'MO','Montana': 'MT','Nebraska': 'NE','Nevada': 'NV','New Hampshire': 'NH','New Jersey': 'NJ','New Mexico': 'NM','New York': 'NY','North Carolina': 'NC','North Dakota': 'ND','Ohio': 'OH','Oklahoma': 'OK','Oregon': 'OR','Pennsylvania': 'PA','Rhode Island': 'RI','South Carolina': 'SC','South Dakota': 'SD','Tennessee': 'TN','Texas': 'TX','Utah': 'UT','Vermont': 'VT','Virginia': 'VA','Washington': 'WA','West Virginia': 'WV','Wisconsin': 'WI', 'Wyoming': 'WY'},
+    loading = [],
     makeVis, modelVis, trendVis, countTextVis, crashesGaugeVis,
     injuriesGaugeVis, firesGaugeVis, speedGaugeVis, scatterplotVis,
     mapVis;
@@ -264,6 +265,14 @@ $( window ).resize(function() {
     toggleYScrollability();
 });
 
+function checkLoading() {
+    // if(loading.length === 0) {
+    //     hideSpinner();
+    // } else {
+    //     showSpinner();
+    // }
+}
+
 function showSpinner(){
     $(".spinner-overlay").css("display", "block");
     
@@ -295,13 +304,6 @@ function positionSplat(){
     // set position of title
     t.css("top", w.offset().top);
     t.css("left", w.offset().left + w.width() + 75 + "px");
-
-
-
-
-
-
-   
 }
 
 function positionHoodReleaseButton(){
@@ -473,125 +475,246 @@ zoomdataClient.visualize({
                 mapVis.controller.state.setFilter(filter);
             }
         });
+});
 
-	zoomdataClient.visualize({
-	    visualization: "Brushing Year Chart",
-	    source: sourceName,
-	    element: $trendVis.get(0)
-	}).done(function(visualization) {
-		trendVis = visualization;
+zoomdataClient.visualize({
+    visualization: "Total Count Text",
+    source: sourceName,
+    element: $totalCountText.get(0)
+}).done(function(visualization) {
+    countTextVis = visualization;
 
-		Zoomdata.eventDispatcher.on('filter:years', function(years) {
-			if(years.length > 0) {
-			    var filter = {
-			        operation: 'IN',
-			        path: 'year',
-			        value: years
-			    };
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
 
-			    countTextVis.controller.state.setFilter(filter);
-			    crashesGaugeVis.controller.state.setFilter(filter);
-			    injuriesGaugeVis.controller.state.setFilter(filter);
-			    firesGaugeVis.controller.state.setFilter(filter);
-			    speedGaugeVis.controller.state.setFilter(filter);
-			    scatterplotVis.controller.state.setFilter(filter);
-                if(mapVis) mapVis.controller.state.setFilter(filter);
-			} else {
-			    var filter = {
-			        path: 'year'
-			    };
-
-			    countTextVis.controller.state.removeFilter(filter);
-			    crashesGaugeVis.controller.state.removeFilter(filter);
-			    injuriesGaugeVis.controller.state.removeFilter(filter);
-			    firesGaugeVis.controller.state.removeFilter(filter);
-			    speedGaugeVis.controller.state.removeFilter(filter);
-			    scatterplotVis.controller.state.removeFilter(filter);
-                if(mapVis) mapVis.controller.state.removeFilter(filter);
-			}
-		});
-	});
-
-    zoomdataClient.visualize({
-        visualization: "Horizontal Bars by Model",
-        source: sourceName,
-        element: $modelBarChart.get(0)
-    }).done(function(visualization) {
-        modelVis = visualization;
-
-        visualization
-            .controller
-            .elementsManager
-            .on('interaction', function (interactiveElement) {
-                var active = $modelBarChart.find('div.active');
-                active.toggleClass('active', false);
-                
-                interactiveElement.$el.toggleClass('active');
-
-                var carModel = interactiveElement.data().group;
-
-                var filter = {
-                    operation: 'IN',
-                    path: 'model',
-                    value: [carModel]
-                };
-
-                countTextVis.controller.state.setFilter(filter);
-                crashesGaugeVis.controller.state.setFilter(filter);
-                injuriesGaugeVis.controller.state.setFilter(filter);
-                firesGaugeVis.controller.state.setFilter(filter);
-                speedGaugeVis.controller.state.setFilter(filter);
-                scatterplotVis.controller.state.setFilter(filter);
-                if(mapVis) mapVis.controller.state.setFilter(filter);
-            });
+        checkLoading();
     });
 
-    zoomdataClient.visualize({
-        visualization: "Total Count Text",
-        source: sourceName,
-        element: $totalCountText.get(0)
-    }).done(function(visualization) {
-        countTextVis = visualization;
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Crashes Gauge",
+    source: sourceName,
+    element: $crashesGauge.get(0)
+}).done(function(visualization) {
+    crashesGaugeVis = visualization;
+
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
+
+        checkLoading();
     });
 
-    zoomdataClient.visualize({
-        visualization: "Vehicle Crashes Gauge",
-        source: sourceName,
-        element: $crashesGauge.get(0)
-    }).done(function(visualization) {
-        crashesGaugeVis = visualization;
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Injuries Gauge",
+    source: sourceName,
+    element: $injuriesGauge.get(0)
+}).done(function(visualization) {
+    injuriesGaugeVis = visualization;
+
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
+
+        checkLoading();
     });
 
-    zoomdataClient.visualize({
-        visualization: "Vehicle Injuries Gauge",
-        source: sourceName,
-        element: $injuriesGauge.get(0)
-    }).done(function(visualization) {
-        injuriesGaugeVis = visualization;
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Fires Gauge",
+    source: sourceName,
+    element: $firesGauge.get(0)
+}).done(function(visualization) {
+    firesGaugeVis = visualization;
+
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
+
+        checkLoading();
     });
 
-    zoomdataClient.visualize({
-        visualization: "Vehicle Fires Gauge",
-        source: sourceName,
-        element: $firesGauge.get(0)
-    }).done(function(visualization) {
-        firesGaugeVis = visualization;
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Speed Gauge",
+    source: sourceName,
+    element: $speedGauge.get(0)
+}).done(function(visualization) {
+    speedGaugeVis = visualization;
+
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
+
+        checkLoading();
     });
 
-    zoomdataClient.visualize({
-        visualization: "Vehicle Speed Gauge",
-        source: sourceName,
-        element: $speedGauge.get(0)
-    }).done(function(visualization) {
-        speedGaugeVis = visualization;
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Vehicle Complaints Scatterplot",
+    source: sourceName,
+    element: $scatterplot.get(0)
+}).done(function(visualization) {
+    scatterplotVis = visualization;
+
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
+
+        checkLoading();
     });
 
-    zoomdataClient.visualize({
-        visualization: "Vehicle Complaints Scatterplot",
-        source: sourceName,
-        element: $scatterplot.get(0)
-    }).done(function(visualization) {
-        scatterplotVis = visualization;
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Brushing Year",
+    source: sourceName,
+    element: $trendVis.get(0)
+}).done(function(visualization) {
+    trendVis = visualization;
+
+    Zoomdata.eventDispatcher.on('filter:years', function(years) {
+        if(years.length > 0) {
+            var filter = {
+                operation: 'IN',
+                path: 'year',
+                value: years
+            };
+
+            countTextVis.controller.state.setFilter(filter);
+            crashesGaugeVis.controller.state.setFilter(filter);
+            injuriesGaugeVis.controller.state.setFilter(filter);
+            firesGaugeVis.controller.state.setFilter(filter);
+            speedGaugeVis.controller.state.setFilter(filter);
+            scatterplotVis.controller.state.setFilter(filter);
+            if(mapVis) mapVis.controller.state.setFilter(filter);
+        } else {
+            var filter = {
+                path: 'year'
+            };
+
+            countTextVis.controller.state.removeFilter(filter);
+            crashesGaugeVis.controller.state.removeFilter(filter);
+            injuriesGaugeVis.controller.state.removeFilter(filter);
+            firesGaugeVis.controller.state.removeFilter(filter);
+            speedGaugeVis.controller.state.removeFilter(filter);
+            scatterplotVis.controller.state.removeFilter(filter);
+            if(mapVis) mapVis.controller.state.removeFilter(filter);
+        }
+    });
+});
+
+zoomdataClient.visualize({
+    visualization: "Horizontal Bars by Model",
+    source: sourceName,
+    element: $modelBarChart.get(0)
+}).done(function(visualization) {
+    modelVis = visualization;
+
+    visualization
+        .controller
+        .elementsManager
+        .on('interaction', function (interactiveElement) {
+            var active = $modelBarChart.find('div.active');
+            active.toggleClass('active', false);
+            
+            interactiveElement.$el.toggleClass('active');
+
+            var carModel = interactiveElement.data().group;
+
+            var filter = {
+                operation: 'IN',
+                path: 'model',
+                value: [carModel]
+            };
+
+            countTextVis.controller.state.setFilter(filter);
+            crashesGaugeVis.controller.state.setFilter(filter);
+            injuriesGaugeVis.controller.state.setFilter(filter);
+            firesGaugeVis.controller.state.setFilter(filter);
+            speedGaugeVis.controller.state.setFilter(filter);
+            scatterplotVis.controller.state.setFilter(filter);
+            if(mapVis) {
+                mapVis.controller.state.setFilter(filter);
+            }
+        });
+
+    visualization.controller.thread.on('thread:dirtyData', function() {
+        if(loading.indexOf(visualization.name) === -1) {
+            loading.push(visualization.name);
+        }
+
+        checkLoading();
+    });
+
+    visualization.controller.thread.on('thread:notDirtyData', function() {
+        var index = loading.indexOf(visualization.name);
+        if(index > -1) {
+            loading.splice(index, 1);
+        }
+
+        checkLoading();
     });
 });
 
