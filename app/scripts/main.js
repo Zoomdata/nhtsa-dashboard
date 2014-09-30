@@ -2,7 +2,7 @@
 // var apiKey = '53e569eae4b0a9e9da986978',
 //     host = 'daily.zoomdata.com/zoomdata',
 var apiKey = '5423cab5e4b0bc6347610a8b',
-    host = '54.164.2.143/zoomdata',
+    host = 'live.zoomdata.com/zoomdata',
     secure = true,
     sourceName = 'Vehicle Complaints',
     lifted = false,
@@ -277,15 +277,15 @@ function showSpinner(){
     $(".spinner-overlay").css("display", "block");
     
     window.setTimeout( function(){
-            $(".spinner-overlay").css("opacity", 0.8);
-        },0);
+        $(".spinner-overlay").css("opacity", 0.8);
+    },0);
 }
 
 function hideSpinner(){
     $(".spinner-overlay").css("opacity", 0);
     window.setTimeout( function(){
-            $(".spinner-overlay").css("display", "none");
-        },500);
+        $(".spinner-overlay").css("display", "none");
+    },500);
 }
 
 
@@ -309,14 +309,14 @@ function positionSplat(){
 function positionHoodReleaseButton(){
     var newTop = $(".dashboard").height() - 67;
     $(".button-container").css("top", newTop + "px");
-
 }
 
 function toggleYScrollability(){
-    if ( $("body").height() < verticalScrollThreshold ) 
+    if ( $("body").height() < verticalScrollThreshold ) {
         $("body").css("overflow-y", "visible");
-    else
+    } else {
         $("body").css("overflow-y", "hidden");
+    }
 
 }
 
@@ -483,23 +483,6 @@ zoomdataClient.visualize({
     element: $totalCountText.get(0)
 }).done(function(visualization) {
     countTextVis = visualization;
-
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
-        }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
-    });
 });
 
 zoomdataClient.visualize({
@@ -508,23 +491,6 @@ zoomdataClient.visualize({
     element: $crashesGauge.get(0)
 }).done(function(visualization) {
     crashesGaugeVis = visualization;
-
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
-        }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
-    });
 });
 
 zoomdataClient.visualize({
@@ -533,23 +499,6 @@ zoomdataClient.visualize({
     element: $injuriesGauge.get(0)
 }).done(function(visualization) {
     injuriesGaugeVis = visualization;
-
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
-        }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
-    });
 });
 
 zoomdataClient.visualize({
@@ -558,23 +507,6 @@ zoomdataClient.visualize({
     element: $firesGauge.get(0)
 }).done(function(visualization) {
     firesGaugeVis = visualization;
-
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
-        }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
-    });
 });
 
 zoomdataClient.visualize({
@@ -583,23 +515,6 @@ zoomdataClient.visualize({
     element: $speedGauge.get(0)
 }).done(function(visualization) {
     speedGaugeVis = visualization;
-
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
-        }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
-    });
 });
 
 zoomdataClient.visualize({
@@ -608,61 +523,6 @@ zoomdataClient.visualize({
     element: $scatterplot.get(0)
 }).done(function(visualization) {
     scatterplotVis = visualization;
-
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
-        }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
-    });
-});
-
-zoomdataClient.visualize({
-    visualization: "Brushing Year",
-    source: sourceName,
-    element: $trendVis.get(0)
-}).done(function(visualization) {
-    trendVis = visualization;
-
-    Zoomdata.eventDispatcher.on('filter:years', function(years) {
-        if(years.length > 0) {
-            var filter = {
-                operation: 'IN',
-                path: 'year',
-                value: years
-            };
-
-            countTextVis.controller.state.setFilter(filter);
-            crashesGaugeVis.controller.state.setFilter(filter);
-            injuriesGaugeVis.controller.state.setFilter(filter);
-            firesGaugeVis.controller.state.setFilter(filter);
-            speedGaugeVis.controller.state.setFilter(filter);
-            scatterplotVis.controller.state.setFilter(filter);
-            if(mapVis) mapVis.controller.state.setFilter(filter);
-        } else {
-            var filter = {
-                path: 'year'
-            };
-
-            countTextVis.controller.state.removeFilter(filter);
-            crashesGaugeVis.controller.state.removeFilter(filter);
-            injuriesGaugeVis.controller.state.removeFilter(filter);
-            firesGaugeVis.controller.state.removeFilter(filter);
-            speedGaugeVis.controller.state.removeFilter(filter);
-            scatterplotVis.controller.state.removeFilter(filter);
-            if(mapVis) mapVis.controller.state.removeFilter(filter);
-        }
-    });
 });
 
 zoomdataClient.visualize({
@@ -699,22 +559,44 @@ zoomdataClient.visualize({
                 mapVis.controller.state.setFilter(filter);
             }
         });
+});
 
-    visualization.controller.thread.on('thread:dirtyData', function() {
-        if(loading.indexOf(visualization.name) === -1) {
-            loading.push(visualization.name);
+
+zoomdataClient.visualize({
+    visualization: "Brushing Year",
+    source: sourceName,
+    element: $trendVis.get(0)
+}).done(function(visualization) {
+    trendVis = visualization;
+
+    Zoomdata.eventDispatcher.on('filter:years', function(years) {
+        if(years.length > 0) {
+            var filter = {
+                operation: 'IN',
+                path: 'year',
+                value: years
+            };
+
+            countTextVis.controller.state.setFilter(filter);
+            crashesGaugeVis.controller.state.setFilter(filter);
+            injuriesGaugeVis.controller.state.setFilter(filter);
+            firesGaugeVis.controller.state.setFilter(filter);
+            speedGaugeVis.controller.state.setFilter(filter);
+            scatterplotVis.controller.state.setFilter(filter);
+            if(mapVis) mapVis.controller.state.setFilter(filter);
+        } else {
+            var filter = {
+                path: 'year'
+            };
+
+            countTextVis.controller.state.removeFilter(filter);
+            crashesGaugeVis.controller.state.removeFilter(filter);
+            injuriesGaugeVis.controller.state.removeFilter(filter);
+            firesGaugeVis.controller.state.removeFilter(filter);
+            speedGaugeVis.controller.state.removeFilter(filter);
+            scatterplotVis.controller.state.removeFilter(filter);
+            if(mapVis) mapVis.controller.state.removeFilter(filter);
         }
-
-        checkLoading();
-    });
-
-    visualization.controller.thread.on('thread:notDirtyData', function() {
-        var index = loading.indexOf(visualization.name);
-        if(index > -1) {
-            loading.splice(index, 1);
-        }
-
-        checkLoading();
     });
 });
 
