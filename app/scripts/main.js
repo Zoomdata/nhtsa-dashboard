@@ -625,11 +625,6 @@ function makePreviewEndpointURL() {
 function getDetails() {
     loadingDetails = true;
     var filters = countTextVis.controller.state.filters.toJSON();
-    filters.forEach(function(filter) {
-    	delete filter.editable;
-    	filter.value = filter.value[0];
-    	filter.operation = "EQUALS";
-    });
 
     var streamSourceId = makeVis.controller.state.get('streamSourceId'),
         url = makePreviewEndpointURL(),
