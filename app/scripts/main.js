@@ -637,8 +637,8 @@ function getDetails() {
         payload = {
             count: count,
             offset: detailsOffset,
-            // fromTime: 788947200000,
-            // toTime: 1404975600000,
+            fromTime: 788947200000,
+            toTime: 1404975600000,
             restrictions: filters,
             streamSourceId: streamSourceId,
             timestampField: 'failtimestamp_real'
