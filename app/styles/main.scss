@@ -915,9 +915,9 @@ footer {
 
 .cover {
   width: 100%;
-  height: 25px;
+  height: 27px;
   position: absolute;
-  top: calc(100% - 23px);
+  bottom: -4px;
   background: #999999;
   z-index: 10;
 }
