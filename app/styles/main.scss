@@ -544,11 +544,12 @@ footer {
             $modelWidth: 90px;
             $yearWidth: 60px;
             $stateWidth: 60px;
+            $componentWidth: 200px;
             $crashedWidth: 30px;
             $fireWidth: 30px;
             $injuredWidth: 30px;
             $speedWidth: 40px;
-            $descriptionWidth: 502px; //942px - 440px
+            $descriptionWidth: 302px; //942px - 640px
 
             letter-spacing: 0.15em;
 
@@ -581,6 +582,10 @@ footer {
 
                 th.state {
                     min-width: $stateWidth;
+                }
+
+                th.component {
+                    min-width: $componentWidth;
                 }
 
                 // Rotate Column Headers
@@ -682,26 +687,31 @@ footer {
                 }
 
                 td:nth-child(5){
-                    min-width: $crashedWidth;
+                    min-width: $componentWidth;
                     text-align: center;
                 }
 
                 td:nth-child(6){
-                    min-width: $fireWidth;
+                    min-width: $crashedWidth;
                     text-align: center;
                 }
 
                 td:nth-child(7){
-                    min-width: $injuredWidth;
+                    min-width: $fireWidth;
                     text-align: center;
                 }
 
                 td:nth-child(8){
-                    min-width: $speedWidth;
+                    min-width: $injuredWidth;
                     text-align: center;
                 }
 
                 td:nth-child(9){
+                    min-width: $speedWidth;
+                    text-align: center;
+                }
+
+                td:nth-child(10){
                     width: $descriptionWidth;
                     min-width: $descriptionWidth;
                 }

@@ -122,6 +122,12 @@ var columns = [
     sortable: false,
     cell: StateAbbreviationCell
   }, {
+    name: "component",
+    label: "FAILED COMPONENT",
+    editable: false,
+    sortable: false,
+    cell: "string"
+  }, {
     name: "crashed",
     label: "CRASH",
     editable: false,
@@ -624,7 +630,7 @@ function resizeBackgrid() {
 
     $backgridTBody.css('height', tbodyHeight);
 
-    var descriptionWidth = $backgridContainer.width() - 441;
+    var descriptionWidth = $backgridContainer.width() - 641;
     $('.backgrid thead th.description').css('width', descriptionWidth + 1).css('min-width', descriptionWidth + 1).css('max-width', descriptionWidth + 1);
     $('.backgrid tbody td.description').css('width', descriptionWidth).css('min-width', descriptionWidth).css('max-width', descriptionWidth);
 }
