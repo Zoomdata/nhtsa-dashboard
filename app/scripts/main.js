@@ -151,7 +151,7 @@ var columns = [
     headerCell: Rotated45HeaderCell
   }, {
     name: "description",
-    label: "FAILED COMPONENT",
+    label: "DESCRIPTION OF ISSUE",
     editable: false,
     sortable: false,
     cell: Backgrid.Cell.extend({
