@@ -288,6 +288,21 @@ function hideSpinner(){
     },500);
 }
 
+function showDetailsSpinner(){
+    $(".details-spinner-overlay").css("display", "block");
+    
+    window.setTimeout( function(){
+        $(".details-spinner-overlay").css("opacity", 0.8);
+    },0);
+}
+
+function hideDetailsSpinner(){
+    $(".details-spinner-overlay").css("opacity", 0);
+    window.setTimeout( function(){
+        $(".details-spinner-overlay").css("display", "none");
+    },500);
+}
+
 
 
 function positionSplat(){
@@ -623,6 +638,8 @@ function makePreviewEndpointURL() {
 }
 
 function getDetails() {
+    showDetailsSpinner();
+
     loadingDetails = true;
     var filters = countTextVis.controller.state.filters.toJSON();
 
@@ -654,9 +671,11 @@ function getDetails() {
         loadingDetails = false;
 
         resizeBackgrid();
+        hideDetailsSpinner();
     })
     .fail(function (response) {
         console.log('ERROR: ', response);
         loadingDetails = false;
+        hideDetailsSpinner();
     });
 }

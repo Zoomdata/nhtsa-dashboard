@@ -89,6 +89,15 @@ footer {
     transition: all 400ms;
     z-index:500;
 }
+
+.details-spinner-overlay {
+    position:absolute;
+    top:0; left:0; right:0; bottom:0;
+    background-color:rgba(0,0,0,0.8);
+    transition: all 400ms;
+    border-bottom-left-radius: inherit;
+    border-bottom-right-radius: inherit;
+}
 .spinner {
   width: 100px;
   height: 100px;
