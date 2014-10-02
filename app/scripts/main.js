@@ -638,7 +638,9 @@ function makePreviewEndpointURL() {
 }
 
 function getDetails() {
-    showDetailsSpinner();
+    if(detailsOffset === 0) {
+        showDetailsSpinner();
+    }
 
     loadingDetails = true;
     var filters = countTextVis.controller.state.filters.toJSON();
