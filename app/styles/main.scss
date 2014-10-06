@@ -656,7 +656,8 @@ footer {
             tbody {
                 display: block;
                 width: 100%;
-                overflow: auto;
+                overflow-y: auto;
+                overflow-x: hidden;
 
                 td {
                     border-left: 1px solid #5F5F5F;
