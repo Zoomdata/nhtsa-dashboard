@@ -12,4 +12,4 @@ This dashboard's Javascript code can be found in `app/scripts/main.js`. This pro
 2. `$ npm install && bower install`
 3. `$ grunt serve`
 
-Refer to Gruntfile.js for other possible grunt tasks.
+Refer to `Gruntfile.js` for other possible grunt tasks.
