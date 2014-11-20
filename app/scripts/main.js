@@ -11,11 +11,11 @@ var apiKey = '5423cab5e4b0bc6347610a8b',
     detailsOffset = 0,
     verticalScrollThreshold = 590,
     stateAbbreviationLookup = {'Alabama': 'AL','Alaska': 'AK','Arizona': 'AZ','Arkansas': 'AR','California': 'CA','Colorado': 'CO','Connecticut': 'CT','Delaware': 'DE','Florida': 'FL','Georgia': 'GA','Hawaii': 'HI','Idaho': 'ID','Illinois': 'IL','Indiana': 'IN','Iowa': 'IA','Kansas': 'KS','Kentucky': 'KY','Louisiana': 'LA','Maine': 'ME','Maryland': 'MD','Massachusetts': 'MA','Michigan': 'MI','Minnesota': 'MN','Mississippi': 'MS','Missouri': 'MO','Montana': 'MT','Nebraska': 'NE','Nevada': 'NV','New Hampshire': 'NH','New Jersey': 'NJ','New Mexico': 'NM','New York': 'NY','North Carolina': 'NC','North Dakota': 'ND','Ohio': 'OH','Oklahoma': 'OK','Oregon': 'OR','Pennsylvania': 'PA','Rhode Island': 'RI','South Carolina': 'SC','South Dakota': 'SD','Tennessee': 'TN','Texas': 'TX','Utah': 'UT','Vermont': 'VT','Virginia': 'VA','Washington': 'WA','West Virginia': 'WV','Wisconsin': 'WI', 'Wyoming': 'WY'},
-    loading = [],
     makeVis, modelVis, trendVis, countTextVis, crashesGaugeVis,
     injuriesGaugeVis, firesGaugeVis, speedGaugeVis, scatterplotVis,
     mapVis;
 
+// cached jQuery selected elements
 var $makeBarChart = $("#make-bar-chart"),
 	$modelBarChart = $("#model-bar-chart"),
 	$trendVis = $("#trend"),
@@ -30,6 +30,12 @@ var $makeBarChart = $("#make-bar-chart"),
 	$backgridContainer = $(".backgrid-container");
 
 
+
+/*****************************************************************************/
+/*
+/* Backgrid Start
+/*
+/*****************************************************************************/
 var Record = Backbone.Model.extend({});
 
 var Records = Backbone.Collection.extend({
@@ -182,8 +188,17 @@ $backgridTBody.scroll(function() {
         getDetails();
     }
 });
+/*****************************************************************************/
+/*
+/* Backgrid End
+/*
+/*****************************************************************************/
+
+
 
 $(document).ready(function() {
+
+    // Reset button removes filters from all visualizations
 	$('button.reset').on('mousedown', function() {
     	var active = $modelBarChart.find('div.active');
     	active.toggleClass('active', false);
@@ -235,7 +250,8 @@ $(document).ready(function() {
         $(this).parent('li').addClass('active').siblings().removeClass('active');
  
         e.preventDefault();
-
+        
+        // Wait until the US Map Tab is clicked to load the US Map Visualization
         if(!mapVis && currentAttrValue === "#map-tab") {
             zoomdataClient.visualize({
                 visualization: "Vehicle Complaints US Map",
@@ -250,13 +266,13 @@ $(document).ready(function() {
         }
     });
 
-	// hideOverlay();
     positionSplat();
     positionCarImageInBackground();
     positionHoodReleaseButton();
     toggleYScrollability();
 });
 
+// Trigger the visualization's resize function when the window is resized.
 $( window ).resize(function() {
     resizeBackgrid();
     makeVis.controller._controller.resize($makeBarChart.width(), $makeBarChart.height());
@@ -270,14 +286,6 @@ $( window ).resize(function() {
     positionHoodReleaseButton();
     toggleYScrollability();
 });
-
-function checkLoading() {
-    // if(loading.length === 0) {
-    //     hideSpinner();
-    // } else {
-    //     showSpinner();
-    // }
-}
 
 function showSpinner(){
     $(".spinner-overlay").css("display", "block");
@@ -308,8 +316,6 @@ function hideDetailsSpinner(){
         $(".details-spinner-overlay").css("display", "none");
     },500);
 }
-
-
 
 function positionSplat(){
     // make sure it is behind the make-wrapper
@@ -433,6 +439,13 @@ function closeHood() {
     $.Velocity.hook($(".dashboard-foreground"), "transformOrigin", "0px 0px");
 }
 
+
+
+/*****************************************************************************/
+/*
+/* Zoomdata Visualization Initialization Start
+/*
+/*****************************************************************************/
 var zoomdataClient = new ZoomdataClient({
     apiKey: apiKey,
     host: host,
@@ -446,6 +459,8 @@ zoomdataClient.visualize({
 }).done(function(visualization) {
 	makeVis = visualization;
 
+    // Triggered by interactions (click, touch) in the visualization
+    // Corresponds to registerInteractiveElement function
     visualization
         .controller
         .elementsManager
@@ -553,6 +568,8 @@ zoomdataClient.visualize({
 }).done(function(visualization) {
     modelVis = visualization;
 
+    // Triggered by interactions (click, touch) in the visualization
+    // Corresponds to registerInteractiveElement function
     visualization
         .controller
         .elementsManager
@@ -590,6 +607,8 @@ zoomdataClient.visualize({
 }).done(function(visualization) {
     trendVis = visualization;
 
+    // Custom event emitted from the 'Brushing Year' visualization
+    // That visualization emits an array of years that were selected on brushing
     Zoomdata.eventDispatcher.on('filter:years', function(years) {
         if(years.length > 0) {
             var filter = {
@@ -620,7 +639,19 @@ zoomdataClient.visualize({
         }
     });
 });
+/*****************************************************************************/
+/*
+/* Zoomdata Visualization Initialization End
+/*
+/*****************************************************************************/
 
+
+
+/*****************************************************************************/
+/*
+/* Utility Functions Start
+/*
+/*****************************************************************************/
 function numberWithCommas(x) {
     return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
 }
@@ -687,3 +718,8 @@ function getDetails() {
         hideDetailsSpinner();
     });
 }
+/*****************************************************************************/
+/*
+/* Utility Functions End
+/*
+/*****************************************************************************/
