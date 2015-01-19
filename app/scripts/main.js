@@ -2,7 +2,7 @@
 //     host = 'daily.zoomdata.com/zoomdata',
 var apiKey = '5423cab5e4b0bc6347610a8b',
     host = '54.85.198.46/zoomdata',
-    secure = true,
+    secure = false,
     sourceName = 'Vehicle Complaints',
     lifted = false,
     hasNextDetails = true,
