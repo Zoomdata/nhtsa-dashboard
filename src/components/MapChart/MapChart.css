@@ -1,0 +1,57 @@
+.root {
+    position: relative;
+    height: 100%;
+}
+
+.state {
+    fill: #4F4F4F;
+    stroke: #848484;
+
+    -webkit-transition: fill 1s;
+    -moz-transition: fill 1s;
+    -ms-transition: fill 1s;
+    -o-transition: fill 1s;
+    transition: fill 1s;
+}
+
+.instructions {
+    text-transform: uppercase;
+    fill: black;
+    font-weight: normal;
+    font-size: 9px;
+    letter-spacing: 0.15em;
+}
+
+.tooltips {
+    letter-spacing: normal;
+    white-space: nowrap;
+    position: absolute;
+    display: inline-block;
+    height: auto;
+    padding: 10px;
+    font-size: 12px;
+    border: 2px;
+    border-style: solid;
+    border-radius: 8px;
+    pointer-events: none;
+    text-align: center;
+    min-width: 140px;
+}
+
+.tooltipMarkerTitle {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.tooltipLeft
+{
+    float: left;
+}
+
+.tooltipRight
+{
+    float: right;
+}

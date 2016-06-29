@@ -1,0 +1,13 @@
+.root {
+    margin-top: 36px;
+    color: white;
+    width: 580px;
+    margin-left: calc(20% + 60px);
+    position: absolute;
+    z-index: 100;
+    display: none;
+}
+
+.root a:visited {
+    color: #fff
+}

@@ -1,0 +1,222 @@
+:global(.ag-dark) :global(.ag-root) {
+  font-family: "Source Sans Pro",source-sans-pro,sans-serif;
+  letter-spacing: .15em;
+  font-size: 11px;
+}
+:global(.ag-dark) :global(.ag-cell) {
+  border-right: 1px solid #808080;
+  border-bottom: 1px solid #808080;
+  padding: 4px;
+}
+:global(.ag-dark) :global(.ag-column-moving) :global(.ag-cell) {
+  -webkit-transition: left 0.2s;
+  -moz-transition: left 0.2s;
+  -o-transition: left 0.2s;
+  -ms-transition: left 0.2s;
+  transition: left 0.2s;
+}
+:global(.ag-dark) :global(.ag-header) {
+  border-bottom: 6px solid #808080;
+  font-weight: 700;
+}
+:global(.ag-dark) :global(.ag-header-row) {
+  bottom: 0;
+  position: absolute;
+  top: initial !important;
+  height: initial !important;
+}
+:global(.ag-dark) :global(.ag-header-cell.crashed) > :global(.ag-header-cell-label) {
+  width: 50px;
+  transform: translate(0,-13px) rotate(315deg);
+}
+:global(.ag-dark) :global(.ag-header-cell.fire) > :global(.ag-header-cell-label) {
+  width: 50px;
+  transform: translate(0,-9px) rotate(315deg);
+}
+:global(.ag-dark) :global(.ag-header-cell.injured) > :global(.ag-header-cell-label) {
+  width: 55px;
+  transform: translate(0,-15px) rotate(315deg);
+}
+:global(.ag-dark) :global(.ag-header-cell.speed) > :global(.ag-header-cell-label) {
+  width: 50px;
+  transform: translate(0,-8px) rotate(315deg);
+}
+:global(.ag-dark) :global(.ag-no-scrolls) :global(.ag-header-container) {
+  background-color: #430000;
+  border-bottom: 1px solid #808080;
+}
+:global(.ag-dark) :global(.ag-header-cell-moving) :global(.ag-header-cell-label) {
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform:global(.Microsoft):global(.Alpha)(Opacity=0)";
+  filter: alpha(opacity=0);
+}
+:global(.ag-dark) :global(.ag-header-cell-moving-clone) {
+  border-right: 1px solid #808080;
+  border-left: 1px solid #808080;
+  background-color: rgba(43,0,0,0.8);
+}
+:global(.ag-dark) :global(.ag-header-cell-moving) {
+  background-color: #808080;
+}
+:global(.ag-dark) :global(.ag-pinned-right-header) {
+  border-left: 1px solid #808080;
+}
+:global(.ag-dark) :global(.ag-cell-first-right-pinned) {
+  border-left: 1px solid #808080;
+}
+:global(.ag-dark) :global(.ag-header-cell-label) {
+  padding: 4px 2px 4px 2px;
+}
+:global(.ag-dark) :global(.ag-header-cell-text) {
+  padding: 2px;
+}
+:global(.ag-dark) :global(.ag-header-group-cell-label) {
+  font-weight: bold;
+  padding: 4px;
+  padding-left: 10px;
+}
+:global(.ag-dark) :global(.ag-header-group-cell) {
+  border-right: 1px solid #808080;
+}
+:global(.ag-dark) :global(.ag-header-group-text) {
+  margin-right: 2px;
+}
+:global(.ag-dark) :global(.ag-header-group-cell-with-group) {
+  border-bottom: 1px solid #808080;
+}
+:global(.ag-dark) :global(.ag-header-cell-menu-button) {
+  padding: 2px;
+  margin-top: 4px;
+  border: 1px solid transparent;
+  -webkit-border-radius: 3px;
+  border-radius: 3px;
+  -webkit-box-sizing: content-box;
+  -moz-box-sizing: content-box;
+  box-sizing: content-box; /* When using bootstrap, box-sizing was set to 'border-box' */
+  line-height: 0px; /* normal line height, a space was appearing below the menu button */
+}
+:global(.ag-dark) :global(.ag-header-cell-menu-button):hover {
+  border: 1px solid #e0e0e0;
+}
+:global(.ag-dark) :global(.ag-header-icon) {
+  stroke: #fff;
+  fill: #fff;
+}
+:global(.ag-dark) :global(.ag-header-expand-icon):hover {
+  cursor: pointer;
+}
+:global(.ag-dark) :global(.ag-overlay-loading-wrapper) {
+  background-color: rgba(255,255,255,0.5);
+}
+:global(.ag-dark) :global(.ag-overlay-loading-center) {
+  background-color: #fff;
+  border: 1px solid #a9a9a9;
+  -webkit-border-radius: 10px;
+  border-radius: 10px;
+  padding: 10px;
+  color: #000;
+}
+
+:global(.ag-dark) :global(.ag-row-selected) {
+  background-color: #000;
+}
+:global(.ag-dark) :global(.ag-group-cell-entire-row) {
+  background-color: #aaa;
+  color: 222;
+  padding: 4px;
+}
+:global(.ag-dark) :global(.ag-footer-cell-entire-row) {
+  background-color: #aaa;
+  color: 222;
+  padding: 4px;
+}
+:global(.ag-dark) :global(.ag-group-cell) {
+  font-style: italic;
+}
+:global(.ag-dark) :global(.ag-group-expand) {
+  padding-right: 2px;
+}
+:global(.ag-dark) :global(.ag-footer-cell) {
+  font-style: italic;
+}
+:global(.ag-dark) :global(.ag-filter) {
+  color: #000;
+}
+:global(.ag-dark) :global(.ag-filter-checkbox) {
+  position: relative;
+  top: 2px;
+  left: 2px;
+}
+:global(.ag-dark) :global(.ag-filter-header-container) {
+  border-bottom: 1px solid #d3d3d3;
+}
+:global(.ag-dark) :global(.ag-filter-header-container) {
+  border-bottom: 1px solid #d3d3d3;
+}
+:global(.ag-dark) :global(.ag-filter-apply-panel) {
+  border-top: 1px solid #d3d3d3;
+  padding: 2px;
+}
+:global(.ag-dark) :global(.ag-filter) {
+  border: 1px solid #000;
+  background-color: #f0f0f0;
+}
+:global(.ag-dark) :global(.ag-selection-checkbox) {
+  margin-left: 4px;
+}
+:global(.ag-dark) :global(.ag-paging-panel) {
+  color: #000;
+  padding: 4px;
+}
+:global(.ag-dark) :global(.ag-paging-button) {
+  margin-left: 4px;
+  margin-right: 4px;
+}
+:global(.ag-dark) :global(.ag-paging-row-summary-panel) {
+  display: inline-block;
+  width: 300px;
+}
+:global(.ag-dark) :global(.ag-column-not-visible) {
+  opacity: 0.75;
+  -ms-filter: "progid:DXImageTransform:global(.Microsoft):global(.Alpha)(Opacity=75)";
+  filter: alpha(opacity=75);
+  font-style: italic;
+}
+:global(.ag-dark) :global(.ag-not-dragging) {
+  border: 1px solid transparent;
+}
+:global(.ag-dark) :global(.ag-drop-target-above) {
+  border-top: 5px solid #a9a9a9;
+}
+:global(.ag-dark) :global(.ag-drop-target-below) {
+  border-bottom: 5px solid #a9a9a9;
+}
+:global(.ag-dark) :global(.ag-dragging) {
+  border: 1px dotted #a9a9a9;
+}
+:global(.ag-dark) :global(.ag-list-item-selected) {
+  color: #f0f0f0;
+}
+:global(.ag-dark) :global(.ag-list-item-not-selected) {
+  font-style: italic;
+  color: #a0a0a0;
+}
+:global(.ag-dark) :global(.ag-tool-panel-container) {
+  background-color: #eee;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  border: 1px solid #a9a9a9;
+  padding: 4px;
+}
+:global(.ag-dark) :global(.ag-list-selection) {
+  background-color: #fff;
+  border: 1px solid #a9a9a9;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+:global(.ag-dark) :global(.ag-visible-icons) {
+  padding-left: 2px;
+  padding-right: 2px;
+}

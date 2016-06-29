@@ -1,0 +1,9 @@
+.root {
+    background: #7A7A7A;
+    float: left;
+    padding: 0 8px;
+    width: 20%;
+    min-width: 186px;
+    height: calc(100% - 180px);
+    position: relative;
+}

@@ -1,0 +1,50 @@
+.root {
+    position: relative;
+    height: 100%;
+}
+
+.barsGroup {
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}
+
+.barGroup {
+    cursor: pointer;
+    opacity: 0.9;
+    -webkit-transition: opacity .1s ease-in-out;
+    -moz-transition: opacity .1s ease-in-out;
+    -ms-transition: opacity .1s ease-in-out;
+    -o-transition: opacity .1s ease-in-out;
+    transition: opacity .1s ease-in-out;
+}
+
+.barGroup:hover {
+    opacity: 1;
+}
+
+.bar {
+    fill: url(#year-bar-stripes);
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 900;
+    text-align: middle;
+    alignment-baseline: middle;
+    stroke: #999999;
+    stroke-width: 1;
+    letter-spacing: 0.01em;
+}
+
+.brush :global(.extent) {
+    fill: url(#year-brush-stripes);
+    stroke: none;
+    fill-opacity: 0.8;
+    shape-rendering: crispEdges;
+}
+
+.selected {
+    fill: #78C9D1;
+}

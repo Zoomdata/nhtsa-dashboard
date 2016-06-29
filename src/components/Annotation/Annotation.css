@@ -1,0 +1,18 @@
+.root {
+    color: #333333;
+    position: absolute;
+    bottom: 0;
+    left: 10px;
+    height: 100px;
+    letter-spacing: 0.15em;
+}
+
+.root div {
+    font-size: 12px;
+    font-weight: 300;
+    text-transform: uppercase;
+}
+
+.root img {
+    margin-bottom: 10px;
+}

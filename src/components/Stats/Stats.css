@@ -1,0 +1,10 @@
+.root {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    position: relative;
+}
+
+.root div{
+    display: inline-block;
+}

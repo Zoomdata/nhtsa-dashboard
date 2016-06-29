@@ -1,0 +1,223 @@
+.root :global(*), .root :global(*:before), .root :global(*:after) {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    font-size: 12px;
+}
+
+.root {
+    position: relative;
+    height: 100%;
+}
+
+.widgetLayout {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin-top: 20px;
+    margin-bottom: 22px;
+    width: 100%;
+    overflow-y: hidden;
+    overflow-x: hidden;
+}
+
+.mainGroup {
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.barsGroup {
+    position: relative;
+    top: 0;
+    left: 0;
+    -webkit-user-select: none;  /* Chrome all / Safari all */
+    -moz-user-select: none;     /* Firefox all */
+    -ms-user-select: none;      /* IE 10+ */
+    user-select: none;
+}
+
+.barGroup {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    -webkit-transition: -webkit-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -moz-transition: -moz-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -ms-transition: -ms-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -o-transition: -o-transform 1s ease-in-out, opacity .1s ease-in-out;
+    transition: transform 1s ease-in-out, opacity .1s ease-in-out;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 0;
+    border-left-width: 1px;
+    border-style: solid;
+    border-color: #979797 rgba(151, 151, 151, 0.5);
+    letter-spacing: normal;
+}
+
+.barGroupEven {
+    composes: barGroup;
+}
+
+.barGroupOdd {
+    composes: barGroup;
+}
+
+.barGroupActive {
+    cursor: pointer;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 1;
+    -webkit-transition: -webkit-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -moz-transition: -moz-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -ms-transition: -ms-transform 1s ease-in-out, opacity .1s ease-in-out;
+    -o-transition: -o-transform 1s ease-in-out, opacity .1s ease-in-out;
+    transition: transform 1s ease-in-out, opacity .1s ease-in-out;
+    border-top-width: 1px;
+    border-right-width: 1px;
+    border-bottom-width: 0;
+    border-left-width: 1px;
+    border-style: solid;
+    border-color: #979797 rgba(151, 151, 151, 0.5);
+    letter-spacing: normal;
+    opacity: 1;
+}
+
+.barGroup:last-child {
+    border-bottom-width: 1px;
+}
+
+.barGroup:hover {
+    background-color: rgba(0,0,0, 0.2);
+}
+
+.bar {
+    background-size: 5px 5px;
+    background-clip: padding-box;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+    position: absolute;
+    left: 0;
+    width: 100%;
+    -webkit-transform-origin: left;
+    -moz-transform-origin: left top;
+    -ms-transform-origin: left top;
+    -o-transform-origin: left top;
+    transform-origin: left top;
+}
+
+.barGroupEven .bar {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAM0lEQVQYV2NM2X/iPwMQzHG0YATRIIBNDCxJjGK8piAbAFdIyGRGkC5C7gOpASscLp4BAMUAU7OnnAroAAAAAElFTkSuQmCC) repeat;
+}
+
+.barGroupOdd .bar {
+    background:url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAoAAAAKCAYAAACNMs+9AAAAOklEQVQYV2NkQAIp+0/8B3HnOFowwoRhYhgC2BSBxMAK8ZkE08hIjCKQYWCFuKxDdifcjYScMBQ8AwC5zVOzlDGLnAAAAABJRU5ErkJggg==) repeat;
+}
+
+.barGroup:hover .bar {
+    opacity: 0.7;
+}
+
+.barGroupActive .bar {
+    background: #78C9D1!important;
+    background-clip: padding-box;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.label {
+    font-size: 15px;
+    font-weight: bold;
+    margin-left: 5px;
+    padding-left: 0;
+    background:rgb(255,255,255);
+    background:rgba(255,255,255,0);
+    filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#0ffffff,endColorstr=#0ffffff);
+    -ms-filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#0ffffff,endColorstr=#0ffffff);
+    color: #F6EBE6;
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    -o-backface-visibility: hidden;
+    backface-visibility: hidden;
+    letter-spacing: 1px;
+    display: inline-block;
+    /* Vertically Center Label */
+    position: relative;
+    top: 50%;
+    -webkit-transform:translateY(-50%);
+    -moz-transform:translateY(-50%);
+    -ms-transform:translateY(-50%);
+    -o-transform:translateY(-50%);
+    transform:translateY(-50%);
+    text-shadow:
+            1px 0 0 #000,
+            -1px 0 0 #000,
+            0 1px 0 #000,
+            0 -1px 0 #000,
+            1px 1px #000,
+            -1px -1px 0 #000,
+            1px -1px 0 #000,
+            -1px 1px 0 #000;
+}
+
+.barGroupActive .label {
+    color: #134348!important;
+    text-shadow:
+            1px 0 0 #cbfaff,
+            -1px 0 0 #cbfaff,
+            0 1px 0 #cbfaff,
+            0 -1px 0 #cbfaff,
+            1px 1px #cbfaff,
+            -1px -1px 0 #cbfaff,
+            1px -1px 0 #cbfaff,
+            -1px 1px 0 #cbfaff;
+}
+
+.value {
+    float: right;
+    background: rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    padding: 0 5px;
+    text-align: center;
+    margin: 3px;
+    line-height: 16px;
+    display: none;
+    position: absolute;
+    right: 0;
+    background-clip: padding-box;
+    border-top: 1px solid transparent;
+    border-bottom: 1px solid transparent;
+}
+
+.barGroupActive .value {
+    display: inline;
+}
+
+.barGroup:hover .value {
+    display: inline;
+}
+
+/*SVG Styles*/
+
+.axis path {
+    display: none;
+}
+
+.axis line {
+    fill: none;
+    stroke: #979797;
+    stroke-opacity: 0.5;
+    shape-rendering: crispEdges;
+}
+
+.axis :global(.tick text) {
+    stroke: #4c4c4c;
+}

@@ -1,0 +1,31 @@
+.normal {
+    width: 57px;
+    height: 10px;
+    transform: perspective(100px) rotateX(125deg) translate(0, 15px);
+    margin: auto;
+    background: #878787;
+    transition: all 0.4s;
+    transform-origin: bottom;
+}
+
+.normal:hover {
+    width: 57px;
+    transform: perspective(110px) rotateX(128deg) translate(0, 15deg);
+}
+
+.active {
+    animation: bottom-drop 1s normal;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+}
+
+@keyframes bottom-drop {
+    0% {
+        width: 57px;
+        transform: perspective(110px) rotateX(128deg) translate(0, 15deg);
+    }
+
+    100% {
+        transform: perspective(110px) rotateX(128deg) translate(0, -400px);
+    }
+}

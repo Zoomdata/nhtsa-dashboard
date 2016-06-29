@@ -1,0 +1,10 @@
+.root {
+    height: 94%;
+    width: 90%;
+    min-height: 550px;
+    min-width: 990px;
+    position: relative;
+    margin: auto;
+    border-bottom-left-radius: 12px;
+    border-bottom-right-radius: 12px;
+}

@@ -1,0 +1,43 @@
+.root {
+    margin: 0;
+    padding: 0;
+    height: 25px;
+}
+
+.root:after {
+    display:block;
+    clear:both;
+    content:'';
+}
+
+.root li {
+    width: 50%;
+    float:left;
+    list-style:none;
+    text-align: center;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.root a {
+    width: 100%;
+    padding:3px 15px;
+    display:inline-block;
+    border-radius:12px 12px 0px 0px;
+    background: rgba(92, 92, 92, 0.8);
+    font-size:14px;
+    font-weight:600;
+    color:white;
+    transition:all linear 0.15s;
+    border-top: 1px solid white;
+    border-left: 1px solid white;
+    border-right: 1px solid white;
+    border-bottom: 1px solid white;
+    text-transform: uppercase;
+    text-decoration: none;
+}
+
+.root a:hover {
+    text-decoration:none;
+}

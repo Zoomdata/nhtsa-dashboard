@@ -1,0 +1,6 @@
+.root {
+    position: absolute;
+    bottom: 0px;
+    left: calc(50% - 155px);
+    cursor: pointer;
+}

@@ -1,0 +1,109 @@
+.root {
+    position: relative;
+    height: 100%;
+}
+
+.axis path {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis line {
+    fill: none;
+    stroke: #000;
+    shape-rendering: crispEdges;
+}
+
+.axis :global(.tick text) {
+    font-size: 13px;
+    font-weight: normal;
+    letter-spacing: -0.05em;
+}
+
+.x {
+    composes: axis
+}
+
+.y {
+    composes: axis
+}
+
+.clearZoom {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    border: 0;
+}
+
+.stripedBackground {
+    fill: url(#stripes)!important;
+}
+
+.brush :global(.background) {
+    fill: white!important;
+    opacity: 0.3;
+}
+
+.brush :global(.extent) {
+    stroke: #fff;
+    fill-opacity: .125;
+    shape-rendering: crispEdges;
+}
+
+.selected{
+    stroke: #000;
+}
+
+.scatterGroup {
+}
+
+.scatterGroup:hover {
+    opacity: 1!important;
+    stroke: #00e8ff;
+    stroke-width: 2;
+}
+
+.tooltips {
+    letter-spacing: normal;
+    white-space: nowrap;
+    position: absolute;
+    display: inline-block;
+    height: auto;
+    padding: 10px;
+    font-size: 12px;
+    border: 2px;
+    border-style: solid;
+    border-radius: 8px;
+    pointer-events: none;
+    text-align: center;
+    min-width: 140px;
+}
+
+.tooltipMarkerTitle {
+    font-weight: 700;
+    text-align: center;
+    margin-bottom: 3px;
+    font-size: 16px;
+    display: inline-block;
+}
+
+.tooltipLeft
+{
+    float: left;
+}
+
+.tooltipRight
+{
+    float: right;
+}
+
+.tooltipClearLeft
+{
+    clear: left;
+}
+
+.tooltipClearRight
+{
+    clear: right;
+}

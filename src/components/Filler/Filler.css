@@ -1,0 +1,10 @@
+.root {
+    color: #f6ebe6;
+    height: 30px;
+    font-size: 21px;
+    line-height: 30px;
+    margin-left: 20px;
+    font-weight: 300;
+    vertical-align: top;
+    text-transform: uppercase;
+}

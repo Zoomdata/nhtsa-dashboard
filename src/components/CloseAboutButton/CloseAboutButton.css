@@ -1,0 +1,11 @@
+.root {
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    float: left;
+    padding-top: 17px;
+    margin-left: 25px;
+    border-bottom: 2px solid white;
+    letter-spacing: 0.2em;
+    cursor: pointer;
+}

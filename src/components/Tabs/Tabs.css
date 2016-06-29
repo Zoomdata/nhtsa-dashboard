@@ -1,0 +1,8 @@
+.root {
+    width: 53%;
+    margin-right: 2%;
+    height: calc(100% - 320px);
+    display: inline-block;
+    position: relative;
+    float: right;
+}

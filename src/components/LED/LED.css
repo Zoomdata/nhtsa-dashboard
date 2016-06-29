@@ -1,0 +1,27 @@
+.normal {
+    background: #7A7A7A;
+    font-family: AF-LED7Seg-3;
+    font-size: 30px;
+    position: relative;
+    height: 30px;
+    margin-left: 20px;
+    line-height: 22px;
+}
+
+.normal div {
+    position: absolute;
+    text-align: right;
+    width: inherit;
+    height: inherit;
+
+}
+
+.five {
+    composes: normal;
+    width: 115px;
+}
+
+.six {
+    composes: normal;
+    width: 135px;
+}

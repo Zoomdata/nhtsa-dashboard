@@ -1,0 +1,8 @@
+.root {
+    background: #4C4C4C;
+    float: left;
+    width: 25px;
+    height: calc(100% - 180px);
+    margin-top: 46px;
+    transform: skew(0,75deg);
+}

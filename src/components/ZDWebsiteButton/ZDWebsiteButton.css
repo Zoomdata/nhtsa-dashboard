@@ -1,0 +1,11 @@
+.root {
+    font-size: 18px;
+    font-weight: 700;
+    padding: 10px 20px;
+    border-radius: 12px;
+    border: 2px solid white;
+    width: 241px;
+    float: left;
+    cursor: pointer;
+    text-decoration: none;
+}
