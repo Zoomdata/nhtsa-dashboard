@@ -1,15 +1,16 @@
 National Highway Transportation Safety Administration (NHTSA) Dashboard
 ===============
 
-A dashboard using the [Zoomdata Javascript SDK](https://github.com/zoomdata/ZoomdataJS) for analyzing NHTSA public data found [here](http://www-odi.nhtsa.dot.gov/downloads/). Documentation for using the Zoomdata Javascript SDK can be found [here](http://demos.zoomdata.com/ZoomdataJS-docs/).
+A dashboard using the [Zoomdata Javascript SDK](https://www.npmjs.com/package/zoomdata-client) for analyzing NHTSA public data found [here](http://www-odi.nhtsa.dot.gov/downloads/). Information about the Zoomdata Javascript SDK can be found [here](http://www.zoomdata.com/developers/).
 
-This project was created using [Yeoman's](http://yeoman.io) [Webapp Generator](https://github.com/yeoman/generator-webapp). You can find Yeoman's Getting Started Guide [here](http://yeoman.io/learning/index.html). [Yeoman](http://yeoman.io) uses [Grunt](http://gruntjs.com/) as a task runner and [Bower](http://bower.io/) for dependency management.
-
-This dashboard's Javascript code can be found in `app/scripts/main.js`. This project's styles are written in [Sass](http://sass-lang.com/) and can be found in `app/styles/main.scss`.
+This dashboard was developed using ReactJS components that can be found in `src/components`. Each component contains its own folder with a .js and .css files. The .css files follow the [CSS Modules](https://github.com/css-modules/css-modules) pattern. 
 
 ## Getting Started
 1. Clone the repo.
-2. `$ npm install && bower install`
-3. `$ grunt serve`
+2. `$ npm install`
+3. `$ PORT=3000 npm start`
+4. `$ Open a browser and hit http://localhost:3000` 
 
-Refer to `Gruntfile.js` for other possible grunt tasks.
+## To build the Production version
+1. `$ npm run-script build`
+2. The build directory will be created with all the necessary resources
