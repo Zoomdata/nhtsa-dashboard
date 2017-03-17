@@ -13,7 +13,7 @@ export const queryConfig = {
             limit: 50,
             sort: {
                 dir: 'desc',
-                name: 'crashed'
+                name: 'count'
             }
         }
     ],

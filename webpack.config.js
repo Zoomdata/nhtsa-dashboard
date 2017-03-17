@@ -40,11 +40,9 @@ var common = {
                 loaders: ['babel?cacheDirectory'],
                 include: PATHS.app
             }
-        ],
-        noParse: [
-            /[\/\\]node_modules[\/\\]zoomdata-client[\/\\]distribute[\/\\]sdk[\/\\]2\.0[\/\\]zoomdata-client\.js$/
         ]
     },
+    externals: { ZoomdataSDK: 'ZoomdataSDK' },
     plugins: [
         new HtmlwebpackPlugin({
             title: 'NHTSA Dashboard',

@@ -1,5 +1,5 @@
 import { map } from 'mobx';
-import ZoomdataSDK from 'zoomdata-client';
+import ZoomdataSDK from 'ZoomdataSDK';
 import { server } from '../config/zoomdata-connections/production';
 import * as makeData from '../config/queries/makeData';
 import * as yearData from '../config/queries/yearData';
