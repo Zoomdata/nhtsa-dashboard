@@ -6,7 +6,7 @@ export const server = {
         secure: true,
         host: 'live.zoomdata.com',
         path: '/zoomdata',
-        port: 8443
+        port: 443
     },
     oauthOptions: {
         client_id: 'bmh0c2FfY2xpZW50MTQ1ODA2NzM4MTE3NDdkNzAxZGIzLTA3MDMtNDk4Mi1iNThiLTQ4NzU2OTZkOTYwNw==',
