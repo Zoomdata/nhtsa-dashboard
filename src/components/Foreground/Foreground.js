@@ -1,15 +1,7 @@
-import styles from './Foreground.css';
-
 import React from 'react';
 
-const Foreground = ({data}) => {
-    return (
-        <div
-            className={styles.root}
-        >
-            {data}
-        </div>
-    )
+const Foreground = ({ data }) => {
+  return <div className="foreground">{data}</div>;
 };
 
 export default Foreground;

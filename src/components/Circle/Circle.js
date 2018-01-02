@@ -1,35 +1,32 @@
-import styles from './Circle.css';
+import flowRight from 'lodash.flowright';
+import React, { Component } from 'react';
+import { observer, inject } from 'mobx-react';
 
-import React from 'react';
-import { observer } from 'mobx-react';
-import { controller } from '../../zoomdata';
-import store from '../../stores/UiState';
-
-const onClick = () => {
-    store.chartFilters.set('filterStatus', 'FILTERS_RESET');
-    store.chartFilters.delete('model');
-    controller.get('componentDataQuery').filters.remove('model');
-    controller.get('metricDataQuery').filters.remove('model');
-    controller.get('stateDataQuery').filters.remove('model');
-};
-
-const Circle  = observer((props, { store }) => {
+class Circle extends Component {
+  render() {
+    const { store } = this.props;
     const filterStatus = store.chartFilters.get('filterStatus');
     return (
-        <div
-            className={
-                filterStatus === 'FILTERS_APPLIED' ?
-                    styles.normal :
-                    styles.disabled
-            }
-            onClick={onClick}
-        >↺
-        </div>
-    )
-});
+      <div
+        className={
+          filterStatus === 'FILTERS_APPLIED' ? 'circle' : 'circle disabled'
+        }
+        onClick={this.onClick}
+      >
+        ↺
+      </div>
+    );
+  }
 
-export default Circle;
-
-Circle.contextTypes = {
-    store: React.PropTypes.object
+  onClick = () => {
+    const { store } = this.props;
+    store.queries.gridDataQuery.set(['offset'], 0);
+    store.chartFilters.set('filterStatus', 'FILTERS_RESET');
+    store.chartFilters.delete('model');
+    store.queries.componentDataQuery.filters.remove('model');
+    store.queries.metricDataQuery.filters.remove('model');
+    store.queries.stateDataQuery.filters.remove('model');
+  };
 }
+
+export default flowRight(inject('store'), observer)(Circle);

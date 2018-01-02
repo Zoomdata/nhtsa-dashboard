@@ -1,29 +1,21 @@
-import styles from './CloseHood.css';
-
+import flowRight from 'lodash.flowright';
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 import image from '../../images/close-hood.png';
 
-const CloseHood = observer(function(props, { store }) {
-    return (
-        <img
-            className={styles.root}
-            width="189"
-            height="52"
-            src={image}
-            onClick={
-                () => {
-                    store.controls.hoodAction = 'CLOSE_HOOD';
-                }
-            }
-        >
-
-        </img>
-    )
-});
-
-export default CloseHood;
-
-CloseHood.contextTypes = {
-    store: React.PropTypes.object
+const CloseHood = function({ store }) {
+  return (
+    <img
+      alt=""
+      className="close-hood"
+      width="189"
+      height="52"
+      src={image}
+      onClick={() => {
+        store.controls.hoodAction = 'CLOSE_HOOD';
+      }}
+    />
+  );
 };
+
+export default flowRight(inject('store'), observer)(CloseHood);

@@ -1,13 +1,7 @@
-import styles from './Cover.css';
-
 import React from 'react';
 
 const Cover = () => {
-    return (
-        <div
-            className={styles.root}>
-        </div>
-    )
+  return <div className="cover" />;
 };
 
 export default Cover;
