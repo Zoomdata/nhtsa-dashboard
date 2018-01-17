@@ -52,33 +52,27 @@ export default class GaugeChart extends Component {
             show: false,
           },
           itemStyle: {
-            normal: {
-              color: '#4C4C4C',
-            },
+            color: '#4C4C4C',
           },
           pointer: {
             width: 5,
           },
           title: {
             offsetCenter: [0, '80%'],
-            textStyle: {
-              color: '#4c4c4c',
-              fontSize: 9,
-              fontWeight: 'bold',
-              fontFamily: 'Source Sans Pro,source-sans-pro,sans-serif',
-            },
+            color: '#4c4c4c',
+            fontSize: 9,
+            fontWeight: 'bold',
+            fontFamily: 'Source Sans Pro,source-sans-pro,sans-serif',
           },
           detail: {
-            textStyle: {
-              color: '#F6EBE6',
-              fontSize: 18,
-              fontFamily:
-                'AF-LED7Seg-3,Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace',
-            },
-            offsetCenter: [0, '48%'],
-            formatter: function(value) {
-              return addCommas(value);
-            },
+            color: '#F6EBE6',
+            fontSize: 18,
+            fontFamily:
+              'AF-LED7Seg-3,Courier New,Courier,Lucida Sans Typewriter,Lucida Typewriter,monospace',
+          },
+          offsetCenter: [0, '48%'],
+          formatter: function(value) {
+            return addCommas(value);
           },
           data: [{ value: 0, name: chartName }],
         },
