@@ -1,20 +1,16 @@
-/* eslint-disable no-unused-vars */
-import normalize from 'normalize.css';
-/* eslint-enable no-unused-vars */
-import 'babel-polyfill';
 import React from 'react';
-import { render } from 'react-dom';
-import NhtsaApp from './components/NhtsaApp/NhtsaApp';
-import Provider from './stores/Provider';
+import ReactDOM from 'react-dom';
+import './index.css';
+import App from './App';
 import store from './stores/UiState';
+import { Provider } from 'mobx-react';
+import 'normalize.css/normalize.css';
+import registerServiceWorker from './registerServiceWorker';
 
-const root = document.getElementById('root');
-
-render(
-    <Provider store={store}>
-        <NhtsaApp />
-    </Provider>,
-    root
+ReactDOM.render(
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  document.getElementById('root'),
 );
-
-
+registerServiceWorker();

@@ -1,57 +1,45 @@
-import styles from './Trend.css';
-
-import React from 'react';
+import flowRight from 'lodash.flowright';
+import React, { Component } from 'react';
 import TrendChart from '../TrendChart/TrendChart';
-import store from '../../stores/UiState';
-import { fetchGridData, controller } from '../../zoomdata/';
-import remove from 'lodash.remove';
-import { gridDetails } from '../../config/app-constants';
-import { observer } from 'mobx-react';
-import { toJSON } from 'mobx';
+import { observer, inject } from 'mobx-react';
+import { toJS } from 'mobx';
 
-const onBrushEnd = (selectedYears, changeFilterStatus) => {
-    gridDetails.offset = 0;
-    gridDetails.hasNextDetails = true;
-    const filter = {
-        path: 'year_string',
-        operation: 'IN',
-        value: selectedYears
-    };
-    store.chartFilters.set('year', selectedYears);
-    controller.get('componentDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('componentDataQuery').filters.add(toJSON(filter));
-    controller.get('metricDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('metricDataQuery').filters.add(toJSON(filter));
-    controller.get('stateDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('stateDataQuery').filters.add(toJSON(filter));
-    const gridDataQuery = controller.get('gridDataQuery').queryConfig;
-    remove(gridDataQuery.restrictions, function(filter) {
-        return filter.path === 'year_string';
-    });
-    gridDataQuery.restrictions.push(toJSON(filter));
-    controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
-    changeFilterStatus ?
-        (store.chartFilters.set('filterStatus', 'FILTERS_APPLIED')) :
-        null
-}
-
-function Trend(props, { store }) {
-    const data = store.chartData.yearData.get('data');
+class Trend extends Component {
+  render() {
+    const { store } = this.props;
+    const data = toJS(store.chartData.yearData);
     const filterStatus = store.chartFilters.get('filterStatus');
     return (
-        <div
-            className={styles.root}
-        >
-            <TrendChart
-                data={data}
-                filterStatus={filterStatus}
-                onBrushEnd={onBrushEnd}
-            />
-        </div>
-    )
-}
+      <div id="trend">
+        <TrendChart
+          data={data}
+          filterStatus={filterStatus}
+          onBrushEnd={this.onBrushEnd}
+        />
+      </div>
+    );
+  }
 
-Trend.contextTypes = {
-    store: React.PropTypes.object
-};
-export default observer(Trend);
+  onBrushEnd = (selectedYears, changeFilterStatus) => {
+    const { store } = this.props;
+    store.queries.gridDataQuery.set(['offset'], 0);
+    const filter = {
+      path: 'year_string',
+      operation: 'IN',
+      value: selectedYears,
+    };
+    store.chartFilters.set('year', selectedYears);
+    store.queries.componentDataQuery.filters.remove(filter.path);
+    store.queries.componentDataQuery.filters.add(filter);
+    store.queries.metricDataQuery.filters.remove(filter.path);
+    store.queries.metricDataQuery.filters.add(filter);
+    store.queries.stateDataQuery.filters.remove(filter.path);
+    store.queries.stateDataQuery.filters.add(filter);
+    store.queries.gridDataQuery.filters.remove(filter.path);
+    store.queries.gridDataQuery.filters.add(filter);
+    if (changeFilterStatus) {
+      store.chartFilters.set('filterStatus', 'FILTERS_APPLIED');
+    }
+  };
+}
+export default flowRight(inject('store'), observer)(Trend);

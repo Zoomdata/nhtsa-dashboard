@@ -1,71 +1,91 @@
-import styles from './GridContainer.css';
-
+import flowRight from 'lodash.flowright';
+import { toJS } from 'mobx';
 import React, { Component } from 'react';
-import {AgGridReact} from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 import 'ag-grid/dist/styles/ag-grid.css';
-import './src/agGridStyles/theme-dark.css';
-import ColDefFactory from './src/ColDefFactory';
+import 'ag-grid/dist/styles/ag-theme-dark.css';
 import { getHeight } from '../../utilities';
-import { gridDetails } from '../../config/app-constants';
-import { observer } from 'mobx-react';
-import { fetchGridData, controller } from '../../zoomdata';
+import { observer, inject } from 'mobx-react';
+import { frameworkComponents } from './CellRenderers';
+import { columnDefs } from './ColumnDefinitions';
 
-@observer export default class GridContainer extends Component {
-    onGridReady(params) {
-        this.api = params.api;
-        this.columnApi = params.columnApi;
-        const gridBody = document.getElementsByClassName('ag-body-viewport')[0];
-        gridBody.addEventListener('scroll', function() {
-            if (gridBody.scrollHeight - getHeight(gridBody) - gridBody.scrollTop < 200 && gridDetails.hasNextDetails && !gridDetails.loadingDetails) {
-                fetchGridData(controller.get('gridDataQuery').queryConfig);
-            }
-        });
+class GridContainer extends Component {
+  constructor(props) {
+    super(props);
+    this.onGridReady = this.onGridReady.bind(this);
+  }
+
+  onGridReady(params) {
+    this.api = params.api;
+    this.columnApi = params.columnApi;
+    // gridBody.addEventListener('scroll', function() {
+    //   if (
+    //     gridBody.scrollHeight - getHeight(gridBody) - gridBody.scrollTop <
+    //       200 &&
+    //     gridDetails.hasNextDetails &&
+    //     !gridDetails.loadingDetails
+    //   ) {
+    //     fetchGridData(controller.get('gridDataQuery').queryConfig);
+    //   }
+    // });
+  }
+
+  componentDidUpdate() {
+    if (!this.api) {
+      return;
     }
-    componentDidUpdate() {
-        if (!this.api) {
-            return;
-        }
-        const data = this.context.store.chartData.gridData.get('data');
-        this.api.setRowData(data);
-        this.api.sizeColumnsToFit()
-    }
-    componentWillUnmount() {
-        this.api.destroy();
-    }
-    componentWillMount() {
-        this.columnDefs = new ColDefFactory().createColDefs();
-    }
-    render() {
-        /* eslint-disable no-unused-vars */
-        const data = this.context.store.chartData.gridData.get('data');
-        /* eslint-enable no-unused-vars */
-        const gridGroupStyle = {
-            height: '100%'
-        };
-        return (
-            <div
-                className={styles.root}
-            >
-                <div
-                    className="ag-dark"
-                    style={gridGroupStyle}
-                >
-                    <AgGridReact
-                        onGridReady={this.onGridReady.bind(this)}
-                        columnDefs={this.columnDefs}
-                        enableSorting="false"
-                        enableFilter="false"
-                        headerHeight="55"
-                        rowHeight="28"
-                        suppressRowClickSelection="true"
-                        suppressCellSelection="true"
-                    />
-                </div>
-            </div>
-        )
-    }
+    const data = toJS(this.props.store.chartData.gridData);
+    this.api.setRowData(data);
+    this.api.sizeColumnsToFit();
+  }
+
+  componentWillUnmount() {
+    this.api.destroy();
+  }
+
+  render() {
+    /* eslint-disable no-unused-vars */
+    const data = toJS(this.props.store.chartData.gridData);
+    /* eslint-enable no-unused-vars */
+    return (
+      <div className="grid-container">
+        <div id="grid-chart" className="ag-theme-dark">
+          <AgGridReact
+            onGridReady={this.onGridReady}
+            columnDefs={columnDefs}
+            enableSorting="false"
+            enableFilter="false"
+            headerHeight="55"
+            rowHeight="28"
+            suppressRowClickSelection="true"
+            suppressCellSelection="true"
+            suppressScrollOnNewData="true"
+            frameworkComponents={frameworkComponents}
+            onViewportChanged={() => {
+              const { store } = this.props;
+              const gridBody = document.getElementsByClassName(
+                'ag-body-viewport',
+              )[0];
+              if (
+                gridBody.scrollHeight -
+                  getHeight(gridBody) -
+                  gridBody.scrollTop <
+                  200 &&
+                store.queries.gridDataQuery &&
+                !store.chartStatus.get('gridLoadingData')
+              ) {
+                store.chartStatus.set('gridLoadingData', true);
+                store.queries.gridDataQuery.set(
+                  ['offset'],
+                  store.queries.gridDataQuery.get(['offset']) +
+                    store.queries.gridDataQuery.get(['limit']),
+                );
+              }
+            }}
+          />
+        </div>
+      </div>
+    );
+  }
 }
-
-GridContainer.contextTypes = {
-    store: React.PropTypes.object
-};
+export default flowRight(inject('store'), observer)(GridContainer);

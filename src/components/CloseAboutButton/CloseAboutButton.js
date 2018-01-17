@@ -1,27 +1,19 @@
-import styles from './CloseAboutButton.css';
+import flowRight from 'lodash.flowright';
+import React from 'react';
+import { observer, inject } from 'mobx-react';
 
-import React  from 'react';
-import { observer } from 'mobx-react';
-
-const CloseAboutButton = observer((props, { store }) => {
-    return (
-        <div
-            className={
-                styles.root
-            }
-            onClick={
-                (e) => {
-                    e.stopPropagation();
-                    store.controls.aboutVisibility = 'CLOSE_ABOUT';
-                }
-            }
-        >Return
-        </div>
-    )
-});
-
-export default CloseAboutButton;
-
-CloseAboutButton.contextTypes = {
-    store: React.PropTypes.object
+const CloseAboutButton = ({ store }) => {
+  return (
+    <div
+      className="close-about-button"
+      onClick={e => {
+        e.stopPropagation();
+        store.controls.aboutVisibility = 'CLOSE_ABOUT';
+      }}
+    >
+      Return
+    </div>
+  );
 };
+
+export default flowRight(inject('store'), observer)(CloseAboutButton);

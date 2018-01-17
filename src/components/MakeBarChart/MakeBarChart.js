@@ -1,78 +1,56 @@
-import styles from './MakeBarChart.css';
-
-import React from 'react';
+import flowRight from 'lodash.flowright';
+import { toJS } from 'mobx';
+import React, { Component } from 'react';
 import BarChart from '../BarChart/BarChart';
-import { fetchGridData, controller } from '../../zoomdata/';
-import store from '../../stores/UiState';
-import remove from 'lodash.remove';
-import { gridDetails } from '../../config/app-constants';
-import { observer } from 'mobx-react';
-import { toJSON } from 'mobx';
+import { observer, inject } from 'mobx-react';
 
-const onClick = (make, hideOverlay) => {
-    gridDetails.offset = 0;
-    gridDetails.hasNextDetails = true;
-    const filter = {
-        path: 'make',
-        operation: 'IN',
-        value: [make]
-    };
-    store.chartFilters.set('make', make);
-    store.chartFilters.delete('model');
-    controller.get('modelDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('modelDataQuery').filters.add(toJSON(filter));
-    controller.get('componentDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('componentDataQuery').filters.remove('model');
-    controller.get('componentDataQuery').filters.add(toJSON(filter));
-    controller.get('metricDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('metricDataQuery').filters.remove('model');
-    controller.get('metricDataQuery').filters.add(toJSON(filter));
-    controller.get('stateDataQuery').filters.remove(toJSON(filter.path));
-    controller.get('stateDataQuery').filters.remove('model');
-    controller.get('stateDataQuery').filters.add(toJSON(filter));
-    const gridDataQuery = controller.get('gridDataQuery').queryConfig;
-    remove(gridDataQuery.restrictions, function(filter) {
-        return filter.path === 'make';
-    });
-    remove(gridDataQuery.restrictions, function(filter) {
-        return filter.path === 'model';
-    });
-    gridDataQuery.restrictions.push(toJSON(filter));
-    controller.has('gridReady') ? fetchGridData(controller.get('gridDataQuery').queryConfig): null;
-    hideOverlay ? (store.controls.hideOverlay = true) : null;
-}
-
-function MakeBarChart(props, { store }) {
+class MakeBarChart extends Component {
+  render() {
+    const { store } = this.props;
     const makeBarChartStyle = {
-        zIndex: 1
+      zIndex: 1,
     };
     const { browser } = store;
     const { hideOverlay } = store.controls;
+    /* eslint-disable no-unused-expressions */
     browser.height;
     browser.width;
-    const data = store.chartData.makeData.get('data');
-    const make = store.chartFilters.get('make');
+    /* eslint-enable no-unused-expressions */
+    const data = toJS(store.chartData.makeData);
+    const make = toJS(store.chartFilters.get('make'));
     return (
-        <div
-            className={styles.root}
-            style={
-                hideOverlay ? makeBarChartStyle : null
-            }
-        >
-            <BarChart
-                data={data}
-                activeBar={make}
-                onClick={onClick}
-            />
-        </div>
-    )
+      <div id="make-bar-chart" style={hideOverlay ? makeBarChartStyle : null}>
+        <BarChart data={data} activeBar={make} onClick={this.onClick} />
+      </div>
+    );
+  }
+
+  onClick = (make, hideOverlay) => {
+    const { store } = this.props;
+    store.queries.gridDataQuery.set(['offset'], 0);
+    const filter = {
+      path: 'make',
+      operation: 'IN',
+      value: [make],
+    };
+    store.chartFilters.set('make', make);
+    store.chartFilters.delete('model');
+    store.queries.modelDataQuery.filters.remove(filter.path);
+    store.queries.modelDataQuery.filters.add(filter);
+    store.queries.componentDataQuery.filters.remove(filter.path);
+    store.queries.componentDataQuery.filters.remove('model');
+    store.queries.componentDataQuery.filters.add(filter);
+    store.queries.metricDataQuery.filters.remove(filter.path);
+    store.queries.metricDataQuery.filters.remove('model');
+    store.queries.metricDataQuery.filters.add(filter);
+    store.queries.stateDataQuery.filters.remove(filter.path);
+    store.queries.stateDataQuery.filters.remove('model');
+    store.queries.stateDataQuery.filters.add(filter);
+    store.queries.gridDataQuery.filters.remove(filter.path);
+    store.queries.gridDataQuery.filters.remove('model');
+    store.queries.gridDataQuery.filters.add(filter);
+    store.controls.hideOverlay = hideOverlay ? true : null;
+  };
 }
 
-MakeBarChart.contextTypes = {
-    store: React.PropTypes.object
-};
-
-export default observer(MakeBarChart);
-
-
-
+export default flowRight(inject('store'), observer)(MakeBarChart);

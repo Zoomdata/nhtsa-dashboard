@@ -1,47 +1,40 @@
-import styles from './Gauges.css';
-
+import flowRight from 'lodash.flowright';
+import { toJS } from 'mobx';
 import React from 'react';
 import Gauge from '../Gauge/Gauge';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
-function Gauges(props, { store }) {
-    const metricData = store.chartData.metricData.get('data');
-    const metricTotalsData = store.chartData.metricTotalsData.get('data');
-    return (
-        <div
-            className={styles.root}
-        >
-            <Gauge
-                id="crashes-gauge"
-                name="CRASHES"
-                data={metricData}
-                max={metricTotalsData}
-            />
-            <Gauge
-                id="injuries-gauge"
-                name="INJURIES"
-                data={metricData}
-                max={metricTotalsData}
-            />
-            <Gauge
-                id="fires-gauge"
-                name="FIRES"
-                data={metricData}
-                max={metricTotalsData}
-            />
-            <Gauge
-                id="speed-gauge"
-                name="AVG. SPEED"
-                data={metricData}
-                max={metricTotalsData}
-            />
-        </div>
-    )
+function Gauges({ store }) {
+  const metricData = toJS(store.chartData.metricData);
+  const metricTotalsData = toJS(store.chartData.metricTotalsData);
+  return (
+    <div className="gauges">
+      <Gauge
+        id="crashes-gauge"
+        name="CRASHES"
+        data={metricData}
+        max={metricTotalsData}
+      />
+      <Gauge
+        id="injuries-gauge"
+        name="INJURIES"
+        data={metricData}
+        max={metricTotalsData}
+      />
+      <Gauge
+        id="fires-gauge"
+        name="FIRES"
+        data={metricData}
+        max={metricTotalsData}
+      />
+      <Gauge
+        id="speed-gauge"
+        name="AVG. SPEED"
+        data={metricData}
+        max={metricTotalsData}
+      />
+    </div>
+  );
 }
 
-Gauges.contextTypes = {
-    store: React.PropTypes.object
-};
-
-export default observer(Gauges);
-
+export default flowRight(inject('store'), observer)(Gauges);

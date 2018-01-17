@@ -1,28 +1,17 @@
-import styles from './MakeHeader.css';
-
+import flowRight from 'lodash.flowright';
 import React from 'react';
-import { observer } from 'mobx-react';
+import { observer, inject } from 'mobx-react';
 
-function MakeHeader(props, { store }) {
-    const makeHeaderStyle = {
-        zIndex: 1
-    };
-    const { hideOverlay } = store.controls;
-    return (
-        <div
-            className={styles.root}
-            style={
-                hideOverlay ? makeHeaderStyle : null
-            }
-        >
-            Complaints <br /> by <b>Make</b>
-        </div>
-    )
+function MakeHeader({ store }) {
+  const makeHeaderStyle = {
+    zIndex: 1,
+  };
+  const { hideOverlay } = store.controls;
+  return (
+    <div className="make-header" style={hideOverlay ? makeHeaderStyle : null}>
+      Complaints <br /> by <b>Make</b>
+    </div>
+  );
 }
 
-MakeHeader.contextTypes = {
-    store: React.PropTypes.object
-};
-
-export default observer(MakeHeader);
-
+export default flowRight(inject('store'), observer)(MakeHeader);

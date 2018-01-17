@@ -1,0 +1,69 @@
+@font-face {
+  font-family: 'AF-LED7Seg-3';
+  src: url('fonts/2BB2E2_0_0.woff') format('woff'),
+    url('fonts/2BB2E2_0_0.ttf') format('truetype');
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  user-select: none;
+  -ms-overflow-style: -ms-autohiding-scrollbar;
+}
+
+body {
+  background-color: #999;
+  background: url(./images/car_background@2x.jpg) no-repeat 100% 100%,
+    url(./images/speckles_background@2x.jpg) repeat;
+  background-size: 530px 325px, auto;
+  color: #333;
+  font-family: 'Source Sans Pro', source-sans-pro, sans-serif;
+  letter-spacing: 3px;
+  overflow: hidden;
+  perspective: 5000px;
+}
+
+img {
+  vertical-align: middle;
+}
+button {
+  overflow: visible;
+  text-transform: none;
+  margin: 0;
+  -webkit-appearance: button;
+  border: none;
+}
+button[disabled] {
+  cursor: default;
+}
+button:focus {
+  outline: 0;
+}
+button::-moz-focus-inner {
+  padding: 0;
+  border: 0;
+}
+
+footer {
+  position: relative;
+  letter-spacing: normal;
+  width: 990px;
+  float: left;
+  margin-top: 10px;
+  margin-left: 5%;
+  font-size: 10px;
+  font-weight: 300;
+}
+footer a:visited,
+footer a {
+  color: #333;
+}
