@@ -1,6 +1,6 @@
 {
   "name": "nhtsa-dashboard",
-  "version": "2.6.0",
+  "version": "3.7.0",
   "description": "NHTSA Dashboard using Zoomdata JS Client",
   "dependencies": {
     "ag-grid": "^15.0.0",
