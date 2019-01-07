@@ -1,6 +1,6 @@
 {
   "name": "nhtsa-dashboard",
-  "version": "2.6.0",
+  "version": "3.7.0",
   "description": "NHTSA Dashboard using Zoomdata JS Client",
   "dependencies": {
     "ag-grid": "^15.0.0",
@@ -21,7 +21,7 @@
     "react-dom": "^16.2.0",
     "react-dom-factories": "^1.0.2",
     "react-scripts": "1.1.0",
-    "velocity-react": "^1.3.3"
+    "velocity-react": "^1.4.1"
   },
   "lint-staged": {
     "src/**/*.{js,jsx,json,css}": [
