@@ -48,7 +48,7 @@ class App extends Component {
           browser={browser}
         />
         <footer>
-          © 2018 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc.{' '}
+          © 2019 <a href="http://www.zoomdata.com/">Zoomdata</a>, Inc.{' '}
           <a href="http://www.zoomdata.com/contact">Contact</a>{' '}
           <a href="http://www.zoomdata.com/terms">Legal</a>
         </footer>
@@ -85,9 +85,13 @@ class App extends Component {
         source,
         makeDataConfig,
       );
-      store.client.runQuery(store.queries.makeDataQuery, data => {
-        store.chartData.makeData = data;
-      });
+      store.client.runQuery(
+        store.queries.makeDataQuery,
+        data => {
+          store.chartData.makeData = data;
+        },
+        console.error,
+      );
     } catch (e) {
       console.error(e);
     }
@@ -100,9 +104,13 @@ class App extends Component {
         source,
         yearDataConfig,
       );
-      store.client.runQuery(store.queries.yearDataQuery, data => {
-        store.chartData.yearData = data;
-      });
+      store.client.runQuery(
+        store.queries.yearDataQuery,
+        data => {
+          store.chartData.yearData = data;
+        },
+        console.error,
+      );
     } catch (e) {
       console.error(e);
     }
@@ -115,9 +123,13 @@ class App extends Component {
         source,
         modelDataConfig,
       );
-      store.client.runQuery(store.queries.modelDataQuery, data => {
-        store.chartData.modelData = data;
-      });
+      store.client.runQuery(
+        store.queries.modelDataQuery,
+        data => {
+          store.chartData.modelData = data;
+        },
+        console.error,
+      );
     } catch (e) {
       console.error(e);
     }
@@ -130,9 +142,13 @@ class App extends Component {
         source,
         componentDataConfig,
       );
-      store.client.runQuery(store.queries.componentDataQuery, data => {
-        store.chartData.componentData = data;
-      });
+      store.client.runQuery(
+        store.queries.componentDataQuery,
+        data => {
+          store.chartData.componentData = data;
+        },
+        console.error,
+      );
     } catch (e) {
       console.error(e);
     }
@@ -145,9 +161,13 @@ class App extends Component {
         source,
         metricTotalsDataConfig,
       );
-      store.client.runQuery(store.queries.metricTotalsDataQuery, data => {
-        store.chartData.metricTotalsData = data;
-      });
+      store.client.runQuery(
+        store.queries.metricTotalsDataQuery,
+        data => {
+          store.chartData.metricTotalsData = data;
+        },
+        console.error,
+      );
     } catch (e) {
       console.error(e);
     }
@@ -160,9 +180,13 @@ class App extends Component {
         source,
         metricDataConfig,
       );
-      store.client.runQuery(store.queries.metricDataQuery, data => {
-        store.chartData.metricData = data;
-      });
+      store.client.runQuery(
+        store.queries.metricDataQuery,
+        data => {
+          store.chartData.metricData = data;
+        },
+        console.error,
+      );
     } catch (e) {
       console.error(e);
     }
