@@ -93,21 +93,24 @@ export default class GaugeChart extends Component {
         metricFunc = 'sum';
         dataset =
           data.length > 0 ? data[0].current.metrics[metricName][metricFunc] : 0;
-        maxDataset = max[0].current.metrics[metricName][metricFunc];
+        maxDataset =
+          max.length > 0 ? max[0].current.metrics[metricName][metricFunc] : 0;
         percentValue = Math.round(dataset / maxDataset * 100);
       } else if (chartName === 'INJURIES') {
         metricName = 'injured';
         metricFunc = 'sum';
         dataset =
           data.length > 0 ? data[0].current.metrics[metricName][metricFunc] : 0;
-        maxDataset = max[0].current.metrics[metricName][metricFunc];
+        maxDataset =
+          max.length > 0 ? max[0].current.metrics[metricName][metricFunc] : 0;
         percentValue = Math.round(dataset / maxDataset * 100);
       } else if (chartName === 'FIRES') {
         metricName = 'fire';
         metricFunc = 'sum';
         dataset =
           data.length > 0 ? data[0].current.metrics[metricName][metricFunc] : 0;
-        maxDataset = max[0].current.metrics[metricName][metricFunc];
+        maxDataset =
+          max.length > 0 ? max[0].current.metrics[metricName][metricFunc] : 0;
         percentValue = Math.round(dataset / maxDataset * 100);
       } else {
         metricName = 'speed';
