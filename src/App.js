@@ -213,7 +213,7 @@ class App extends Component {
       );
       const sorts = [
         {
-          field: { field: { name: 'failtimestamp_real' }, type: 'FIELD' },
+          field: { field: { name: 'year_string' }, type: 'FIELD' },
           direction: 'ASC',
         },
       ];
@@ -225,4 +225,7 @@ class App extends Component {
   };
 }
 
-export default flowRight(inject('store'), observer)(App);
+export default flowRight(
+  inject('store'),
+  observer,
+)(App);

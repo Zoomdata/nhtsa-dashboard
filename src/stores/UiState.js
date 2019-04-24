@@ -70,36 +70,44 @@ class UiState {
     this.chartStatus.observe(
       function(changes) {
         if (changes.name === 'mapReady' && changes.newValue === true) {
-          this.client.runQuery(this.queries.stateDataQuery, data => {
-            this.chartData.stateData = data;
-          });
+          this.client.runQuery(
+            this.queries.stateDataQuery,
+            data => {
+              this.chartData.stateData = data;
+            },
+            console.error,
+          );
         }
         if (changes.name === 'gridReady' && changes.newValue === true) {
-          this.client.runQuery(this.queries.gridDataQuery, data => {
-            if (
-              this.queries.gridDataQuery.get(['offset']) <
-              this.queries.gridDataQuery.get(['limit'])
-            ) {
-              this.chartData.gridData = data.map(row => {
-                const datum = {};
-                row.forEach((value, index) => {
-                  datum[gridDataConfig.fields[index].name] = value;
+          this.client.runQuery(
+            this.queries.gridDataQuery,
+            data => {
+              if (
+                this.queries.gridDataQuery.get(['offset']) <
+                this.queries.gridDataQuery.get(['limit'])
+              ) {
+                this.chartData.gridData = data.map(row => {
+                  const datum = {};
+                  row.forEach((value, index) => {
+                    datum[gridDataConfig.fields[index].name] = value;
+                  });
+                  return datum;
                 });
-                return datum;
-              });
-            } else {
-              const newData = data.map(row => {
-                const datum = {};
-                row.forEach((value, index) => {
-                  datum[gridDataConfig.fields[index].name] = value;
+              } else {
+                const newData = data.map(row => {
+                  const datum = {};
+                  row.forEach((value, index) => {
+                    datum[gridDataConfig.fields[index].name] = value;
+                  });
+                  return datum;
                 });
-                return datum;
-              });
-              const oldData = this.chartData.gridData;
-              this.chartData.gridData = oldData.concat(newData);
-              this.chartStatus.set('gridLoadingData', false);
-            }
-          });
+                const oldData = this.chartData.gridData;
+                this.chartData.gridData = oldData.concat(newData);
+                this.chartStatus.set('gridLoadingData', false);
+              }
+            },
+            console.error,
+          );
         }
       }.bind(this),
     );
