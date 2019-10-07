@@ -7,7 +7,7 @@ export const queryConfig = {
   },
   filters: [],
   fields: [
-    { name: 'make', limit: 50 },
+    { name: 'make' },
     { name: 'model' },
     { name: 'year_string' },
     { name: 'state' },
@@ -18,4 +18,5 @@ export const queryConfig = {
     { name: 'speed' },
     { name: 'description' },
   ],
+  limit: 50,
 };
